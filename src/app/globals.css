@@ -3,6 +3,7 @@
 @theme {
   --font-serif: var(--font-serif);
   --font-sans: var(--font-sans);
+  --font-alex: var(--font-alex-brush);
   
   /* Map gold tokens to premium light-to-dark purple shades for global replacement */
   --color-gold-50: #fbf7fc;

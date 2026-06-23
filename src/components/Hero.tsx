@@ -3,6 +3,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Volume2, VolumeX, ChevronDown } from "lucide-react";
+import Image from "next/image";
 
 interface HeroProps {
   isPlaying: boolean;
@@ -112,14 +113,28 @@ export default function Hero({ isPlaying, toggleMusic, onOpenInvitation }: HeroP
         </motion.div>
 
         {/* Couple Names */}
-        <motion.h1
+        <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1, duration: 1.2, ease: [0.25, 1, 0.5, 1] }}
-          className="font-serif text-5xl sm:text-7xl lg:text-8xl font-light tracking-wide text-stone-900"
+          className="flex flex-row items-center justify-center gap-4 sm:gap-6 flex-wrap my-4"
         >
-          Srushti <span className="text-3xl sm:text-5xl font-sans font-light text-purple-500">&</span> Aman
-        </motion.h1>
+          <span className="font-serif text-4xl sm:text-6xl lg:text-7xl font-bold text-[#8a1525] leading-none">
+            ચિ. સૃષ્ટિ
+          </span>
+          <div className="relative w-14 h-14 sm:w-24 sm:h-24 flex-shrink-0">
+            <Image
+              src="/images/gold_rings.png"
+              alt="Rings"
+              fill
+              className="object-contain"
+              priority
+            />
+          </div>
+          <span className="font-serif text-4xl sm:text-6xl lg:text-7xl font-bold text-[#8a1525] leading-none">
+            ચિ. અમન
+          </span>
+        </motion.div>
 
         {/* Romance Tagline */}
         <motion.div
@@ -133,7 +148,7 @@ export default function Hero({ isPlaying, toggleMusic, onOpenInvitation }: HeroP
             અનંતકાળની શરૂઆત
           </p>
           <p className="font-sans text-[10px] sm:text-xs tracking-[0.1em] text-purple-700/70 uppercase mt-2 font-medium">
-            સગાઈના બંધનમાં બંધાવા જઈ રહ્યા છે • ૨૮ ઓક્ટોબર ૨૦૨૬
+            સગાઈના બંધનમાં બંધાવા જઈ રહ્યા છે • ૧૮ ઓગસ્ટ ૨૦૨૬
           </p>
         </motion.div>
 

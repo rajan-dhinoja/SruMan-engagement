@@ -1,11 +1,18 @@
 import type { Metadata, Viewport } from "next";
-import { Cormorant_Garamond, Montserrat } from "next/font/google";
+import { Cormorant_Garamond, Montserrat, Alex_Brush } from "next/font/google";
 import "./globals.css";
 
 const cormorant = Cormorant_Garamond({
   variable: "--font-serif",
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
+  display: "swap",
+});
+
+const alexBrush = Alex_Brush({
+  variable: "--font-alex-brush",
+  subsets: ["latin"],
+  weight: ["400"],
   display: "swap",
 });
 
@@ -32,15 +39,19 @@ export const metadata: Metadata = {
   },
 };
 
+import { LanguageProvider } from "@/context/LanguageContext";
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="gu" className={`${cormorant.variable} ${montserrat.variable} scroll-smooth`}>
+    <html lang="gu" className={`${cormorant.variable} ${montserrat.variable} ${alexBrush.variable} scroll-smooth`}>
       <body className="bg-[#fbf9fb] text-[#2d142c] antialiased min-h-screen">
-        {children}
+        <LanguageProvider>
+          {children}
+        </LanguageProvider>
       </body>
     </html>
   );

@@ -8,8 +8,6 @@ import { CheckCircle2, Sparkles, Heart } from "lucide-react";
 export default function RSVP() {
   const [name, setName] = useState("");
   const [isAttending, setIsAttending] = useState<string>("yes");
-  const [guestsCount, setGuestsCount] = useState(1);
-  const [mealPreference, setMealPreference] = useState("vegetarian");
   const [message, setMessage] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
 
@@ -118,49 +116,6 @@ export default function RSVP() {
                   </div>
                 </div>
 
-                {isAttending === "yes" && (
-                  <motion.div
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: "auto" }}
-                    exit={{ opacity: 0, height: 0 }}
-                    className="space-y-6 overflow-hidden"
-                  >
-                    {/* Number of Guests */}
-                    <div>
-                      <label className="font-sans text-[10px] uppercase tracking-wider text-stone-400 font-semibold mb-2 block">
-                        મહેમાનોની સંખ્યા
-                      </label>
-                      <select
-                        value={guestsCount}
-                        onChange={(e) => setGuestsCount(Number(e.target.value))}
-                        className="w-full px-5 py-3.5 rounded-2xl border border-gold-200 bg-white/70 text-sm text-stone-850 focus:outline-none focus:border-gold-500 transition-colors"
-                      >
-                        {[1, 2, 3, 4, 5].map((num) => (
-                          <option key={num} value={num}>
-                            {num} {num === 1 ? "મહેમાન" : "મહેમાનો"}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-
-                    {/* Meal Preference */}
-                    <div>
-                      <label className="font-sans text-[10px] uppercase tracking-wider text-stone-400 font-semibold mb-2 block">
-                        ભોજનની પસંદગી
-                      </label>
-                      <select
-                        value={mealPreference}
-                        onChange={(e) => setMealPreference(e.target.value)}
-                        className="w-full px-5 py-3.5 rounded-2xl border border-gold-200 bg-white/70 text-sm text-stone-850 focus:outline-none focus:border-gold-500 transition-colors"
-                      >
-                        <option value="vegetarian">શાકાહારી ભોજન</option>
-                        <option value="vegan">વેગન ભોજન</option>
-                        <option value="jain">જૈન ભોજન</option>
-                        <option value="regular">બધી વાનગીઓ</option>
-                      </select>
-                    </div>
-                  </motion.div>
-                )}
 
                 {/* Additional Note */}
                 <div>
@@ -208,7 +163,7 @@ export default function RSVP() {
               
               <p className="font-sans text-sm text-stone-600 leading-relaxed font-light px-4 mb-8 relative z-10">
                 {isAttending === "yes"
-                  ? "અમે તમારી હાજરીથી અત્યંત ખુશ છીએ. તાજ મહેલ પેલેસમાં આપની રાહ જોવાશે!"
+                  ? "અમે તમારી હાજરીથી અત્યંત ખુશ છીએ. પરિશ્રમ ધ લોન્સ ખાતે આપની રાહ જોવાશે!"
                   : "અમે આપની હાજરીને મિસ કરીશું, પરંતુ આપના આશીર્વાદ હંમેશા અમારી સાથે છે."}
               </p>
 
