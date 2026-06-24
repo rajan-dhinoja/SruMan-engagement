@@ -169,7 +169,7 @@ export default function EventDetails() {
                       {mounted ? formatNumber(String(item.value).padStart(2, "0")) : formatNumber("00")}
                     </span>
                   </div>
-                  <span className="font-sans text-[8px] sm:text-xs tracking-widest uppercase text-stone-500 mt-2.5 font-bold">
+                  <span className="font-sans text-[12px] sm:text-xs tracking-widest uppercase text-stone-500 mt-2.5 font-bold">
                     {item.label}
                   </span>
                 </div>
@@ -194,7 +194,7 @@ export default function EventDetails() {
             {/* Header Label */}
             <div className="flex items-center gap-2 text-[#5e1f70] mb-4 pb-3 border-b border-purple-100 flex-shrink-0">
               <Calendar className="w-5 h-5 text-[#d4af37]" />
-              <span className="font-sans text-[10px] tracking-[0.2em] uppercase font-bold">
+              <span className="font-sans text-base sm:text-lg tracking-[0.15em] uppercase font-bold">
                 {t("eventDetails.dateTimeCard.title")}
               </span>
             </div>
@@ -206,7 +206,7 @@ export default function EventDetails() {
                   <Sparkles className="w-4 h-4" />
                 </div>
                 <div>
-                  <span className="font-sans text-[9px] uppercase tracking-wider text-stone-400 font-bold block">
+                  <span className="font-sans text-[12px] uppercase tracking-wider text-stone-400 font-bold block">
                     {labels.auspiciousDay}
                   </span>
                   <p className="font-serif text-base sm:text-lg text-stone-850 font-bold mt-0.5">
@@ -221,7 +221,7 @@ export default function EventDetails() {
                   <Calendar className="w-4 h-4" />
                 </div>
                 <div>
-                  <span className="font-sans text-[9px] uppercase tracking-wider text-stone-400 font-bold block">
+                  <span className="font-sans text-[12px] uppercase tracking-wider text-stone-400 font-bold block">
                     {labels.date}
                   </span>
                   <p className="font-serif text-base sm:text-lg text-stone-850 font-bold mt-0.5">
@@ -236,7 +236,7 @@ export default function EventDetails() {
                   <Clock className="w-4 h-4" />
                 </div>
                 <div>
-                  <span className="font-sans text-[9px] uppercase tracking-wider text-stone-400 font-bold block">
+                  <span className="font-sans text-[12px] uppercase tracking-wider text-stone-400 font-bold block">
                     {labels.time}
                   </span>
                   <p className="font-serif text-base sm:text-lg text-stone-850 font-bold mt-0.5">
@@ -269,7 +269,7 @@ export default function EventDetails() {
                 {/* Header Label */}
                 <div className="flex items-center gap-2 text-[#5e1f70] mb-4 pb-3 border-b border-purple-100">
                   <Landmark className="w-5 h-5 text-[#d4af37]" />
-                  <span className="font-sans text-[10px] tracking-[0.2em] uppercase font-bold">
+                  <span className="font-sans text-base sm:text-lg tracking-[0.15em] uppercase font-bold">
                     {labels.venueTitle}
                   </span>
                 </div>
@@ -298,10 +298,10 @@ export default function EventDetails() {
                     <Landmark className="w-3.5 h-3.5" />
                   </div>
                   <div>
-                    <span className="font-sans text-[9px] uppercase tracking-wider text-stone-400 font-bold block">
+                    <span className="font-sans text-[12px] uppercase tracking-wider text-stone-400 font-bold block">
                       {labels.venueName}
                     </span>
-                    <h3 className="font-serif text-lg sm:text-xl font-bold text-stone-850 mt-0.5">
+                    <h3 className="font-serif text-sm sm:text-base font-bold text-stone-850 mt-0.5">
                       {t("venue.venueName")}
                     </h3>
                   </div>
@@ -313,10 +313,10 @@ export default function EventDetails() {
                     <MapPin className="w-3.5 h-3.5" />
                   </div>
                   <div>
-                    <span className="font-sans text-[9px] uppercase tracking-wider text-stone-400 font-bold block">
+                    <span className="font-sans text-[12px] uppercase tracking-wider text-stone-400 font-bold block">
                       {labels.address}
                     </span>
-                    <p className="font-sans text-xs sm:text-sm text-stone-700 leading-relaxed font-semibold mt-0.5">
+                    <p className="font-sans text-sm sm:text-base text-stone-700 leading-relaxed font-semibold mt-0.5">
                       {t("venue.address")}
                     </p>
                   </div>
@@ -358,7 +358,7 @@ export default function EventDetails() {
             <div className="relative w-full h-full min-h-[300px] md:min-h-full overflow-hidden group/map">
               <div className="absolute top-4 left-4 z-20 px-3.5 py-2 rounded-xl bg-white/80 backdrop-blur-md border border-[#d4af37]/35 shadow-md flex items-center gap-2 pointer-events-none">
                 <Compass className="w-3.5 h-3.5 text-[#d4af37] animate-pulse" />
-                <span className="font-sans text-[9px] tracking-wider text-[#5e1f70] font-bold uppercase">
+                <span className="font-sans text-xs sm:text-sm tracking-wider text-[#5e1f70] font-bold uppercase">
                   {labels.interactiveMap}
                 </span>
               </div>

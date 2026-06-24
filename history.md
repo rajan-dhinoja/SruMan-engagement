@@ -250,3 +250,10 @@
 - Increased the font sizes for better readability in the main invitation card text within [Couple.tsx](file:///d:/SruMan/SruMan-engagement/src/components/Couple.tsx).
 - Increased font sizes and added extra bottom padding/spacing to the final credits section in [page.tsx](file:///d:/SruMan/SruMan-engagement/src/app/page.tsx).
 - Marked all new tasks as completed in [tasks.md](file:///d:/SruMan/SruMan-engagement/tasks.md).
+
+## Prompt 50 (2026-06-24)
+- Unified the font size, style (`font-serif`), and weight (`font-bold`) across all body text blocks in the Couple section ([Couple.tsx](file:///d:/SruMan/SruMan-engagement/src/components/Couple.tsx)) to match the main top heading, while keeping their respective original text colors.
+## Prompt 51 (2026-06-24)
+- Increased the font sizes of the Date, Venue, and Map card titles in the Event Details section ([EventDetails.tsx](file:///d:/SruMan/SruMan-engagement/src/components/EventDetails.tsx)) for better readability.
+## Prompt 52 (2026-06-24)
+- Decreased the font size of the venue name and increased the font size of the venue address in the Event Details section ([EventDetails.tsx](file:///d:/SruMan/SruMan-engagement/src/components/EventDetails.tsx)), unifying them both to the same size (`text-sm sm:text-base`).
