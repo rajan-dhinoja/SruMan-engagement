@@ -242,7 +242,7 @@ export default function Home() {
 function CreditsSection() {
   const { t, formatNumber } = useLanguage();
   return (
-    <div id="credits-section" className="w-full bg-gradient-to-b from-[#1a0525] via-[#110119] to-[#08000c] text-center flex flex-col items-center gap-12 px-6 py-10 md:py-16 relative overflow-hidden select-none">
+    <div id="credits-section" className="w-full bg-gradient-to-b from-[#1a0525] via-[#110119] to-[#08000c] text-center flex flex-col items-center gap-12 px-6 py-10 md:py-16 pb-20 md:pb-28 relative overflow-hidden select-none">
       {/* Decorative Royal Corner Elements */}
       <div className="absolute inset-0 pointer-events-none opacity-25">
         <div className="absolute top-0 left-0 w-36 h-36 md:w-48 md:h-48 border-l border-t border-gold-400/25 rounded-tl-[100px] m-4 md:m-6" />
@@ -258,7 +258,7 @@ function CreditsSection() {
       <motion.div 
         className="mt-4 flex flex-col items-center"
       >
-        <span className="font-serif text-[10px] tracking-[0.35em] text-[#d4af37]/60 uppercase mb-2">
+        <span className="font-serif text-xs tracking-[0.35em] text-[#d4af37]/60 uppercase mb-2">
           {t("global.footer.thankYouForVisiting")}
         </span>
         <div className="w-16 h-[1px] bg-gold-400/20" />
@@ -317,7 +317,7 @@ function CreditsSection() {
       <motion.div
         className="w-full max-w-lg bg-[#fbf9fb]/[0.02] backdrop-blur-md rounded-[32px] border border-gold-400/10 p-6 md:p-8 flex flex-col items-center shadow-[0_12px_40px_rgba(0,0,0,0.6)] mb-4 z-10"
       >
-        <span className="font-sans text-[8px] md:text-[9px] tracking-[0.3em] text-[#d4af37]/75 uppercase mb-5 font-semibold">
+        <span className="font-sans text-[9px] md:text-[10px] tracking-[0.3em] text-[#d4af37]/75 uppercase mb-5 font-semibold">
           {t("global.footer.craftedBy")}
         </span>
 
@@ -349,10 +349,10 @@ function CreditsSection() {
           </motion.div>
           
           <div className="text-center">
-            <h3 className="font-sans text-sm md:text-base tracking-[0.15em] text-[#f7e4a9] font-bold group-hover:text-gold-400 transition-colors uppercase">
+            <h3 className="font-sans text-base md:text-lg tracking-[0.15em] text-[#f7e4a9] font-bold group-hover:text-gold-400 transition-colors uppercase">
               DHINOJA OmniTech Resolutions
             </h3>
-            <p className="font-sans text-[9px] tracking-[0.2em] text-stone-400 mt-1">
+            <p className="font-sans text-[10px] tracking-[0.2em] text-stone-400 mt-1">
               {t("global.footer.nickname")} <span className="text-[#d4af37]/80 font-bold group-hover:text-gold-400 transition-colors">dotr</span>
             </p>
           </div>
@@ -364,7 +364,7 @@ function CreditsSection() {
             href="http://dotr.in" 
             target="_blank" 
             rel="noopener noreferrer"
-            className="flex-1 flex items-center justify-center gap-2 px-5 py-3 rounded-full border border-gold-400/20 bg-black/40 hover:bg-gold-500 hover:text-stone-950 font-sans text-[11px] tracking-wider text-[#f7e4a9] transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_20px_rgba(212,175,55,0.35)] font-semibold cursor-pointer whitespace-nowrap"
+            className="flex-1 flex items-center justify-center gap-2 px-5 py-3 rounded-full border border-gold-400/20 bg-black/40 hover:bg-gold-500 hover:text-stone-950 font-sans text-xs tracking-wider text-[#f7e4a9] transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_20px_rgba(212,175,55,0.35)] font-semibold cursor-pointer whitespace-nowrap"
           >
             <Globe className="w-3.5 h-3.5" />
             dotr.in
@@ -372,7 +372,7 @@ function CreditsSection() {
           
           <a 
             href="mailto:info@dotr.in"
-            className="flex-1 flex items-center justify-center gap-2 px-5 py-3 rounded-full border border-gold-400/20 bg-black/40 hover:bg-gold-500 hover:text-stone-950 font-sans text-[11px] tracking-wider text-[#f7e4a9] transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_20px_rgba(212,175,55,0.35)] font-semibold cursor-pointer whitespace-nowrap"
+            className="flex-1 flex items-center justify-center gap-2 px-5 py-3 rounded-full border border-gold-400/20 bg-black/40 hover:bg-gold-500 hover:text-stone-950 font-sans text-xs tracking-wider text-[#f7e4a9] transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_20px_rgba(212,175,55,0.35)] font-semibold cursor-pointer whitespace-nowrap"
           >
             <Mail className="w-3.5 h-3.5" />
             info@dotr.in
@@ -380,7 +380,7 @@ function CreditsSection() {
           
           <a 
             href="tel:+918200965524"
-            className="flex-1 flex items-center justify-center gap-2 px-5 py-3 rounded-full border border-gold-400/20 bg-black/40 hover:bg-gold-500 hover:text-stone-950 font-sans text-[11px] tracking-wider text-[#f7e4a9] transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_20px_rgba(212,175,55,0.35)] font-semibold cursor-pointer whitespace-nowrap"
+            className="flex-1 flex items-center justify-center gap-2 px-5 py-3 rounded-full border border-gold-400/20 bg-black/40 hover:bg-gold-500 hover:text-stone-950 font-sans text-xs tracking-wider text-[#f7e4a9] transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_20px_rgba(212,175,55,0.35)] font-semibold cursor-pointer whitespace-nowrap"
           >
             <Phone className="w-3.5 h-3.5" />
             {formatNumber("+91 8200965524")}

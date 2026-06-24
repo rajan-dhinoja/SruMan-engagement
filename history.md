@@ -238,3 +238,15 @@
 
 ## Prompt 47 (2026-06-24)
 - Removed `font-bold` from the grandparents name row in [Nimantrak.tsx](file:///d:/SruMan/SruMan-engagement/src/components/Nimantrak.tsx). The grandparents' names now render at normal (`font-semibold` inherited from the parent container) weight, matching the visual style of the rest of the invitation card.
+
+## Prompt 48 (2026-06-24)
+- Corrected three name spellings in the **couple section** across all 3 languages in [translations.ts](file:///d:/SruMan/SruMan-engagement/src/data/translations.ts):
+  - **gu**: ચંદ્રાબાગાબેન → **ચંદ્રાભાગાબેન**, નાતાણી → **નાટાણી**, ધીનોજા (ન→ણ) → **ધીણોજા**
+  - **en**: Chandrabaghaben → **Chandrabhagaben** (Natani and Dhinoja transliterations unchanged as they render identically in English)
+  - **hi**: चंद्राबागाबेन → **चंद्राभागाबेन**, नाताणी → **नाटाणी**, धीनोजा → **धीणोजा**
+## Prompt 49 (2026-06-24)
+- Added secondary contact number `9106675320` in the Nimantrak section in [Nimantrak.tsx](file:///d:/SruMan/SruMan-engagement/src/components/Nimantrak.tsx) and updated [translations.ts](file:///d:/SruMan/SruMan-engagement/src/data/translations.ts) for all 3 languages.
+- Removed "Rupavati" from the venue address in all language dictionaries in [translations.ts](file:///d:/SruMan/SruMan-engagement/src/data/translations.ts).
+- Increased the font sizes for better readability in the main invitation card text within [Couple.tsx](file:///d:/SruMan/SruMan-engagement/src/components/Couple.tsx).
+- Increased font sizes and added extra bottom padding/spacing to the final credits section in [page.tsx](file:///d:/SruMan/SruMan-engagement/src/app/page.tsx).
+- Marked all new tasks as completed in [tasks.md](file:///d:/SruMan/SruMan-engagement/tasks.md).

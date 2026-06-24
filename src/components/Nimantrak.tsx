@@ -163,6 +163,9 @@ export default function Nimantrak() {
           <p className="font-sans text-base sm:text-lg md:text-xl font-bold text-[#1d3c26] mt-2">
             {t("nimantrak.shubhSthalMobile")}
           </p>
+          <p className="font-sans text-base sm:text-lg md:text-xl font-bold text-[#1d3c26] mt-1">
+            {t("nimantrak.shubhSthalMobile2")}
+          </p>
         </motion.div>
       </div>
 

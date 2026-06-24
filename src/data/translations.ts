@@ -46,6 +46,7 @@ export interface TranslationDict {
     shubhSthalName: string;
     shubhSthalAddress: string;
     shubhSthalMobile: string;
+    shubhSthalMobile2: string;
     scrollNext: string;
   };
   eventDetails: {
@@ -146,14 +147,14 @@ export const translations: Record<"gu" | "en" | "hi", TranslationDict> = {
     couple: {
       familyBlessingIntro: "પરિવારના આશીર્વાદ સાથે",
       shreenathjiGrace: "પરમ કૃપાળુ શ્રી નાથજી બાવાની અસીમ કૃપાથી",
-      brideGrandparents: "ગૌ.વા. શરદભાઈ ઘેલાભાઈ ધીનોજા તથા ગૌ.વા. પુષ્પાબેન શરદચંદ્ર ધીનોજા ની સુપોત્રી",
-      brideParents: "તથા શ્રી અજયભાઈ શરદચંદ્ર ધીનોજા તથા અ.સૌ. રીનાબેન અજયભાઈ ધીનોજા ની સુપુત્રી",
+      brideGrandparents: "ગૌ.વા. શરદભાઈ ઘેલાભાઈ ધીણોજા તથા ગૌ.વા. પુષ્પાબેન શરદચંદ્ર ધીણોજા ની સુપોત્રી",
+      brideParents: "તથા શ્રી અજયભાઈ શરદચંદ્ર ધીણોજા તથા અ.સૌ. રીનાબેન અજયભાઈ ધીણોજા ની સુપુત્રી",
       brideName: "ચિ. સૃષ્ટિ",
       brideRole: "કન્યા",
       brideTagline: "લાવણ્ય અને હેતની સરવાણી",
       brideDesc: "સુંદર સપનાઓથી ભરેલું હૃદય. તે અમનની દુનિયામાં ખુશીઓ અને શાલીનતા લાવે છે, રોજિંદી પળોને યાદગાર વાર્તાઓમાં ફેરવે છે.",
-      groomGrandparents: "જયપુર નિવાસી ગૌ.વા. જગદીશભાઈ કનૈયાલાલ નાતાણી તથા શ્રી ચંદ્રાબાગાબેન જગદીશપ્રસાદ નાતાણી ના સુપોત્ર",
-      groomParents: "તથા શ્રી મુરારીભાઈ જગદીશભાઈ નાતાણી તથા અ.સૌ. સુધાલતાબેન મુરારીભાઈ નાતાણી ના સુપુત્ર",
+      groomGrandparents: "જયપુર નિવાસી ગૌ.વા. જગદીશભાઈ કનૈયાલાલ નાટાણી તથા શ્રી ચંદ્રાભાગાબેન જગદીશપ્રસાદ નાટાણી ના સુપોત્ર",
+      groomParents: "તથા શ્રી મુરારીભાઈ જગદીશભાઈ નાટાણી તથા અ.સૌ. સુધાલતાબેન મુરારીભાઈ નાટાણી ના સુપુત્ર",
       groomName: "ચિ. અમન",
       groomRole: "વરરાજ",
       groomTagline: "ધૈર્ય અને સમર્પણનો પથદર્શક",
@@ -182,6 +183,7 @@ export const translations: Record<"gu" | "en" | "hi", TranslationDict> = {
       shubhSthalName: '"ગિરિકંદરા"',
       shubhSthalAddress: "ચોરડી દરવાજો, ઉદ્યોગ ભારતી ચોક, ગોંડલ.",
       shubhSthalMobile: "મો. ૯૧૦૬૬૭૫૧૫૬",
+      shubhSthalMobile2: "મો. ૯૧૦૬૬૭૫૩૨૦",
       scrollNext: "પરિચય જોવા સ્ક્રોલ કરો",
     },
     eventDetails: {
@@ -217,7 +219,7 @@ export const translations: Record<"gu" | "en" | "hi", TranslationDict> = {
       addressLabel: "સરનામું",
       mainTitle: "સ્થળ અને દિશા નિર્દેશ",
       venueName: "પરિશ્રમ ધ લોન્સ",
-      address: "મોવીયા રોડ, ગોંડલ, રૂપાવટી, ગુજરાત ૩૬૦૩૧૧",
+      address: "મોવીયા રોડ, ગોંડલ, ગુજરાત ૩૬૦૩૧૧",
       button: "રસ્તો મેળવો",
     },
     blessings: {
@@ -286,7 +288,7 @@ export const translations: Record<"gu" | "en" | "hi", TranslationDict> = {
       brideRole: "Bride-to-be",
       brideTagline: "A Symphony of Grace & Love",
       brideDesc: "A heart filled with beautiful dreams. She brings joy and elegance to Aman's world, making everyday moments beautiful memories.",
-      groomGrandparents: "Grandson of Late Jagdishbhai Kanhaiyalal Natani & Mrs. Chandrabaghaben Jagdishprasad Natani (Residents of Jaipur)",
+      groomGrandparents: "Grandson of Late Jagdishbhai Kanhaiyalal Natani & Mrs. Chandrabhagaben Jagdishprasad Natani (Residents of Jaipur)",
       groomParents: "and Son of Mr. Muraribhai Jagdishbhai Natani & Mrs. Sudhalataben Muraribhai Natani",
       groomName: "Chi. Aman",
       groomRole: "Groom-to-be",
@@ -316,6 +318,7 @@ export const translations: Record<"gu" | "en" | "hi", TranslationDict> = {
       shubhSthalName: '"Girikandra"',
       shubhSthalAddress: "Chordi Darwajo, Udhyog Bharti Chok, Gondal.",
       shubhSthalMobile: "Mo. 9106675156",
+      shubhSthalMobile2: "Mo. 9106675320",
       scrollNext: "Scroll to Meet Couple",
     },
     eventDetails: {
@@ -351,7 +354,7 @@ export const translations: Record<"gu" | "en" | "hi", TranslationDict> = {
       addressLabel: "Address",
       mainTitle: "Venue & Directions",
       venueName: "Parishram The Lawns",
-      address: "Moviya Road, Gondal, Rupavati, Gujarat 360311",
+      address: "Moviya Road, Gondal, Gujarat 360311",
       button: "Get Directions",
     },
     blessings: {
@@ -414,14 +417,14 @@ export const translations: Record<"gu" | "en" | "hi", TranslationDict> = {
     couple: {
       familyBlessingIntro: "परिवार के आशीर्वाद के साथ",
       shreenathjiGrace: "परम कृपालु श्री नाथजी बावा की असीम कृपा से",
-      brideGrandparents: "स्व. शरदभाई घेलाभाई धीनोजा एवं स्व. पुष्पाबेन शरदचंद्र धीनोजा की सुपौत्री",
-      brideParents: "तथा श्री अजयभाई शरदचंद्र धीनोजा एवं अ.सौ. रीनाबेन अजयभाई धीनोजा की सुपुत्री",
+      brideGrandparents: "स्व. शरदभाई घेलाभाई धीणोजा एवं स्व. पुष्पाबेन शरदचंद्र धीणोजा की सुपौत्री",
+      brideParents: "तथा श्री अजयभाई शरदचंद्र धीणोजा एवं अ.सौ. रीनाबेन अजयभाई धीणोजा की सुपुत्री",
       brideName: "चि. सृष्टि",
       brideRole: "कन्या",
       brideTagline: "सच्चे प्रेम और शालीनता की मूरत",
       brideDesc: "सुंदर सपनों से भरा दिल। वह अमन की दुनिया में खुशियाँ और गरिमा लाती हैं, रोज़मर्रा के पलों को यादगार कहानियों में बदल देती हैं।",
-      groomGrandparents: "जयपुर निवासी स्व. जगदीशभाई कन्हैयालाल नाताणी तथा श्रीमती चंद्राबागाबेन जगदीशप्रसाद नाताणी के सुपौत्र",
-      groomParents: "तथा श्री मुरारीभाई जगदीशभाई नाताणी एवं अ.सौ. सुधालाताबेन मुरारीभाई नाताणी के सुपुत्र",
+      groomGrandparents: "जयपुर निवासी स्व. जगदीशभाई कन्हैयालाल नाटाणी तथा श्रीमती चंद्राभागाबेन जगदीशप्रसाद नाटाणी के सुपौत्र",
+      groomParents: "तथा श्री मुरारीभाई जगदीशभाई नाटाणी एवं अ.सौ. सुधालाताबेन मुरारीभाई नाटाणी के सुपुत्र",
       groomName: "चि. अमन",
       groomRole: "वरराज",
       groomTagline: "धैर्य और सच्चे समर्पण की पहचान",
@@ -450,6 +453,7 @@ export const translations: Record<"gu" | "en" | "hi", TranslationDict> = {
       shubhSthalName: '"गिरिकंदरा"',
       shubhSthalAddress: "चोरडी दरवाजा, उद्योग भारती चौक, गोंडल।",
       shubhSthalMobile: "मो. ९१०६६७५१५६",
+      shubhSthalMobile2: "मो. ९१०६६७५३२०",
       scrollNext: "परिचय देखने के लिए स्क्रॉल करें",
     },
     eventDetails: {
@@ -485,7 +489,7 @@ export const translations: Record<"gu" | "en" | "hi", TranslationDict> = {
       addressLabel: "पता",
       mainTitle: "स्थान और मार्ग दर्शन",
       venueName: "परिश्रम द लॉन्स",
-      address: "मोवीया रोड, गोंडल, रूपावटी, गुजरात ३६૦૩૧૧",
+      address: "मोवीया रोड, गोंडल, गुजरात ३६०३११",
       button: "मार्ग प्राप्त करें",
     },
     blessings: {

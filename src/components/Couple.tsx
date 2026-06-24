@@ -52,7 +52,7 @@ export default function Couple() {
           <motion.div
             className={`mb-6 sm:mb-8 ${language === "en" ? "max-w-6xl" : "max-w-5xl"}`}
           >
-            <p className="font-sans text-sm sm:text-base md:text-lg lg:text-xl text-stone-700 leading-relaxed font-semibold">
+            <p className="font-sans text-base sm:text-lg md:text-xl lg:text-2xl text-stone-700 leading-relaxed font-semibold">
               {t("couple.brideGrandparents")} <br className="hidden sm:inline" />
               {t("couple.brideParents")}
             </p>
@@ -91,18 +91,18 @@ export default function Couple() {
           <motion.div
             className={`${language === "en" ? "max-w-6xl" : "max-w-5xl"} space-y-4`}
           >
-            <p className="font-sans text-sm sm:text-base md:text-lg lg:text-xl text-stone-700 leading-relaxed font-semibold">
+            <p className="font-sans text-base sm:text-lg md:text-xl lg:text-2xl text-stone-700 leading-relaxed font-semibold">
               {t("couple.groomGrandparents")} <br className="hidden sm:inline" />
               {t("couple.groomParents")}
             </p>
 
             <div className="w-16 h-[1px] bg-gold-400/30 mx-auto my-4" />
 
-            <p className="font-serif text-[#8a1525] text-base sm:text-lg md:text-xl lg:text-2xl font-extrabold leading-relaxed">
+            <p className="font-serif text-[#8a1525] text-lg sm:text-xl md:text-2xl lg:text-3xl font-extrabold leading-relaxed">
               {t("couple.eventAnnouncement")}
             </p>
 
-            <p className="font-sans text-sm sm:text-base md:text-lg lg:text-xl text-[#8a1525] font-extrabold leading-relaxed">
+            <p className="font-sans text-base sm:text-lg md:text-xl lg:text-2xl text-[#8a1525] font-extrabold leading-relaxed">
               {t("couple.invitationGreeting")}
             </p>
           </motion.div>
