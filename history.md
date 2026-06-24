@@ -113,3 +113,12 @@
   - **Tone B** — soft champagne-gold `#fdf8ed` (from project's accent color `#d4af37`): applied to [Couple.tsx](file:///d:/SruMan/SruMan-engagement/src/components/Couple.tsx), [MeetCouple.tsx](file:///d:/SruMan/SruMan-engagement/src/components/MeetCouple.tsx), [Venue.tsx](file:///d:/SruMan/SruMan-engagement/src/components/Venue.tsx).
   - Credits section retains its dark royal gradient (intentional footer styling).
   - Updated main `<main>` container in [page.tsx](file:///d:/SruMan/SruMan-engagement/src/app/page.tsx) background to `white` so section colors are cleanly visible.
+
+## Prompt 24 (2026-06-24)
+- Redesigned [MeetCouple.tsx](file:///d:/SruMan/SruMan-engagement/src/components/MeetCouple.tsx) for proper photo and text visibility:
+  - **Photos**: Increased image container to `h-[26rem] sm:h-[28rem]`, `object-contain object-bottom` so figures fill the frame. Themed gradient photo backdrops — lavender for Srushti, warm champagne for Aman.
+  - **Fade**: Soft `from-white` gradient overlay at image bottom blends into card info area.
+  - **Card**: Changed to solid `bg-white` (was semi-transparent). Stronger border `border-[#d4af37]/30` and shadow.
+  - **Text**: Description increased from `text-xs` to `text-sm`, `text-stone-600` → `text-stone-700`. Fixed role label from invalid `text-purple-650` to `text-purple-700`. Tagline set to `text-[#5e1f70]`.
+  - **Layout**: Gold divider between role and tagline. Cards slide in from sides instead of bottom.
+

@@ -32,84 +32,102 @@ export default function MeetCouple() {
 
   return (
     <section id="meet-couple-section" className="w-full flex flex-col gap-10 py-16 px-6 bg-[#fffdf7] relative">
-      {/* Top Spacer for scroll buffer */}
-      <div className="h-16 sm:h-24 flex-shrink-0 w-full pointer-events-none" />
+      {/* Top Spacer */}
+      <div className="h-10 sm:h-16 flex-shrink-0 w-full pointer-events-none" />
 
       {/* Decorative Ornaments */}
-      <div className="absolute top-10 left-10 w-48 h-48 bg-purple-200/10 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-10 right-10 w-48 h-48 bg-gold-200/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-10 left-10 w-64 h-64 bg-purple-200/15 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-10 right-10 w-64 h-64 bg-amber-200/15 rounded-full blur-3xl pointer-events-none" />
 
-      <div className="max-w-6xl mx-auto w-full flex flex-col items-center z-20 flex-grow justify-center">
+      <div className="max-w-5xl mx-auto w-full flex flex-col items-center z-20">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="text-center mb-10"
+          className="text-center mb-12"
         >
-          <span className="font-sans text-[10px] sm:text-xs tracking-[0.25em] text-purple-700/80 uppercase font-semibold block mb-2">
+          <span className="font-sans text-[10px] sm:text-xs tracking-[0.3em] text-purple-700 uppercase font-semibold block mb-3">
             Our Story
           </span>
           <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl text-[#8a1525] font-bold tracking-wide">
             {t("couple.meetCoupleTitle")}
           </h2>
-          <div className="w-24 h-[1px] bg-gold-400/40 mx-auto mt-4" />
+          <div className="w-24 h-[1.5px] bg-gradient-to-r from-transparent via-[#d4af37]/60 to-transparent mx-auto mt-4" />
         </motion.div>
 
         {/* Profiles Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 w-full max-w-4xl justify-items-center">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-14 w-full justify-items-center">
+
           {/* Srushti's Card */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.1 }}
-            className="flex flex-col items-center justify-center w-full"
+            className="w-full max-w-sm"
           >
-            <div className="relative group w-full max-w-sm">
-              <div className="absolute -inset-1.5 rounded-[2rem] bg-gradient-to-r from-purple-500/20 to-gold-400/20 opacity-70 blur-sm group-hover:opacity-100 transition duration-700 pointer-events-none" />
-              <div className="relative z-10 glass-card p-6 rounded-[1.8rem] overflow-hidden flex flex-col items-center text-center bg-white/70 backdrop-blur-md border border-gold-300/20 shadow-md">
-                <div className="relative w-full h-[22rem] sm:h-[24rem] rounded-xl overflow-hidden mb-5 bg-stone-50 border border-gold-300/10">
+            <div className="relative group w-full">
+              {/* Glow border */}
+              <div className="absolute -inset-1 rounded-[2rem] bg-gradient-to-br from-purple-400/30 via-[#d4af37]/20 to-purple-400/30 opacity-60 blur-md group-hover:opacity-90 transition duration-700 pointer-events-none" />
+
+              {/* Card */}
+              <div className="relative z-10 flex flex-col items-center text-center bg-white rounded-[1.8rem] overflow-hidden border border-[#d4af37]/30 shadow-[0_8px_32px_rgba(94,31,112,0.10)]">
+
+                {/* Photo */}
+                <div className="relative w-full h-[26rem] sm:h-[28rem] overflow-hidden bg-gradient-to-b from-[#f9f4ff] to-[#f3eaf8]">
                   <Image
                     src="/images/srushti_natural.png"
                     alt="Srushti"
                     fill
-                    className="object-contain transition-transform duration-700 group-hover:scale-103"
-                    sizes="(max-w-768px) 100vw, 300px"
+                    className="object-contain object-bottom transition-transform duration-700 group-hover:scale-105"
+                    sizes="(max-width: 768px) 100vw, 350px"
                     priority
                   />
+                  {/* Soft bottom fade into card */}
+                  <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-white to-transparent pointer-events-none" />
                 </div>
-                <h3 className="font-serif text-3xl sm:text-4xl font-bold text-[#8a1525] tracking-wide mb-1">
-                  {t("couple.brideName")}
-                </h3>
-                <span className="font-sans text-[10px] tracking-[0.2em] uppercase text-purple-650 font-semibold mb-3">
-                  {t("couple.brideRole")}
-                </span>
-                
-                {/* Beautiful Tagline */}
-                <p className="font-serif italic text-sm text-[#8a1525] font-bold tracking-wide mb-3">
-                  &ldquo;{t("couple.brideTagline")}&rdquo;
-                </p>
 
-                <p className="font-sans text-xs text-stone-600 leading-relaxed font-light px-2 mb-5">
-                  {t("couple.brideDesc")}
-                </p>
-                <div className="flex gap-3 items-center justify-center w-full mt-2">
-                  <span className="w-8 h-[1px] bg-gold-300/30" />
-                  <motion.button
-                    onClick={handleLikeBride}
-                    whileHover={{ scale: 1.15 }}
-                    whileTap={{ scale: 0.85 }}
-                    className={`relative z-20 flex items-center justify-center cursor-pointer p-2.5 rounded-full border transition-all duration-300 shadow-sm pointer-events-auto ${
-                      hasLikedBride 
-                        ? "bg-red-50 border-red-200 text-red-500" 
-                        : "bg-purple-50/60 border-purple-200/30 text-purple-400 hover:bg-purple-100/60"
-                    }`}
-                  >
-                    <Heart className={`w-4 h-4 transition-colors ${hasLikedBride ? "text-red-500 fill-red-500" : "fill-transparent"}`} />
-                  </motion.button>
-                  <span className="w-8 h-[1px] bg-gold-300/30" />
+                {/* Info */}
+                <div className="px-6 pb-6 pt-2 flex flex-col items-center w-full">
+                  <h3 className="font-serif text-3xl sm:text-4xl font-bold text-[#8a1525] tracking-wide mb-1">
+                    {t("couple.brideName")}
+                  </h3>
+                  <span className="font-sans text-[10px] tracking-[0.25em] uppercase text-purple-700 font-bold mb-3">
+                    {t("couple.brideRole")}
+                  </span>
+
+                  {/* Divider */}
+                  <div className="w-16 h-[1px] bg-[#d4af37]/40 mb-3" />
+
+                  {/* Tagline */}
+                  <p className="font-serif italic text-sm text-[#5e1f70] font-semibold tracking-wide mb-3 px-2">
+                    &ldquo;{t("couple.brideTagline")}&rdquo;
+                  </p>
+
+                  {/* Description */}
+                  <p className="font-sans text-sm text-stone-700 leading-relaxed px-2 mb-5">
+                    {t("couple.brideDesc")}
+                  </p>
+
+                  {/* Like */}
+                  <div className="flex gap-3 items-center justify-center w-full">
+                    <span className="flex-1 h-[1px] bg-[#d4af37]/30" />
+                    <motion.button
+                      onClick={handleLikeBride}
+                      whileHover={{ scale: 1.15 }}
+                      whileTap={{ scale: 0.85 }}
+                      className={`relative z-20 flex items-center justify-center cursor-pointer p-2.5 rounded-full border transition-all duration-300 shadow-sm ${
+                        hasLikedBride
+                          ? "bg-red-50 border-red-200 text-red-500"
+                          : "bg-purple-50 border-purple-200/50 text-purple-500 hover:bg-purple-100"
+                      }`}
+                    >
+                      <Heart className={`w-4 h-4 transition-colors ${hasLikedBride ? "text-red-500 fill-red-500" : "fill-transparent"}`} />
+                    </motion.button>
+                    <span className="flex-1 h-[1px] bg-[#d4af37]/30" />
+                  </div>
                 </div>
               </div>
             </div>
@@ -117,63 +135,81 @@ export default function MeetCouple() {
 
           {/* Aman's Card */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="flex flex-col items-center justify-center w-full"
+            className="w-full max-w-sm"
           >
-            <div className="relative group w-full max-w-sm">
-              <div className="absolute -inset-1.5 rounded-[2rem] bg-gradient-to-r from-gold-400/20 to-purple-500/20 opacity-70 blur-sm group-hover:opacity-100 transition duration-700 pointer-events-none" />
-              <div className="relative z-10 glass-card p-6 rounded-[1.8rem] overflow-hidden flex flex-col items-center text-center bg-white/70 backdrop-blur-md border border-gold-300/20 shadow-md">
-                <div className="relative w-full h-[22rem] sm:h-[24rem] rounded-xl overflow-hidden mb-5 bg-stone-50 border border-gold-300/10">
+            <div className="relative group w-full">
+              {/* Glow border */}
+              <div className="absolute -inset-1 rounded-[2rem] bg-gradient-to-br from-[#d4af37]/30 via-purple-400/20 to-[#d4af37]/30 opacity-60 blur-md group-hover:opacity-90 transition duration-700 pointer-events-none" />
+
+              {/* Card */}
+              <div className="relative z-10 flex flex-col items-center text-center bg-white rounded-[1.8rem] overflow-hidden border border-[#d4af37]/30 shadow-[0_8px_32px_rgba(94,31,112,0.10)]">
+
+                {/* Photo */}
+                <div className="relative w-full h-[26rem] sm:h-[28rem] overflow-hidden bg-gradient-to-b from-[#fef9ee] to-[#f8f0dc]">
                   <Image
-                    src="/images/aman-new.png"
+                    src="/images/aman-without-safa.png"
                     alt="Aman"
                     fill
-                    className="object-contain transition-transform duration-700 group-hover:scale-103"
-                    sizes="(max-w-768px) 100vw, 300px"
+                    className="object-contain object-bottom transition-transform duration-700 group-hover:scale-105"
+                    sizes="(max-width: 768px) 100vw, 350px"
                     priority
                   />
+                  {/* Soft bottom fade into card */}
+                  <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-white to-transparent pointer-events-none" />
                 </div>
-                <h3 className="font-serif text-3xl sm:text-4xl font-bold text-[#8a1525] tracking-wide mb-1">
-                  {t("couple.groomName")}
-                </h3>
-                <span className="font-sans text-[10px] tracking-[0.2em] uppercase text-purple-650 font-semibold mb-3">
-                  {t("couple.groomRole")}
-                </span>
 
-                {/* Beautiful Tagline */}
-                <p className="font-serif italic text-sm text-[#8a1525] font-bold tracking-wide mb-3">
-                  &ldquo;{t("couple.groomTagline")}&rdquo;
-                </p>
+                {/* Info */}
+                <div className="px-6 pb-6 pt-2 flex flex-col items-center w-full">
+                  <h3 className="font-serif text-3xl sm:text-4xl font-bold text-[#8a1525] tracking-wide mb-1">
+                    {t("couple.groomName")}
+                  </h3>
+                  <span className="font-sans text-[10px] tracking-[0.25em] uppercase text-purple-700 font-bold mb-3">
+                    {t("couple.groomRole")}
+                  </span>
 
-                <p className="font-sans text-xs text-stone-605 leading-relaxed font-light px-2 mb-5">
-                  {t("couple.groomDesc")}
-                </p>
-                <div className="flex gap-3 items-center justify-center w-full mt-2">
-                  <span className="w-8 h-[1px] bg-gold-300/30" />
-                  <motion.button
-                    onClick={handleLikeGroom}
-                    whileHover={{ scale: 1.15 }}
-                    whileTap={{ scale: 0.85 }}
-                    className={`relative z-20 flex items-center justify-center cursor-pointer p-2.5 rounded-full border transition-all duration-300 shadow-sm pointer-events-auto ${
-                      hasLikedGroom 
-                        ? "bg-red-50 border-red-200 text-red-500" 
-                        : "bg-purple-50/60 border-purple-200/30 text-purple-400 hover:bg-purple-100/60"
-                    }`}
-                  >
-                    <Heart className={`w-4 h-4 transition-colors ${hasLikedGroom ? "text-red-500 fill-red-500" : "fill-transparent"}`} />
-                  </motion.button>
-                  <span className="w-8 h-[1px] bg-gold-300/30" />
+                  {/* Divider */}
+                  <div className="w-16 h-[1px] bg-[#d4af37]/40 mb-3" />
+
+                  {/* Tagline */}
+                  <p className="font-serif italic text-sm text-[#5e1f70] font-semibold tracking-wide mb-3 px-2">
+                    &ldquo;{t("couple.groomTagline")}&rdquo;
+                  </p>
+
+                  {/* Description */}
+                  <p className="font-sans text-sm text-stone-700 leading-relaxed px-2 mb-5">
+                    {t("couple.groomDesc")}
+                  </p>
+
+                  {/* Like */}
+                  <div className="flex gap-3 items-center justify-center w-full">
+                    <span className="flex-1 h-[1px] bg-[#d4af37]/30" />
+                    <motion.button
+                      onClick={handleLikeGroom}
+                      whileHover={{ scale: 1.15 }}
+                      whileTap={{ scale: 0.85 }}
+                      className={`relative z-20 flex items-center justify-center cursor-pointer p-2.5 rounded-full border transition-all duration-300 shadow-sm ${
+                        hasLikedGroom
+                          ? "bg-red-50 border-red-200 text-red-500"
+                          : "bg-amber-50 border-amber-200/50 text-amber-600 hover:bg-amber-100"
+                      }`}
+                    >
+                      <Heart className={`w-4 h-4 transition-colors ${hasLikedGroom ? "text-red-500 fill-red-500" : "fill-transparent"}`} />
+                    </motion.button>
+                    <span className="flex-1 h-[1px] bg-[#d4af37]/30" />
+                  </div>
                 </div>
               </div>
             </div>
           </motion.div>
+
         </div>
       </div>
 
-      {/* Bottom Scroll Indicator */}
+      {/* Scroll Indicator */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 0.6 }}
@@ -191,8 +227,8 @@ export default function MeetCouple() {
         </motion.div>
       </motion.div>
 
-      {/* Bottom Spacer for scroll buffer */}
-      <div className="h-20 sm:h-28 flex-shrink-0 w-full pointer-events-none" />
+      {/* Bottom Spacer */}
+      <div className="h-16 sm:h-24 flex-shrink-0 w-full pointer-events-none" />
     </section>
   );
 }
