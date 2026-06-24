@@ -238,12 +238,3 @@
 
 ## Prompt 47 (2026-06-24)
 - Removed `font-bold` from the grandparents name row in [Nimantrak.tsx](file:///d:/SruMan/SruMan-engagement/src/components/Nimantrak.tsx). The grandparents' names now render at normal (`font-semibold` inherited from the parent container) weight, matching the visual style of the rest of the invitation card.
-
-## Prompt 48 (2026-06-24)
-- Redesigned the DOTR company credit card in [PalaceGateEntry.tsx](file:///d:/SruMan/SruMan-engagement/src/components/PalaceGateEntry.tsx) to be compact and mobile-friendly:
-  - Changed the card shape from a large `rounded-2xl` rectangle to a slim `rounded-full` pill layout.
-  - Shrunk the DOTR logo from a `h-10 w-20` rectangle container to a small `h-6 w-6` (mobile) / `h-8 w-8` (md+) circular badge.
-  - Reduced padding from `px-5 py-3` to `px-3 py-1.5` on mobile, `px-4 py-2` on md+.
-  - Made font sizes responsive: "Crafted By" label scales from `7px` to `8px`, company name from `9px` to `11px`.
-  - Shortened company name to "DHINOJA OmniTech" (without "Resolutions") for a neater single-line fit on mobile.
-  - Added `whitespace-nowrap` to prevent any line break inside the pill.

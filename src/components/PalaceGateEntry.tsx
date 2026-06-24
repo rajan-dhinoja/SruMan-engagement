@@ -281,10 +281,10 @@ export default function PalaceGateEntry({ onEnter }: PalaceGateEntryProps) {
               </motion.button>
             </motion.div>
 
-            {/* Company Credit Card — compact pill, mobile-first */}
+            {/* Company Credit Card (Repositioned above first stair at door bottom) */}
             <motion.div
               initial={{ opacity: 0, y: 15 }}
-              animate={isEntering ? { opacity: 0, scale: 0.8 } : { opacity: 1, y: 0 }}
+              animate={isEntering ? { opacity: 0, scale: 0.7 } : { opacity: 1, y: 0 }}
               transition={{ delay: 1.0, duration: 0.8 }}
               className="absolute left-1/2 -translate-x-1/2 z-40"
               style={{ top: "66%" }}
@@ -293,24 +293,22 @@ export default function PalaceGateEntry({ onEnter }: PalaceGateEntryProps) {
                 href="http://dotr.in"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 rounded-full border border-[#d4af37]/40 bg-black/70 backdrop-blur-md shadow-[0_4px_20px_rgba(0,0,0,0.5)] hover:border-[#d4af37]/70 transition-all duration-300 cursor-pointer group hover:scale-[1.03] whitespace-nowrap"
+                className="flex items-center gap-3.5 px-5 py-3 rounded-2xl border border-[#d4af37]/35 bg-black/75 backdrop-blur-md shadow-[0_8px_32px_rgba(0,0,0,0.5),inset_0_1px_1px_rgba(255,255,255,0.1)] hover:border-gold-400/60 transition-all duration-300 cursor-pointer group hover:scale-[1.02]"
               >
-                {/* Logo pill */}
-                <div className="flex items-center justify-center bg-white rounded-full border border-[#d4af37]/40 h-6 w-6 md:h-8 md:w-8 overflow-hidden shadow-sm flex-shrink-0">
-                  <img
-                    src="/logos/dotr_logo.png"
-                    alt="dotr logo"
-                    className="h-full w-full object-contain transition-transform duration-500 group-hover:scale-105"
+                <div className="flex items-center justify-center p-1 bg-white rounded-lg border border-[#d4af37]/40 h-10 w-20 overflow-hidden shadow-sm">
+                  <img 
+                    src="/logos/dotr_logo.png" 
+                    alt="dotr logo" 
+                    className="h-full w-full object-contain transition-transform duration-500 group-hover:scale-105" 
                   />
                 </div>
-
-                {/* Text */}
-                <div className="flex flex-col items-start leading-none gap-[2px]">
-                  <span className="font-sans text-[7px] md:text-[8px] tracking-[0.22em] text-[#d4af37]/80 uppercase font-semibold">
+                
+                <div className="flex flex-col items-start text-left">
+                  <span className="font-sans text-[8px] tracking-[0.25em] text-[#d4af37]/90 uppercase font-bold">
                     Crafted By
                   </span>
-                  <span className="font-sans text-[9px] md:text-[11px] tracking-[0.06em] text-[#f7e4a9] font-bold uppercase group-hover:text-white transition-colors">
-                    DHINOJA OmniTech
+                  <span className="font-sans text-[11px] tracking-[0.1em] text-[#f7e4a9] font-bold uppercase mt-0.5 group-hover:text-white transition-colors">
+                    DHINOJA OmniTech Resolutions
                   </span>
                 </div>
               </a>
