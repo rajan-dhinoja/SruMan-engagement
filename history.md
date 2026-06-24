@@ -261,3 +261,9 @@
 - Added localized translations for the submitted blessing confirmation card ("Blessing Sent!", "Thank you for your beautiful wish..."), the pinned wish section title ("Your Blessing"), and the toggle view buttons ("View All Wishes", "Back to Loop View") in the Wishes section (`Blessings.tsx` and `translations.ts`) for all 3 supported languages.
 ## Prompt 54 (2026-06-24)
 - Increased the font sizes for the "Thank You For Visiting" text and the "18.08.2026 • GONDAL, GUJARAT" date/place text in the final Credits section ([page.tsx](file:///d:/SruMan/SruMan-engagement/src/app/page.tsx)).
+## Prompt 55 (2026-06-24)
+- Localized the date and place text ("18.08.2026 • GONDAL, GUJARAT") in the Credits section to support Gujarati, English, and Hindi.
+## Prompt 56 (2026-06-24)
+- Removed the delayed fade-in animation from the "Crafted By" company credit logo block on the Palace Gate Entrance screen (`PalaceGateEntry.tsx`) so it appears immediately on load.
+## Prompt 57 (2026-06-24)
+- Further removed the initial fade-in animations for the central monogram logo and the "Open Gate" button on the Palace Gate Entrance screen (`PalaceGateEntry.tsx`), ensuring all central elements appear fully rendered instantly on load without any staggered transition effects.

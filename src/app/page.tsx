@@ -309,7 +309,7 @@ function CreditsSection() {
         <motion.p
           className="font-serif text-base md:text-lg tracking-[0.2em] text-[#f7e4a9]/85 font-light"
         >
-          18.08.2026 • GONDAL, GUJARAT
+          {t("global.footer.dateAndPlace")}
         </motion.p>
       </div>
 

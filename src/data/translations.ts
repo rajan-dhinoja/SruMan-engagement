@@ -132,6 +132,7 @@ export interface TranslationDict {
       thankYouForVisiting: string;
       craftedBy: string;
       nickname: string;
+      dateAndPlace: string;
     };
     audio: {
       mute: string;
@@ -275,6 +276,7 @@ export const translations: Record<"gu" | "en" | "hi", TranslationDict> = {
         thankYouForVisiting: "પધારવા બદલ આભાર",
         craftedBy: "ડિજિટલ આમંત્રણ પત્રિકા નિર્માતા",
         nickname: "ટૂંકું નામ (ઉપનામ):",
+        dateAndPlace: "૧૮.૦૮.૨૦૨૬ • ગોંડલ, ગુજરાત",
       },
       audio: {
         mute: "મ્યૂટ કરો",
@@ -416,6 +418,7 @@ export const translations: Record<"gu" | "en" | "hi", TranslationDict> = {
         thankYouForVisiting: "Thank You For Visiting",
         craftedBy: "Digital Invitation Crafted By",
         nickname: "INSHORT (NICKNAME):",
+        dateAndPlace: "18.08.2026 • GONDAL, GUJARAT",
       },
       audio: {
         mute: "Mute Music",
@@ -557,6 +560,7 @@ export const translations: Record<"gu" | "en" | "hi", TranslationDict> = {
         thankYouForVisiting: "पधारने के लिए धन्यवाद",
         craftedBy: "डिजिटल आमंत्रण पत्र निर्माता",
         nickname: "छोटा नाम (उपनाम):",
+        dateAndPlace: "१८.०८.२०२६ • गोंडल, गुजरात",
       },
       audio: {
         mute: "म्यूट करें",

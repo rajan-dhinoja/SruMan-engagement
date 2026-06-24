@@ -221,9 +221,9 @@ export default function PalaceGateEntry({ onEnter }: PalaceGateEntryProps) {
               className="absolute z-30 -translate-x-1/2 -translate-y-1/2 left-1/2 top-[48%] flex flex-col items-center justify-center text-center px-4"
             >
               <motion.div
-                initial={{ scale: 0.7, opacity: 0, rotate: -30 }}
+                initial={false}
                 animate={{ scale: 1, opacity: 1, rotate: 0 }}
-                transition={{ delay: 0.4, duration: 1.3, ease: [0.16, 1, 0.3, 1] }}
+                transition={{ duration: 1.3, ease: [0.16, 1, 0.3, 1] }}
                 className="w-32 h-32 md:w-52 md:h-52 mb-4 md:mb-8 relative flex items-center justify-center"
               >
                 {/* Outer spinning ring */}
@@ -263,9 +263,9 @@ export default function PalaceGateEntry({ onEnter }: PalaceGateEntryProps) {
               {/* CTA Button */}
               <motion.button
                 onClick={handleOpenGates}
-                initial={{ opacity: 0, y: 20 }}
+                initial={false}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.8, duration: 0.8 }}
+                transition={{ duration: 0.8 }}
                 whileHover={{ scale: 1.05, boxShadow: "0 0 50px rgba(212,175,55,0.7)" }}
                 whileTap={{ scale: 0.95 }}
                 className="flex items-center gap-3 px-10 py-4 rounded-full font-sans text-xs tracking-[0.2em] uppercase font-bold cursor-pointer transition-all duration-300"
@@ -283,9 +283,9 @@ export default function PalaceGateEntry({ onEnter }: PalaceGateEntryProps) {
 
             {/* Company Credit Card (Repositioned above first stair at door bottom) */}
             <motion.div
-              initial={{ opacity: 0, y: 15 }}
-              animate={isEntering ? { opacity: 0, scale: 0.7 } : { opacity: 1, y: 0 }}
-              transition={{ delay: 1.0, duration: 0.8 }}
+              initial={false}
+              animate={isEntering ? { opacity: 0, scale: 0.7 } : { opacity: 1, scale: 1 }}
+              transition={{ duration: 0.4, ease: "easeInOut" }}
               className="absolute left-1/2 -translate-x-1/2 z-40"
               style={{ top: "66%" }}
             >
