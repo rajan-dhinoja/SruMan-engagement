@@ -41,23 +41,15 @@ body {
   color: var(--foreground);
   font-family: var(--font-sans);
   overflow-x: hidden;
-  scrollbar-width: thin;
-  scrollbar-color: #8e35a7 #fbf9fb;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
 }
 
-/* Custom Scrollbar */
+/* Hide scrollbar for Chrome, Safari and Opera */
 ::-webkit-scrollbar {
-  width: 8px;
-}
-::-webkit-scrollbar-track {
-  background: #fbf9fb;
-}
-::-webkit-scrollbar-thumb {
-  background: #8e35a7;
-  border-radius: 4px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #74278a;
+  display: none;
+  width: 0;
+  height: 0;
 }
 
 /* Luxury Glassmorphism */

@@ -47,8 +47,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="gu" className={`${cormorant.variable} ${montserrat.variable} ${alexBrush.variable} scroll-smooth`}>
-      <body className="bg-[#fbf9fb] text-[#2d142c] antialiased min-h-screen">
+    <html lang="gu" suppressHydrationWarning className={`${cormorant.variable} ${montserrat.variable} ${alexBrush.variable} scroll-smooth`}>
+      <body suppressHydrationWarning className="bg-[#fbf9fb] text-[#2d142c] antialiased min-h-screen">
         <LanguageProvider>
           {children}
         </LanguageProvider>

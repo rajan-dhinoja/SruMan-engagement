@@ -1,228 +1,131 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { Heart, ChevronDown } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 
 export default function Couple() {
-  const { t } = useLanguage();
-  const [hasLikedBride, setHasLikedBride] = useState(false);
-  const [hasLikedGroom, setHasLikedGroom] = useState(false);
+  const { t, language } = useLanguage();
 
-  useEffect(() => {
-    const bHasLiked = localStorage.getItem("sruman_has_liked_bride");
-    const gHasLiked = localStorage.getItem("sruman_has_liked_groom");
-    if (bHasLiked === "true") setHasLikedBride(true);
-    if (gHasLiked === "true") setHasLikedGroom(true);
-  }, []);
-
-  const handleLikeBride = () => {
-    const nextState = !hasLikedBride;
-    setHasLikedBride(nextState);
-    localStorage.setItem("sruman_has_liked_bride", String(nextState));
-  };
-
-  const handleLikeGroom = () => {
-    const nextState = !hasLikedGroom;
-    setHasLikedGroom(nextState);
-    localStorage.setItem("sruman_has_liked_groom", String(nextState));
-  };
   return (
-    <section id="couple-section" className="min-h-screen w-full flex flex-col justify-between py-12 px-6 bg-[#fcf9f2] relative overflow-y-auto no-scrollbar">
+    <section id="couple-section" className="min-h-screen w-full flex flex-col justify-between py-12 px-6 bg-[#fcf9f2] relative">
       {/* Top Spacer for scroll buffer */}
       <div className="h-16 sm:h-24 flex-shrink-0 w-full pointer-events-none" />
 
-      {/* Background Decor */}
+      {/* Decorative Ornaments */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-gold-200/10 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-96 h-96 bg-purple-200/10 rounded-full blur-3xl pointer-events-none" />
 
       {/* Top Subtitle */}
       <motion.div
-        initial={{ opacity: 0, y: -25 }}
+        initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2, duration: 0.8 }}
-        className="text-center mt-4 z-20"
+        className="text-center mt-2 z-20"
       >
-        <span className="font-sans text-[10px] sm:text-xs tracking-[0.2em] text-purple-700/90 uppercase font-semibold">
+        <span className="font-sans text-[10px] sm:text-xs tracking-[0.25em] text-purple-700/90 uppercase font-semibold">
           {t("couple.familyBlessingIntro")}
         </span>
       </motion.div>
 
-      <div className="max-w-6xl mx-auto w-full flex flex-col items-center z-20 flex-grow justify-center mt-6">
-
-        {/* Family Blessings/Details */}
+      <div className={`${language === "en" ? "max-w-7xl" : "max-w-6xl"} mx-auto w-full flex flex-col items-center z-20 flex-grow justify-center mt-4 px-2 sm:px-4`}>
+        {/* Traditional Invitation Envelope Card */}
         <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5, duration: 1.0 }}
-          className="text-center max-w-4xl mb-10 px-4 z-20"
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1.0, ease: "easeOut" }}
+          className="w-full relative bg-white/70 backdrop-blur-md rounded-[2.5rem] border-2 border-[#d4af37]/35 p-6 sm:p-10 md:p-14 lg:p-16 shadow-[0_15px_50px_rgba(138,21,37,0.06)] text-center flex flex-col items-center overflow-hidden"
         >
-          <p className="font-serif text-[#8a1525] text-base sm:text-lg font-bold leading-relaxed mb-3">
-            {t("couple.shreenathjiGrace")}
-          </p>
-          <p className="font-sans text-xs sm:text-sm text-stone-700 leading-relaxed font-normal">
-            {t("couple.brideGrandparents")} <br className="hidden sm:inline" />
-            {t("couple.brideParents")}
-          </p>
-        </motion.div>
+          {/* Card Corner Ornaments */}
+          <div className="absolute top-0 left-0 w-16 h-16 border-l-2 border-t-2 border-[#d4af37]/40 rounded-tl-3xl m-4 pointer-events-none" />
+          <div className="absolute top-0 right-0 w-16 h-16 border-r-2 border-t-2 border-[#d4af37]/40 rounded-tr-3xl m-4 pointer-events-none" />
+          <div className="absolute bottom-0 left-0 w-16 h-16 border-l-2 border-b-2 border-[#d4af37]/40 rounded-bl-3xl m-4 pointer-events-none" />
+          <div className="absolute bottom-0 right-0 w-16 h-16 border-r-2 border-b-2 border-[#d4af37]/40 rounded-br-3xl m-4 pointer-events-none" />
 
-        {/* Profiles Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] gap-6 lg:gap-8 w-full items-center justify-items-center">
-          {/* Srushti's Card */}
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="flex flex-col items-center justify-center w-full"
+          {/* Shreenathji Grace Heading */}
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.3 }}
+            className="font-serif text-[#8a1525] text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold leading-relaxed mb-6 sm:mb-8"
           >
-            <div className="relative group w-full max-w-sm">
-              <div className="absolute -inset-1.5 rounded-[2rem] bg-gradient-to-r from-purple-500/20 to-gold-400/20 opacity-70 blur-sm group-hover:opacity-100 transition duration-700 pointer-events-none" />
-              <div className="relative z-10 glass-card p-5 rounded-[1.8rem] overflow-hidden flex flex-col items-center text-center">
-                <div className="relative w-full h-[22rem] sm:h-[24rem] rounded-xl overflow-hidden mb-4 bg-stone-100 border border-gold-300/10">
-                  <Image
-                    src="/images/srushti_natural.png"
-                    alt="Srushti"
-                    fill
-                    className="object-contain transition-transform duration-700 group-hover:scale-103"
-                    sizes="(max-w-768px) 100vw, 300px"
-                    priority
-                  />
-                </div>
-                <h3 className="font-serif text-3xl sm:text-4xl font-bold text-[#8a1525] tracking-wide mb-1">
-                  {t("couple.brideName")}
-                </h3>
-                <span className="font-sans text-[10px] tracking-[0.2em] uppercase text-purple-650 font-semibold mb-2.5">
-                  {t("couple.brideRole")}
-                </span>
-                
-                {/* Beautiful Tagline */}
-                <p className="font-serif italic text-[13px] sm:text-[14px] text-[#8a1525] font-bold tracking-wide mb-3">
-                  &ldquo;{t("couple.brideTagline")}&rdquo;
-                </p>
+            {t("couple.shreenathjiGrace")}
+          </motion.p>
 
-                <p className="font-sans text-xs text-stone-600 leading-relaxed font-light px-2 mb-4">
-                  {t("couple.brideDesc")}
-                </p>
-                <div className="flex gap-3 items-center justify-center w-full mt-2">
-                  <span className="w-6 h-[1px] bg-gold-300/30" />
-                  <motion.button
-                    onClick={handleLikeBride}
-                    whileHover={{ scale: 1.15 }}
-                    whileTap={{ scale: 0.85 }}
-                    className={`relative z-20 flex items-center justify-center cursor-pointer p-2.5 rounded-full border transition-all duration-300 shadow-sm pointer-events-auto ${
-                      hasLikedBride 
-                        ? "bg-red-50 border-red-200 text-red-500" 
-                        : "bg-purple-50/60 border-purple-200/30 text-purple-400 hover:bg-purple-100/60"
-                    }`}
-                  >
-                    <Heart className={`w-4 h-4 transition-colors ${hasLikedBride ? "text-red-500 fill-red-500" : "fill-transparent"}`} />
-                  </motion.button>
-                  <span className="w-6 h-[1px] bg-gold-300/30" />
-                </div>
-              </div>
-            </div>
+          {/* Bride Family Details */}
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.4, duration: 0.8 }}
+            className={`mb-6 sm:mb-8 ${language === "en" ? "max-w-6xl" : "max-w-5xl"}`}
+          >
+            <p className="font-sans text-sm sm:text-base md:text-lg lg:text-xl text-stone-700 leading-relaxed font-semibold">
+              {t("couple.brideGrandparents")} <br className="hidden sm:inline" />
+              {t("couple.brideParents")}
+            </p>
           </motion.div>
 
-          {/* Center Ring Image */}
+          {/* Main Couple Names Section (Centered) */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
+            initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            className="flex flex-col items-center justify-center py-4 md:py-0"
+            transition={{ delay: 0.5, duration: 0.8 }}
+            className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 my-6 sm:my-8 py-2 w-full"
           >
+            <h2 className="font-serif text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-[#8a1525] tracking-wide whitespace-nowrap">
+              {t("couple.brideName")}
+            </h2>
+
+            {/* Rotating / Floating Ring Icon */}
             <motion.div
               animate={{ rotate: 360 }}
               transition={{ repeat: Infinity, duration: 25, ease: "linear" }}
-              className="relative w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 xl:w-56 xl:h-56"
+              className="relative w-24 h-24 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 flex-shrink-0"
             >
               <Image
                 src="/images/ring.png"
                 alt="Wedding Rings"
                 fill
                 className="object-contain"
-                style={{ filter: "drop-shadow(0 0 15px rgba(212,175,55,0.95)) drop-shadow(0 0 35px rgba(94,31,112,0.5))" }}
+                style={{ filter: "drop-shadow(0 0 10px rgba(212,175,55,0.8))" }}
                 priority
               />
             </motion.div>
+
+            <h2 className="font-serif text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-[#8a1525] tracking-wide whitespace-nowrap">
+              {t("couple.groomName")}
+            </h2>
           </motion.div>
 
-          {/* Aman's Card */}
+          {/* Groom Family Details & Announcement */}
           <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="flex flex-col items-center justify-center w-full"
+            transition={{ delay: 0.6, duration: 0.8 }}
+            className={`${language === "en" ? "max-w-6xl" : "max-w-5xl"} space-y-4`}
           >
-            <div className="relative group w-full max-w-sm">
-              <div className="absolute -inset-1.5 rounded-[2rem] bg-gradient-to-r from-gold-400/20 to-purple-500/20 opacity-70 blur-sm group-hover:opacity-100 transition duration-700 pointer-events-none" />
-              <div className="relative z-10 glass-card p-5 rounded-[1.8rem] overflow-hidden flex flex-col items-center text-center">
-                <div className="relative w-full h-[22rem] sm:h-[24rem] rounded-xl overflow-hidden mb-4 bg-stone-100 border border-gold-300/10">
-                  <Image
-                    src="/images/aman-new.png"
-                    alt="Aman"
-                    fill
-                    className="object-contain transition-transform duration-700 group-hover:scale-103"
-                    sizes="(max-w-768px) 100vw, 300px"
-                    priority
-                  />
-                </div>
-                <h3 className="font-serif text-3xl sm:text-4xl font-bold text-[#8a1525] tracking-wide mb-1">
-                  {t("couple.groomName")}
-                </h3>
-                <span className="font-sans text-[10px] tracking-[0.2em] uppercase text-purple-650 font-semibold mb-2.5">
-                  {t("couple.groomRole")}
-                </span>
+            <p className="font-sans text-sm sm:text-base md:text-lg lg:text-xl text-stone-700 leading-relaxed font-semibold">
+              {t("couple.groomGrandparents")} <br className="hidden sm:inline" />
+              {t("couple.groomParents")}
+            </p>
 
-                {/* Beautiful Tagline */}
-                <p className="font-serif italic text-[13px] sm:text-[14px] text-[#8a1525] font-bold tracking-wide mb-3">
-                  &ldquo;{t("couple.groomTagline")}&rdquo;
-                </p>
+            <div className="w-16 h-[1px] bg-gold-400/30 mx-auto my-4" />
 
-                <p className="font-sans text-xs text-stone-605 leading-relaxed font-light px-2 mb-4">
-                  {t("couple.groomDesc")}
-                </p>
-                <div className="flex gap-3 items-center justify-center w-full mt-2">
-                  <span className="w-6 h-[1px] bg-gold-300/30" />
-                  <motion.button
-                    onClick={handleLikeGroom}
-                    whileHover={{ scale: 1.15 }}
-                    whileTap={{ scale: 0.85 }}
-                    className={`relative z-20 flex items-center justify-center cursor-pointer p-2.5 rounded-full border transition-all duration-300 shadow-sm pointer-events-auto ${
-                      hasLikedGroom 
-                        ? "bg-red-50 border-red-200 text-red-500" 
-                        : "bg-purple-50/60 border-purple-200/30 text-purple-400 hover:bg-purple-100/60"
-                    }`}
-                  >
-                    <Heart className={`w-4 h-4 transition-colors ${hasLikedGroom ? "text-red-500 fill-red-500" : "fill-transparent"}`} />
-                  </motion.button>
-                  <span className="w-6 h-[1px] bg-gold-300/30" />
-                </div>
-              </div>
-            </div>
+            <p className="font-serif text-[#8a1525] text-base sm:text-lg md:text-xl lg:text-2xl font-extrabold leading-relaxed">
+              {t("couple.eventAnnouncement")}
+            </p>
+
+            <p className="font-sans text-sm sm:text-base md:text-lg lg:text-xl text-[#8a1525] font-extrabold leading-relaxed">
+              {t("couple.invitationGreeting")}
+            </p>
           </motion.div>
-        </div>
-
-        {/* Groom Family Blessings/Details */}
-        <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.6, duration: 1.0 }}
-          className="text-center max-w-4xl mt-10 mb-6 px-4 z-20"
-        >
-          <p className="font-sans text-xs sm:text-sm text-stone-700 leading-relaxed font-normal">
-            {t("couple.groomGrandparents")} <br className="hidden sm:inline" />
-            {t("couple.groomParents")} <br className="my-2 block" />
-            {t("couple.eventAnnouncement")} <br className="my-1 block" />
-            {t("couple.invitationGreeting")}
-          </p>
         </motion.div>
-
-
       </div>
 
       {/* Bottom Scroll Indicator */}

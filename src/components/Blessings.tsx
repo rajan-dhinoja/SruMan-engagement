@@ -207,7 +207,7 @@ export default function Blessings() {
   const marqueeList = [...wishes, ...wishes];
 
   return (
-    <section id="blessings-section" className="py-16 sm:py-24 px-4 sm:px-6 bg-[#fbf9fb] relative overflow-x-hidden overflow-y-auto no-scrollbar">
+    <section id="blessings-section" className="py-16 sm:py-24 px-4 sm:px-6 bg-[#fbf9fb] relative overflow-x-hidden">
       
       {/* Styles for Infinite Loop Wishes Train Marquee */}
       <style>{`

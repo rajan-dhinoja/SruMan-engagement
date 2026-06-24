@@ -6,6 +6,7 @@ import { Volume2, VolumeX, Globe, Mail, Phone } from "lucide-react";
 import SparklesCanvas from "@/components/SparklesCanvas";
 import Welcome from "@/components/Welcome";
 import Couple from "@/components/Couple";
+import MeetCouple from "@/components/MeetCouple";
 import Nimantrak from "@/components/Nimantrak";
 import EventDetails from "@/components/EventDetails";
 import Venue from "@/components/Venue";
@@ -16,10 +17,8 @@ import LanguageSwitcher from "@/components/LanguageSwitcher";
 
 export default function Home() {
   const [showGate, setShowGate] = useState(true);
-  const [isOpen, setIsOpen] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [activeSection, setActiveSection] = useState(0);
-  const [sectionStyles, setSectionStyles] = useState<string[]>([]);
   const { t } = useLanguage();
   
   const audioContextRef = useRef<AudioContext | null>(null);
@@ -27,6 +26,11 @@ export default function Home() {
   const synthLoopIntervalRef = useRef<NodeJS.Timeout | null>(null);
 
   const containerRef = useRef<HTMLDivElement>(null);
+  const activeSectionRef = useRef(activeSection);
+
+  useEffect(() => {
+    activeSectionRef.current = activeSection;
+  }, [activeSection]);
 
   // Web Audio Synthesizer for high-end romantic arpeggios
   const startSynth = () => {
@@ -121,29 +125,6 @@ export default function Home() {
     }
   };
 
-  const handleOpenInvitation = () => {
-    setIsOpen(true);
-    
-    // Resume audio context in case browser blocked auto-play
-    if (audioContextRef.current?.state === "suspended") {
-      audioContextRef.current.resume();
-      setIsPlaying(true);
-    } else if (!audioContextRef.current) {
-      startSynth();
-    }
-
-    // Scroll to the second section (Couple)
-    setTimeout(() => {
-      if (containerRef.current) {
-        const height = containerRef.current.clientHeight;
-        containerRef.current.scrollTo({
-          top: height,
-          behavior: "smooth"
-        });
-      }
-    }, 100);
-  };
-
   // Cleanup synthesizer loop on unmount
   useEffect(() => {
     return () => {
@@ -153,10 +134,11 @@ export default function Home() {
     };
   }, []);
 
-  const sections = [
+  const sections = React.useMemo(() => [
     { id: "welcome", name: t("global.navDots.welcome"), component: <Welcome /> },
     { id: "couple", name: t("global.navDots.couple"), component: <Couple /> },
     { id: "nimantrak", name: t("global.navDots.nimantrak"), component: <Nimantrak /> },
+    { id: "meet-couple", name: t("global.navDots.meetCouple"), component: <MeetCouple /> },
     { id: "events", name: t("global.navDots.events"), component: <EventDetails /> },
     { id: "venue", name: t("global.navDots.venue"), component: <Venue /> },
     { 
@@ -169,50 +151,45 @@ export default function Home() {
       name: t("global.navDots.credits"),
       component: <CreditsSection />
     }
-  ];
-
-  // Initialize random styles for each section
-  useEffect(() => {
-    const styles = ["cube", "flip", "slide", "zoom"];
-    const assigned = sections.map((_, idx) => {
-      if (idx === 0) return "none"; // Hero starts with default entrance
-      return styles[Math.floor(Math.random() * styles.length)];
-    });
-    setSectionStyles(assigned);
-  }, []);
+  ], [t]);
 
   // Monitor scroll positioning to update active dot
   const handleScroll = () => {
-    if (!containerRef.current) return;
-    const { scrollTop, clientHeight } = containerRef.current;
-    const index = Math.round(scrollTop / clientHeight);
-    if (index !== activeSection) {
-      setActiveSection(index);
-      if (index > 0) {
-        setIsOpen(true);
+    const scrollPos = window.scrollY + window.innerHeight / 3;
+    
+    sections.forEach((sec, idx) => {
+      const element = document.getElementById(
+        sec.id === "events" ? "event-section" : `${sec.id}-section`
+      );
+      if (element) {
+        const top = element.offsetTop;
+        const height = element.offsetHeight;
+        if (scrollPos >= top && scrollPos < top + height) {
+          if (idx !== activeSectionRef.current) {
+            setActiveSection(idx);
+          }
+        }
       }
-    }
-  };
-
-  const scrollToSection = (idx: number) => {
-    if (!containerRef.current) return;
-    const height = containerRef.current.clientHeight;
-    containerRef.current.scrollTo({
-      top: idx * height,
-      behavior: "smooth"
     });
   };
 
-  const getAnimationVariants = (style: string): any => {
-    return {
-      initial: {
-        opacity: 0
-      },
-      whileInView: {
-        opacity: 1,
-        transition: { duration: 0.8, ease: "easeOut" }
-      }
-    };
+  useEffect(() => {
+    if (showGate) return;
+    window.addEventListener("scroll", handleScroll);
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [showGate]);
+
+  const scrollToSection = (idx: number) => {
+    const sec = sections[idx];
+    const element = document.getElementById(
+      sec.id === "events" ? "event-section" : `${sec.id}-section`
+    );
+    if (element) {
+      element.scrollIntoView({
+        behavior: "smooth"
+      });
+    }
   };
 
   return (
@@ -226,29 +203,28 @@ export default function Home() {
       </AnimatePresence>
 
       <main 
-          ref={containerRef}
-          onScroll={showGate ? undefined : handleScroll}
-          className={`h-[100dvh] w-screen overflow-y-auto snap-y snap-mandatory scroll-smooth relative bg-[#fbf9fb] no-scrollbar ${showGate ? "pointer-events-none select-none" : "select-none"}`}
+          className={`relative w-full overflow-x-hidden bg-[#fbf9fb] ${showGate ? "h-screen overflow-hidden pointer-events-none select-none" : "select-none"}`}
         >
           {sections.map((sec, idx) => (
             <div
               key={sec.id}
-              className="w-full h-full snap-start snap-always relative overflow-hidden flex flex-col justify-center"
+              id={sec.id === "events" ? "event-section" : `${sec.id}-section`}
+              className="w-full min-h-screen relative flex flex-col justify-center"
             >
-              {sectionStyles[idx] && sectionStyles[idx] !== "none" ? (
+              {idx === 0 ? (
+                <div className="w-full min-h-screen">
+                  {sec.component}
+                </div>
+              ) : (
                 <motion.div
-                  variants={getAnimationVariants(sectionStyles[idx])}
-                  initial="initial"
-                  whileInView="whileInView"
-                  viewport={{ once: false, amount: 0.25 }}
-                  className="w-full h-full overflow-y-auto scroll-smooth origin-center no-scrollbar"
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.1 }}
+                  transition={{ duration: 0.8, ease: "easeOut" }}
+                  className="w-full min-h-screen origin-center"
                 >
                   {sec.component}
                 </motion.div>
-              ) : (
-                <div className="w-full h-full overflow-y-auto scroll-smooth no-scrollbar">
-                  {sec.component}
-                </div>
               )}
             </div>
           ))}
@@ -301,7 +277,7 @@ export default function Home() {
 function CreditsSection() {
   const { t } = useLanguage();
   return (
-    <div className="w-full h-full min-h-screen bg-gradient-to-b from-[#1a0525] via-[#110119] to-[#08000c] text-center flex flex-col items-center justify-between px-6 py-12 md:py-16 relative overflow-hidden select-none">
+    <div id="credits-section" className="w-full min-h-screen bg-gradient-to-b from-[#1a0525] via-[#110119] to-[#08000c] text-center flex flex-col items-center justify-between px-6 py-12 md:py-16 relative overflow-hidden select-none">
       {/* Decorative Royal Corner Elements */}
       <div className="absolute inset-0 pointer-events-none opacity-25">
         <div className="absolute top-0 left-0 w-36 h-36 md:w-48 md:h-48 border-l border-t border-gold-400/25 rounded-tl-[100px] m-4 md:m-6" />

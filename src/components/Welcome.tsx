@@ -9,9 +9,9 @@ import { useLanguage } from "@/context/LanguageContext";
 export default function Welcome() {
   const { t } = useLanguage();
   return (
-    <section id="welcome-section" className="min-h-screen w-full flex flex-col justify-between py-12 px-6 bg-[#fbf9fb] relative overflow-x-hidden overflow-y-auto no-scrollbar select-none">
+    <section id="welcome-section" className="min-h-screen w-full flex flex-col justify-between py-12 px-6 bg-[#fbf9fb] relative overflow-x-hidden select-none">
       {/* Top Spacer for scroll buffer */}
-      <div className="h-16 sm:h-24 flex-shrink-0 w-full pointer-events-none" />
+      <div className="h-6 sm:h-10 flex-shrink-0 w-full pointer-events-none" />
 
       {/* Traditional Side Garlands (Toran / Hanging Flowers) */}
       <div className="absolute top-0 left-0 bottom-0 w-12 sm:w-20 pointer-events-none z-10 flex flex-col justify-between items-center opacity-60">
@@ -53,7 +53,7 @@ export default function Welcome() {
           <span className="font-serif text-[#5e1f70] text-[9px] font-semibold text-center leading-tight min-h-[24px] flex items-center justify-center">
             {t("welcome.shreenathjiMantra")}
           </span>
-          <div className="relative w-28 h-28 mt-2">
+          <div className="relative w-16 h-16 xs:w-20 xs:h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 mt-2">
             <Image
               src="/images/shreenathji.png"
               alt="Shreenathji"
@@ -70,9 +70,9 @@ export default function Welcome() {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.2, ease: "easeOut" }}
-          className="flex flex-col items-center w-[35%] mt-20"
+          className="flex flex-col items-center w-[35%] mt-10"
         >
-          <div className="relative w-28 h-28">
+          <div className="relative w-16 h-16 xs:w-20 xs:h-20 sm:w-24 sm:h-24 md:w-28 md:h-28">
             <Image
               src="/images/ChatGPT Image Jun 23, 2026, 12_21_15 AM.png"
               alt="Lord Ganesha"
@@ -97,7 +97,7 @@ export default function Welcome() {
           <span className="font-serif text-[#5e1f70] text-[9px] font-semibold text-center leading-tight min-h-[24px] flex items-center justify-center">
             {t("welcome.kuldeviMantra")}
           </span>
-          <div className="relative w-28 h-28 mt-2">
+          <div className="relative w-16 h-16 xs:w-20 xs:h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 mt-2">
             <Image
               src="/images/Mataji-removebg.png"
               alt="Kuldevi Maa"
@@ -111,7 +111,7 @@ export default function Welcome() {
       </div>
 
       {/* Top Mantras Grid (Desktop only) */}
-      <div className="hidden md:grid w-full max-w-5xl mx-auto grid-cols-3 gap-4 items-start text-center z-20 mt-4 px-8">
+      <div className="hidden md:grid w-full max-w-5xl mx-auto grid-cols-3 gap-20 items-start text-center z-20 mt-1 px-2">
         <motion.div
           initial={{ opacity: 0, x: -30 }}
           animate={{ opacity: 1, x: 0 }}

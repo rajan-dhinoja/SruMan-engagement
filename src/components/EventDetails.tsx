@@ -57,7 +57,7 @@ export default function EventDetails() {
   ];
 
   return (
-    <section id="event-section" className="py-24 px-6 bg-[#fbf9fb] relative overflow-x-hidden overflow-y-auto no-scrollbar">
+    <section id="event-section" className="py-24 px-6 bg-transparent relative overflow-x-hidden">
       {/* Top Spacer for scroll buffer */}
       <div className="h-16 sm:h-24 flex-shrink-0 w-full pointer-events-none" />
 
@@ -105,7 +105,7 @@ export default function EventDetails() {
         </div>
 
         {/* Event Details Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-3xl mx-auto">
           {/* Card 1: Time & Date */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -159,34 +159,6 @@ export default function EventDetails() {
               className="mt-auto px-5 py-2.5 rounded-full border border-gold-300 text-gold-600 font-sans text-[10px] tracking-widest uppercase hover:bg-stone-900 hover:text-[#fdfbf7] hover:border-stone-900 transition-all duration-300"
             >
               {t("eventDetails.venueCard.button")}
-            </a>
-          </motion.div>
-
-          {/* Card 3: Dress Code */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="glass-card p-8 rounded-2xl flex flex-col items-center text-center group hover:border-gold-300/40 transition-colors duration-500"
-          >
-            <div className="w-14 h-14 rounded-full bg-purple-50/80 border border-purple-300/20 flex items-center justify-center text-purple-600 mb-6 group-hover:bg-purple-500 group-hover:text-[#fdfbf7] transition-all duration-500">
-              <Award className="w-6 h-6" />
-            </div>
-            <h4 className="font-serif text-xl font-light text-stone-900 mb-3">
-              {t("eventDetails.dressCodeCard.title")}
-            </h4>
-            <p className="font-sans text-sm text-stone-600 leading-relaxed font-light mb-1">
-              {t("eventDetails.dressCodeCard.style")}
-            </p>
-            <p className="font-sans text-sm text-purple-700 leading-relaxed font-semibold mb-6">
-              {t("eventDetails.dressCodeCard.colors")}
-            </p>
-            <a
-              href="#blessings-section"
-              className="mt-auto px-6 py-2.5 rounded-full bg-stone-900 border border-stone-900 text-[#fdfbf7] font-sans text-[10px] tracking-widest uppercase hover:bg-gold-500 hover:border-gold-500 hover:text-stone-900 transition-all duration-300 cursor-pointer font-semibold"
-            >
-              {t("eventDetails.dressCodeCard.button")}
             </a>
           </motion.div>
         </div>

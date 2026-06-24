@@ -26,6 +26,7 @@ export interface TranslationDict {
     invitationGreeting: string;
     foreverBeginning: string;
     gettingEngagedDate: string;
+    meetCoupleTitle: string;
   };
   nimantrak: {
     title: string;
@@ -109,6 +110,7 @@ export interface TranslationDict {
     navDots: {
       welcome: string;
       couple: string;
+      meetCouple: string;
       nimantrak: string;
       events: string;
       venue: string;
@@ -143,17 +145,18 @@ export const translations: Record<"gu" | "en" | "hi", TranslationDict> = {
       brideName: "ચિ. સૃષ્ટિ",
       brideRole: "કન્યા",
       brideTagline: "લાવણ્ય અને હેતની સરવાણી",
-      brideDesc: "સુંદર સપનાઓથી ભરેલું હૃદય. તે Aman ની દુનિયામાં ખુશીઓ અને શાલીનતા લાવે છે, રોજિંદી પળોને યાદગાર વાર્તાઓમાં ફેરવે છે.",
+      brideDesc: "સુંદર સપનાઓથી ભરેલું હૃદય. તે અમનની દુનિયામાં ખુશીઓ અને શાલીનતા લાવે છે, રોજિંદી પળોને યાદગાર વાર્તાઓમાં ફેરવે છે.",
       groomGrandparents: "જયપુર નિવાસી ગૌ.વા. જગદીશભાઈ કનૈયાલાલ નાતાણી તથા શ્રી ચંદ્રાબાગાબેન જગદીશપ્રસાદ નાતાણી ના સુપોત્ર",
       groomParents: "તથા શ્રી મુરારીભાઈ જગદીશભાઈ નાતાણી તથા અ.સૌ. સુધાલતાબેન મુરારીભાઈ નાતાણી ના સુપુત્ર",
       groomName: "ચિ. અમન",
       groomRole: "વરરાજ",
       groomTagline: "ધૈર્ય અને સમર્પણનો પથદર્શક",
-      groomDesc: "એક સ્વપ્નદ્રષ્ટા અને શક્તિનો સ્તંભ, જે માયાળુ અને હૂંફાળો છે. Aman Srushti ને એક નિશ્ચિત, અતૂટ અને આદરપૂર્વકનો પ્રેમ આપે છે.",
+      groomDesc: "એક સ્વપ્નદ્રષ્ટા અને શક્તિનો સ્તંભ, જે માયાળુ અને હૂંફાળો છે. અમન સૃષ્ટિને એક નિશ્ચિત, અતૂટ અને આદરપૂર્વકનો પ્રેમ આપે છે.",
       eventAnnouncement: "સાથે શ્રીફળ વિધિ (સગાઈ અને ચુંદડી) શ્રાવણ સુદ-૬ ને મંગળવાર તા. ૧૮-૦૮-૨૦૨૬ ના શુભ દિવસે નિરધારેલ છે.",
-      invitationGreeting: "તો આ શુભ પ્રસંગે aap સહ પરિવાર sahit પધારી amari શોભામાં અભિવૃધ્ધી કરશોજી.",
+      invitationGreeting: "તો આ શુભ પ્રસંગે આપ સહપરિવાર સહિત પધારી અમારી શોભામાં અભિવૃદ્ધિ કરશોજી.",
       foreverBeginning: "અનંતકાળની શરૂઆત",
       gettingEngagedDate: "સગાઈના બંધનમાં બંધાવા જઈ રહ્યા છે • ૧૮ ઓગસ્ટ ૨૦૨૬",
+      meetCoupleTitle: "વર-વધૂ પરિચય",
     },
     nimantrak: {
       title: ":: નિમંત્રક ::",
@@ -223,7 +226,7 @@ export const translations: Record<"gu" | "en" | "hi", TranslationDict> = {
       submitButton: "શુભેચ્છા મોકલો",
       defaultWishes: {
         wish1: "સૌથી સુંદર જોડીને, તમારી રિંગ સેરેમની તમારા જીવનની નવી અને પ્રેમભરી શરૂઆત બને તેવી શુભકામનાઓ!",
-        wish2: "Srushti અને Aman, અમને તમારા આ સુંદર સોપાનની ઉજવણી તમારી સાથે કરતાં ખૂબ જ આનંદ થાય છે! ખુબ ખુબ અભિનંદન!",
+        wish2: "સૃષ્ટિ અને અમન, અમને તમારા આ સુંદર સોપાનની ઉજવણી તમારી સાથે કરતાં ખૂબ જ આનંદ થાય છે! ખુબ ખુબ અભિનંદન!",
         wish3: "તમારા બંનેને મારા હાર્દિક આશીર્વાદ અને પ્રાર્થના. આ સુંદર પ્રેમ ઉત્સવની ઉજવણી જોવા આતુર છું!",
       },
       justNow: "હમણાં જ",
@@ -237,6 +240,7 @@ export const translations: Record<"gu" | "en" | "hi", TranslationDict> = {
       navDots: {
         welcome: "શ્રી ગણેશ",
         couple: "વર-વધૂ",
+        meetCouple: "પરિચય",
         nimantrak: "નિમંત્રક",
         events: "પ્રસંગો",
         venue: "સ્થળ",
@@ -280,6 +284,7 @@ export const translations: Record<"gu" | "en" | "hi", TranslationDict> = {
       invitationGreeting: "Therefore, on this auspicious occasion, please grace us with your presence along with your family and add to our joy.",
       foreverBeginning: "The Beginning of Forever",
       gettingEngagedDate: "Getting Engaged • August 18, 2026",
+      meetCoupleTitle: "Meet the Couple",
     },
     nimantrak: {
       title: ":: Inviters ::",
@@ -363,6 +368,7 @@ export const translations: Record<"gu" | "en" | "hi", TranslationDict> = {
       navDots: {
         welcome: "Shree Ganesh",
         couple: "Couple",
+        meetCouple: "Meet Couple",
         nimantrak: "Inviters",
         events: "Events",
         venue: "Venue",
@@ -406,6 +412,7 @@ export const translations: Record<"gu" | "en" | "hi", TranslationDict> = {
       invitationGreeting: "तो इस शुभ अवसर पर आप सपरिवार सहित पधारकर हमारी शोभा बढ़ाएं।",
       foreverBeginning: "अनंत काल की शुरुआत",
       gettingEngagedDate: "सगाई के बंधन में बंधने जा रहे हैं • १८ अगस्त २०२६",
+      meetCoupleTitle: "वर-वधू परिचय",
     },
     nimantrak: {
       title: ":: निमंत्रक ::",
@@ -489,6 +496,7 @@ export const translations: Record<"gu" | "en" | "hi", TranslationDict> = {
       navDots: {
         welcome: "श्री गणेश",
         couple: "वर-वधू",
+        meetCouple: "परिचय",
         nimantrak: "निमंत्रक",
         events: "समारोह",
         venue: "स्थान",
