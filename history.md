@@ -257,3 +257,7 @@
 - Increased the font sizes of the Date, Venue, and Map card titles in the Event Details section ([EventDetails.tsx](file:///d:/SruMan/SruMan-engagement/src/components/EventDetails.tsx)) for better readability.
 ## Prompt 52 (2026-06-24)
 - Decreased the font size of the venue name and increased the font size of the venue address in the Event Details section ([EventDetails.tsx](file:///d:/SruMan/SruMan-engagement/src/components/EventDetails.tsx)), unifying them both to the same size (`text-sm sm:text-base`).
+## Prompt 53 (2026-06-24)
+- Added localized translations for the submitted blessing confirmation card ("Blessing Sent!", "Thank you for your beautiful wish..."), the pinned wish section title ("Your Blessing"), and the toggle view buttons ("View All Wishes", "Back to Loop View") in the Wishes section (`Blessings.tsx` and `translations.ts`) for all 3 supported languages.
+## Prompt 54 (2026-06-24)
+- Increased the font sizes for the "Thank You For Visiting" text and the "18.08.2026 • GONDAL, GUJARAT" date/place text in the final Credits section ([page.tsx](file:///d:/SruMan/SruMan-engagement/src/app/page.tsx)).

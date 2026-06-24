@@ -347,10 +347,10 @@ export default function Blessings() {
                   <Sparkles className="w-6 h-6" />
                 </div>
                 <h3 className="font-serif text-xl font-bold text-[#5e1f70] mb-2 z-10">
-                  Blessing Sent!
+                  {t("blessings.blessingSentTitle")}
                 </h3>
                 <p className="font-sans text-xs text-stone-605 leading-relaxed max-w-[240px] mx-auto z-10">
-                  Thank you for your beautiful wish! You can view or delete your sent blessing on the board.
+                  {t("blessings.blessingSentMsg")}
                 </p>
                 <div className="w-8 h-[1px] bg-gold-400/40 my-4 z-10" />
                 <span className="font-serif italic text-xs text-[#5e1f70] font-bold z-10">
@@ -367,7 +367,7 @@ export default function Blessings() {
             {myWishes.length > 0 && (
               <div className="space-y-3 pt-2 pb-2 pl-1">
                 <h4 className="font-sans text-[10px] uppercase tracking-widest text-[#5e1f70] font-bold">
-                  Your Blessing ✨ / તમારી શુભેચ્છા
+                  {t("blessings.yourBlessing")}
                 </h4>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   {myWishes.map((w) => {
@@ -571,12 +571,12 @@ export default function Blessings() {
                   {showAll ? (
                     <>
                       <ChevronUp className="w-4 h-4 text-[#5e1f70]" />
-                      Back to Loop View
+                      {t("blessings.backToLoopView")}
                     </>
                   ) : (
                     <>
                       <ChevronDown className="w-4 h-4 text-[#5e1f70]" />
-                      View All Wishes List ({wishes.length} cards)
+                      {t("blessings.viewAllWishes")} ({wishes.length} {t("blessings.cardsCount")})
                     </>
                   )}
                 </button>

@@ -258,7 +258,7 @@ function CreditsSection() {
       <motion.div 
         className="mt-4 flex flex-col items-center"
       >
-        <span className="font-serif text-xs tracking-[0.35em] text-[#d4af37]/60 uppercase mb-2">
+        <span className="font-serif text-sm md:text-base tracking-[0.35em] text-[#d4af37]/60 uppercase mb-2">
           {t("global.footer.thankYouForVisiting")}
         </span>
         <div className="w-16 h-[1px] bg-gold-400/20" />
@@ -307,7 +307,7 @@ function CreditsSection() {
 
         {/* Date / Location Details */}
         <motion.p
-          className="font-serif text-sm tracking-[0.2em] text-[#f7e4a9]/85 font-light"
+          className="font-serif text-base md:text-lg tracking-[0.2em] text-[#f7e4a9]/85 font-light"
         >
           18.08.2026 • GONDAL, GUJARAT
         </motion.p>

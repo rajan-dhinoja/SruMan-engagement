@@ -106,6 +106,12 @@ export interface TranslationDict {
     justNow: string;
     hoursAgo: string;
     daysAgo: string;
+    blessingSentTitle: string;
+    blessingSentMsg: string;
+    yourBlessing: string;
+    viewAllWishes: string;
+    cardsCount: string;
+    backToLoopView: string;
   };
   gateEntry: {
     openGateBtn: string;
@@ -243,6 +249,12 @@ export const translations: Record<"gu" | "en" | "hi", TranslationDict> = {
       justNow: "હમણાં જ",
       hoursAgo: "કલાક પહેલા",
       daysAgo: "દિવસ પહેલા",
+      blessingSentTitle: "શુભેચ્છા મોકલાઈ ગઈ!",
+      blessingSentMsg: "તમારી સુંદર શુભેચ્છા માટે આભાર! તમે બોર્ડ પર તમારી મોકલેલી શુભેચ્છા જોઈ કે કાઢી શકો છો.",
+      yourBlessing: "તમારી શુભેચ્છા ✨",
+      viewAllWishes: "તમામ શુભેચ્છાઓ જુઓ",
+      cardsCount: "કાર્ડ્સ",
+      backToLoopView: "લૂપ વ્યૂ પર પાછા ફરો",
     },
     gateEntry: {
       openGateBtn: "મહેલના દ્વાર ખોલો",
@@ -378,6 +390,12 @@ export const translations: Record<"gu" | "en" | "hi", TranslationDict> = {
       justNow: "Just Now",
       hoursAgo: "hours ago",
       daysAgo: "days ago",
+      blessingSentTitle: "Blessing Sent!",
+      blessingSentMsg: "Thank you for your beautiful wish! You can view or delete your sent blessing on the board.",
+      yourBlessing: "Your Blessing ✨",
+      viewAllWishes: "View All Wishes List",
+      cardsCount: "cards",
+      backToLoopView: "Back to Loop View",
     },
     gateEntry: {
       openGateBtn: "Open Palace Gates",
@@ -513,6 +531,12 @@ export const translations: Record<"gu" | "en" | "hi", TranslationDict> = {
       justNow: "अभी-अभी",
       hoursAgo: "घंटे पहले",
       daysAgo: "दिन पहले",
+      blessingSentTitle: "आशीर्वाद भेजा गया!",
+      blessingSentMsg: "आपकी सुंदर शुभकामना के लिए धन्यवाद! आप बोर्ड पर अपने भेजे गए आशीर्वाद को देख या हटा सकते हैं।",
+      yourBlessing: "आपका आशीर्वाद ✨",
+      viewAllWishes: "सभी शुभकामनाएँ देखें",
+      cardsCount: "कार्ड",
+      backToLoopView: "लूप व्यू पर वापस जाएं",
     },
     gateEntry: {
       openGateBtn: "महल के द्वार खोलें",
