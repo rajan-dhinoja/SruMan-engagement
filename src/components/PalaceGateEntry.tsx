@@ -55,7 +55,6 @@ export default function PalaceGateEntry({ onEnter }: PalaceGateEntryProps) {
   }, []);
 
   const handleOpenGates = () => {
-    playChime();
     setIsEntering(true);          // kick off the entire cinematic sequence
     setTimeout(() => {
       setIsVisible(false);        // unmount after animation
@@ -244,7 +243,7 @@ export default function PalaceGateEntry({ onEnter }: PalaceGateEntryProps) {
                 </motion.div>
                 
                 {/* Static inner circle holding the SruMan Logo */}
-                <div className="absolute inset-4 md:inset-6 rounded-full flex items-center justify-center overflow-hidden"
+                <div className="absolute inset-4 md:inset-6 rounded-full flex items-center justify-center"
                   style={{
                     background: "#ffffff",
                     border: "2px solid rgba(94, 31, 112, 0.8)",
@@ -255,7 +254,7 @@ export default function PalaceGateEntry({ onEnter }: PalaceGateEntryProps) {
                     <img 
                       src="/logos/sruman-logo.png?v=2" 
                       alt="SruMan Logo" 
-                      className="w-full h-full object-contain"
+                      className="w-full h-full object-contain scale-[1.18] transition-transform duration-500 hover:scale-[1.26]"
                     />
                   </div>
                 </div>
@@ -282,39 +281,41 @@ export default function PalaceGateEntry({ onEnter }: PalaceGateEntryProps) {
               </motion.button>
             </motion.div>
 
-          </motion.div>
-
-          {/* Company Credit at absolute bottom of gate page viewport */}
-          <motion.div
-            animate={isEntering ? { opacity: 0, y: 20 } : { opacity: 1 }}
-            transition={{ duration: 0.5 }}
-            className="absolute bottom-6 left-1/2 -translate-x-1/2 z-40"
-          >
-            <motion.a
-              href="http://dotr.in"
-              target="_blank"
-              rel="noopener noreferrer"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="flex items-center gap-3 px-5 py-2.5 rounded-2xl border border-gold-400/20 bg-black/60 backdrop-blur-md shadow-[0_8px_32px_rgba(0,0,0,0.5),inset_0_1px_1px_rgba(255,255,255,0.1)] hover:border-gold-400/40 transition-all duration-300 cursor-pointer"
+            {/* Company Credit Card — compact pill, mobile-first */}
+            <motion.div
+              initial={{ opacity: 0, y: 15 }}
+              animate={isEntering ? { opacity: 0, scale: 0.8 } : { opacity: 1, y: 0 }}
+              transition={{ delay: 1.0, duration: 0.8 }}
+              className="absolute left-1/2 -translate-x-1/2 z-40"
+              style={{ top: "66%" }}
             >
-              <div className="flex items-center justify-center p-1 bg-black/40 rounded-lg border border-[#d4af37]/35 h-9 w-18 overflow-hidden">
-                <img 
-                  src="/logos/dotr_logo.png" 
-                  alt="dotr logo" 
-                  className="h-full w-full object-contain filter invert(1) brightness-200 contrast-125" 
-                />
-              </div>
-              
-              <div className="flex flex-col items-start">
-                <span className="font-sans text-[7px] tracking-[0.25em] text-[#d4af37]/75 uppercase font-semibold">
-                  Crafted By
-                </span>
-                <span className="font-sans text-[10px] tracking-[0.1em] text-[#f7e4a9] font-bold uppercase mt-0.5">
-                  DHINOJA OmniTech Resolutions
-                </span>
-              </div>
-            </motion.a>
+              <a
+                href="http://dotr.in"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 rounded-full border border-[#d4af37]/40 bg-black/70 backdrop-blur-md shadow-[0_4px_20px_rgba(0,0,0,0.5)] hover:border-[#d4af37]/70 transition-all duration-300 cursor-pointer group hover:scale-[1.03] whitespace-nowrap"
+              >
+                {/* Logo pill */}
+                <div className="flex items-center justify-center bg-white rounded-full border border-[#d4af37]/40 h-6 w-6 md:h-8 md:w-8 overflow-hidden shadow-sm flex-shrink-0">
+                  <img
+                    src="/logos/dotr_logo.png"
+                    alt="dotr logo"
+                    className="h-full w-full object-contain transition-transform duration-500 group-hover:scale-105"
+                  />
+                </div>
+
+                {/* Text */}
+                <div className="flex flex-col items-start leading-none gap-[2px]">
+                  <span className="font-sans text-[7px] md:text-[8px] tracking-[0.22em] text-[#d4af37]/80 uppercase font-semibold">
+                    Crafted By
+                  </span>
+                  <span className="font-sans text-[9px] md:text-[11px] tracking-[0.06em] text-[#f7e4a9] font-bold uppercase group-hover:text-white transition-colors">
+                    DHINOJA OmniTech
+                  </span>
+                </div>
+              </a>
+            </motion.div>
+
           </motion.div>
 
         </motion.div>

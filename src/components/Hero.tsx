@@ -177,7 +177,7 @@ export default function Hero({ isPlaying, toggleMusic, onOpenInvitation }: HeroP
         onClick={onOpenInvitation}
       >
         <span className="font-sans text-[9px] tracking-[0.1em] uppercase mb-2">
-          શોધખોળ કરવા માટે સ્ક્રોલ કરો
+          આમંત્રણ પત્રિકા જોવા માટે સ્ક્રોલ કરો
         </span>
         <motion.div
           animate={{ y: [0, 6, 0] }}

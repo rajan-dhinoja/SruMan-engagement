@@ -27,6 +27,8 @@ export interface TranslationDict {
     foreverBeginning: string;
     gettingEngagedDate: string;
     meetCoupleTitle: string;
+    scrollNext: string;
+    meetCoupleScrollNext: string;
   };
   nimantrak: {
     title: string;
@@ -44,6 +46,7 @@ export interface TranslationDict {
     shubhSthalName: string;
     shubhSthalAddress: string;
     shubhSthalMobile: string;
+    scrollNext: string;
   };
   eventDetails: {
     joinCelebration: string;
@@ -119,6 +122,9 @@ export interface TranslationDict {
     };
     footer: {
       madeWithLove: string;
+      thankYouForVisiting: string;
+      craftedBy: string;
+      nickname: string;
     };
     audio: {
       mute: string;
@@ -135,7 +141,7 @@ export const translations: Record<"gu" | "en" | "hi", TranslationDict> = {
       kuldeviMantra: "|| શ્રી કુળદેવીમાં સત્ય છે. ||",
       ringCeremony: "Ring Ceremony",
       shreefalVidhi: "(શ્રીફળ વિધિ)",
-      scrollExplore: "શોધખોળ કરવા માટે સ્ક્રોલ કરો",
+      scrollExplore: "આમંત્રણ પત્રિકા જોવા સ્ક્રોલ કરો",
     },
     couple: {
       familyBlessingIntro: "પરિવારના આશીર્વાદ સાથે",
@@ -157,6 +163,8 @@ export const translations: Record<"gu" | "en" | "hi", TranslationDict> = {
       foreverBeginning: "અનંતકાળની શરૂઆત",
       gettingEngagedDate: "સગાઈના બંધનમાં બંધાવા જઈ રહ્યા છે • ૧૮ ઓગસ્ટ ૨૦૨૬",
       meetCoupleTitle: "વર-વધૂ પરિચય",
+      scrollNext: "નિમંત્રક જોવા સ્ક્રોલ કરો",
+      meetCoupleScrollNext: "પ્રસંગો જોવા સ્ક્રોલ કરો",
     },
     nimantrak: {
       title: ":: નિમંત્રક ::",
@@ -174,6 +182,7 @@ export const translations: Record<"gu" | "en" | "hi", TranslationDict> = {
       shubhSthalName: '"ગિરિકંદરા"',
       shubhSthalAddress: "ચોરડી દરવાજો, ઉદ્યોગ ભારતી ચોક, ગોંડલ.",
       shubhSthalMobile: "મો. ૯૧૦૬૬૭૫૧૫૬",
+      scrollNext: "પરિચય જોવા સ્ક્રોલ કરો",
     },
     eventDetails: {
       joinCelebration: "ઉજવણીમાં સામેલ થાઓ",
@@ -187,7 +196,7 @@ export const translations: Record<"gu" | "en" | "hi", TranslationDict> = {
       },
       dateTimeCard: {
         title: "તારીખ અને સમય",
-        date: "મંગળવાર, ૧૮ ઓગસ્ટ ૨૦૨૬",
+        date: "૧૮ ઓગસ્ટ, ૨૦૨૬ {મંગળવાર}",
         time: "સવારે ૯:૦૦ વાગ્યાથી શરૂ",
         button: "કેલેન્ડરમાં ઉમેરો",
       },
@@ -249,6 +258,9 @@ export const translations: Record<"gu" | "en" | "hi", TranslationDict> = {
       },
       footer: {
         madeWithLove: "પ્રેમપૂર્વક બનાવેલ • ઓગસ્ટ ૨૦૨૬",
+        thankYouForVisiting: "પધારવા બદલ આભાર",
+        craftedBy: "ડિજિટલ આમંત્રણ પત્રિકા નિર્માતા",
+        nickname: "ટૂંકું નામ (ઉપનામ):",
       },
       audio: {
         mute: "મ્યૂટ કરો",
@@ -263,7 +275,7 @@ export const translations: Record<"gu" | "en" | "hi", TranslationDict> = {
       kuldeviMantra: "|| श्री कुलदेवी माँ सत्य है। ||",
       ringCeremony: "Ring Ceremony",
       shreefalVidhi: "(Shreefal Vidhi)",
-      scrollExplore: "Scroll to Explore",
+      scrollExplore: "Explore Invites",
     },
     couple: {
       familyBlessingIntro: "With Family Blessings",
@@ -285,6 +297,8 @@ export const translations: Record<"gu" | "en" | "hi", TranslationDict> = {
       foreverBeginning: "The Beginning of Forever",
       gettingEngagedDate: "Getting Engaged • August 18, 2026",
       meetCoupleTitle: "Meet the Couple",
+      scrollNext: "Scroll to Inviters",
+      meetCoupleScrollNext: "Scroll to Event Details",
     },
     nimantrak: {
       title: ":: Inviters ::",
@@ -302,6 +316,7 @@ export const translations: Record<"gu" | "en" | "hi", TranslationDict> = {
       shubhSthalName: '"Girikandra"',
       shubhSthalAddress: "Chordi Darwajo, Udhyog Bharti Chok, Gondal.",
       shubhSthalMobile: "Mo. 9106675156",
+      scrollNext: "Scroll to Meet Couple",
     },
     eventDetails: {
       joinCelebration: "Join the Celebration",
@@ -315,7 +330,7 @@ export const translations: Record<"gu" | "en" | "hi", TranslationDict> = {
       },
       dateTimeCard: {
         title: "Date & Time",
-        date: "Tuesday, August 18, 2026",
+        date: "August 18, 2026 {Tuesday}",
         time: "Starting from 9:00 AM",
         button: "Add to Calendar",
       },
@@ -377,6 +392,9 @@ export const translations: Record<"gu" | "en" | "hi", TranslationDict> = {
       },
       footer: {
         madeWithLove: "Made with Love • August 2026",
+        thankYouForVisiting: "Thank You For Visiting",
+        craftedBy: "Digital Invitation Crafted By",
+        nickname: "INSHORT (NICKNAME):",
       },
       audio: {
         mute: "Mute Music",
@@ -391,7 +409,7 @@ export const translations: Record<"gu" | "en" | "hi", TranslationDict> = {
       kuldeviMantra: "|| श्री कुलदेवी माँ सत्य है। ||",
       ringCeremony: "Ring Ceremony",
       shreefalVidhi: "(श्रीफल विधि)",
-      scrollExplore: "खोजने के लिए स्क्रॉल करें",
+      scrollExplore: "आमंत्रण पत्र देखने के लिए स्क्रॉल करें",
     },
     couple: {
       familyBlessingIntro: "परिवार के आशीर्वाद के साथ",
@@ -411,8 +429,10 @@ export const translations: Record<"gu" | "en" | "hi", TranslationDict> = {
       eventAnnouncement: "के साथ श्रीफल विधि (सगाई और चुनरी) श्रावण सुद-६, मंगलवार दिनांक १८-૦૮-२०२६ के शुभ दिन तय हुई है।",
       invitationGreeting: "तो इस शुभ अवसर पर आप सपरिवार सहित पधारकर हमारी शोभा बढ़ाएं।",
       foreverBeginning: "अनंत काल की शुरुआत",
-      gettingEngagedDate: "सगाई के बंधन में बंधने जा रहे हैं • १८ अगस्त २०२६",
+      gettingEngagedDate: "सगाई के बंधन में बंधन जा रहे हैं • १८ अगस्त २०२६",
       meetCoupleTitle: "वर-वधू परिचय",
+      scrollNext: "निमंत्रक देखने के लिए स्क्रॉल करें",
+      meetCoupleScrollNext: "समारोह विवरण देखने के लिए स्क्रॉल करें",
     },
     nimantrak: {
       title: ":: निमंत्रक ::",
@@ -421,7 +441,7 @@ export const translations: Record<"gu" | "en" | "hi", TranslationDict> = {
       uncleAunt: "अमितभाई शरदचंद्र धीणोजा • अ.सौ. ज्योतिबेन अमितभाई धीणोजा",
       relativesList: {
         riki: "कु. रिकी अजयभाई धीणोजा",
-        rajan: "राजन अजयभाई धीणोजा",
+        rajan: "राजन् अजयभाई धीणोजा",
         ruchi: "कु. रुचि अमितभाई धीणोजा",
         vansh: "वंश अमितभाई धीणोजा",
       },
@@ -430,6 +450,7 @@ export const translations: Record<"gu" | "en" | "hi", TranslationDict> = {
       shubhSthalName: '"गिरिकंदरा"',
       shubhSthalAddress: "चोरडी दरवाजा, उद्योग भारती चौक, गोंडल।",
       shubhSthalMobile: "मो. ९१०६६७५१५६",
+      scrollNext: "परिचय देखने के लिए स्क्रॉल करें",
     },
     eventDetails: {
       joinCelebration: "उत्सव में शामिल हों",
@@ -443,7 +464,7 @@ export const translations: Record<"gu" | "en" | "hi", TranslationDict> = {
       },
       dateTimeCard: {
         title: "तारीख और समय",
-        date: "मंगलवार, १८ अगस्त २०२६",
+        date: "१८ अगस्त २०२६ {मंगलवार}",
         time: "सुबह ९:०० बजे से शुरू",
         button: "कैलेंडर में जोड़ें",
       },
@@ -505,6 +526,9 @@ export const translations: Record<"gu" | "en" | "hi", TranslationDict> = {
       },
       footer: {
         madeWithLove: "प्रेमपूर्वक निर्मित • अगस्त २०२६",
+        thankYouForVisiting: "पधारने के लिए धन्यवाद",
+        craftedBy: "डिजिटल आमंत्रण पत्र निर्माता",
+        nickname: "छोटा नाम (उपनाम):",
       },
       audio: {
         mute: "म्यूट करें",

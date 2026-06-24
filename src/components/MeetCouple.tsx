@@ -31,10 +31,7 @@ export default function MeetCouple() {
   };
 
   return (
-    <section id="meet-couple-section" className="w-full flex flex-col gap-10 py-16 px-6 bg-[#fffdf7] relative">
-      {/* Top Spacer */}
-      <div className="h-10 sm:h-16 flex-shrink-0 w-full pointer-events-none" />
-
+    <section id="meet-couple-section" className="w-full flex flex-col gap-10 py-8 px-4 bg-[#fffdf7] relative">
       {/* Decorative Ornaments */}
       <div className="absolute top-10 left-10 w-64 h-64 bg-purple-200/15 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-10 right-10 w-64 h-64 bg-amber-200/15 rounded-full blur-3xl pointer-events-none" />
@@ -42,19 +39,21 @@ export default function MeetCouple() {
       <div className="max-w-5xl mx-auto w-full flex flex-col items-center z-20">
         {/* Section Header */}
         <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
           className="text-center mb-12"
         >
-          <span className="font-sans text-[10px] sm:text-xs tracking-[0.3em] text-purple-700 uppercase font-semibold block mb-3">
+          <span className="font-sans text-[10px] sm:text-xs tracking-[0.3em] text-[#8a1525]/85 uppercase font-semibold block mb-3">
             Our Story
           </span>
-          <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl text-[#8a1525] font-bold tracking-wide">
-            {t("couple.meetCoupleTitle")}
+          <h2 className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-[#8a1525] tracking-wide mb-0">
+            :: {t("couple.meetCoupleTitle")} ::
           </h2>
-          <div className="w-24 h-[1.5px] bg-gradient-to-r from-transparent via-[#d4af37]/60 to-transparent mx-auto mt-4" />
+          
+          {/* Traditional Separator */}
+          <div className="flex items-center justify-center gap-2 mt-1 mb-6">
+            <span className="w-16 sm:w-24 h-[1px] bg-gradient-to-r from-transparent to-[#8a1525]/50" />
+            <span className="text-[#8a1525] text-lg">♦</span>
+            <span className="w-16 sm:w-24 h-[1px] bg-gradient-to-l from-transparent to-[#8a1525]/50" />
+          </div>
         </motion.div>
 
         {/* Profiles Grid */}
@@ -62,10 +61,6 @@ export default function MeetCouple() {
 
           {/* Srushti's Card */}
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.1 }}
             className="w-full max-w-sm"
           >
             <div className="relative group w-full">
@@ -91,12 +86,9 @@ export default function MeetCouple() {
 
                 {/* Info */}
                 <div className="px-6 pb-6 pt-2 flex flex-col items-center w-full">
-                  <h3 className="font-serif text-3xl sm:text-4xl font-bold text-[#8a1525] tracking-wide mb-1">
+                  <h3 className="font-serif text-3xl sm:text-4xl font-bold text-[#8a1525] tracking-wide mb-3">
                     {t("couple.brideName")}
                   </h3>
-                  <span className="font-sans text-[10px] tracking-[0.25em] uppercase text-purple-700 font-bold mb-3">
-                    {t("couple.brideRole")}
-                  </span>
 
                   {/* Divider */}
                   <div className="w-16 h-[1px] bg-[#d4af37]/40 mb-3" />
@@ -135,10 +127,6 @@ export default function MeetCouple() {
 
           {/* Aman's Card */}
           <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.2 }}
             className="w-full max-w-sm"
           >
             <div className="relative group w-full">
@@ -164,12 +152,9 @@ export default function MeetCouple() {
 
                 {/* Info */}
                 <div className="px-6 pb-6 pt-2 flex flex-col items-center w-full">
-                  <h3 className="font-serif text-3xl sm:text-4xl font-bold text-[#8a1525] tracking-wide mb-1">
+                  <h3 className="font-serif text-3xl sm:text-4xl font-bold text-[#8a1525] tracking-wide mb-3">
                     {t("couple.groomName")}
                   </h3>
-                  <span className="font-sans text-[10px] tracking-[0.25em] uppercase text-purple-700 font-bold mb-3">
-                    {t("couple.groomRole")}
-                  </span>
 
                   {/* Divider */}
                   <div className="w-16 h-[1px] bg-[#d4af37]/40 mb-3" />
@@ -217,7 +202,7 @@ export default function MeetCouple() {
         className="flex flex-col items-center text-stone-400 z-20 mt-4 cursor-pointer"
       >
         <span className="font-sans text-[8px] tracking-[0.1em] uppercase mb-1">
-          {t("welcome.scrollExplore")}
+          {t("couple.meetCoupleScrollNext")}
         </span>
         <motion.div
           animate={{ y: [0, 4, 0] }}
@@ -226,9 +211,6 @@ export default function MeetCouple() {
           <ChevronDown className="w-3.5 h-3.5 text-purple-500" />
         </motion.div>
       </motion.div>
-
-      {/* Bottom Spacer */}
-      <div className="h-16 sm:h-24 flex-shrink-0 w-full pointer-events-none" />
     </section>
   );
 }

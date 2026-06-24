@@ -9,10 +9,7 @@ import { useLanguage } from "@/context/LanguageContext";
 export default function Welcome() {
   const { t } = useLanguage();
   return (
-    <section id="welcome-section" className="w-full flex flex-col gap-10 py-16 px-6 bg-[#fdf9ff] relative overflow-x-hidden select-none">
-      {/* Top Spacer for scroll buffer */}
-      <div className="h-6 sm:h-10 flex-shrink-0 w-full pointer-events-none" />
-
+    <section id="welcome-section" className="w-full flex flex-col gap-10 py-8 px-4 bg-[#fdf9ff] relative overflow-x-hidden select-none">
       {/* Traditional Side Garlands (Toran / Hanging Flowers) */}
       <div className="absolute top-0 left-0 bottom-0 w-12 sm:w-20 pointer-events-none z-10 flex flex-col justify-between items-center opacity-60">
         <svg viewBox="0 0 40 400" className="w-full h-full fill-none stroke-[#d4af37]" strokeWidth="1">
@@ -181,29 +178,54 @@ export default function Welcome() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.7, duration: 1.2, ease: [0.25, 1, 0.5, 1] }}
-          className="text-[#5e1f70] filter drop-shadow-sm leading-tight flex flex-col items-center"
+          className="leading-tight flex flex-col items-center select-none"
         >
-          <span className="font-alex text-6xl sm:text-8xl lg:text-9xl tracking-wide capitalize">{t("welcome.ringCeremony")}</span>
-          <span className="font-serif text-xl sm:text-3xl lg:text-4xl font-semibold text-[#5e1f70]/80 mt-2">
-            {t("welcome.shreefalVidhi")}
-          </span>
+          <span className="font-alex text-5xl xs:text-6xl sm:text-8xl md:text-9xl lg:text-[10rem] tracking-wide capitalize bg-gradient-to-r from-[#5e1f70] via-[#a3449c] to-[#d4af37] bg-clip-text text-transparent filter drop-shadow-[0_2px_10px_rgba(94,31,112,0.15)] px-6 py-2">{t("welcome.ringCeremony")}</span>
+          
+          <div className="flex items-center justify-center gap-3 mt-3">
+            <span className="w-10 sm:w-16 h-[1.2px] bg-[#d4af37]/45" />
+            <span className="font-serif text-xl sm:text-3xl lg:text-4xl font-bold text-[#5e1f70]/90 tracking-wide">
+              {t("welcome.shreefalVidhi")}
+            </span>
+            <span className="w-10 sm:w-16 h-[1.2px] bg-[#d4af37]/45" />
+          </div>
         </motion.h1>
 
-        {/* Romance Tagline */}
+        {/* SruMan Monogram Crest Logo */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.9, duration: 1.0 }}
-          className="flex flex-col items-center text-center mt-8 mb-4"
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.9, duration: 1.2, ease: "easeOut" }}
+          whileHover={{ scale: 1.05 }}
+          className="relative w-36 h-36 sm:w-48 sm:h-48 md:w-56 md:h-56 mt-10 mb-6 flex items-center justify-center rounded-full border-2 border-gold-400/20 bg-white/40 backdrop-blur-md shadow-[0_15px_35px_rgba(94,31,112,0.1)] cursor-pointer group"
         >
-          <p className="font-serif italic text-base sm:text-xl text-stone-600 font-light">
-            {t("couple.foreverBeginning")}
-          </p>
-          <p className="font-sans text-[10px] sm:text-xs tracking-[0.1em] text-purple-700/70 uppercase mt-2 font-medium">
-            {t("couple.gettingEngagedDate")}
-          </p>
-          <div className="w-16 h-[1px] bg-purple-400/30 mt-4" />
+          {/* Rotating Dashed Gold Ring */}
+          <motion.div
+            animate={{ rotate: 360 }}
+            transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+            className="absolute inset-1.5 border border-dashed border-[#d4af37]/45 rounded-full pointer-events-none"
+          />
+          
+          {/* Shimmer / Glow Effect */}
+          <motion.div
+            animate={{ opacity: [0.15, 0.4, 0.15] }}
+            transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute inset-3 bg-gradient-to-br from-[#d4af37]/10 to-[#5e1f70]/10 rounded-full filter blur-md pointer-events-none"
+          />
+
+          {/* Logo container */}
+          <div className="absolute inset-2 rounded-full bg-white border border-[#d4af37]/35 flex items-center justify-center shadow-inner">
+            <div className="relative w-full h-full flex items-center justify-center">
+              <img
+                src="/logos/sruman-logo.png"
+                alt="SruMan Logo"
+                className="w-full h-full object-contain scale-[1.18] transition-transform duration-500 group-hover:scale-[1.26]"
+              />
+            </div>
+          </div>
         </motion.div>
+        
+        <div className="w-16 h-[1.5px] bg-purple-400/30 mt-2" />
       </div>
 
       {/* Scroll Indicator */}
@@ -223,9 +245,6 @@ export default function Welcome() {
           <ChevronDown className="w-4 h-4 text-[#5e1f70]" />
         </motion.div>
       </motion.div>
-      
-      {/* Bottom Spacer for scroll buffer */}
-      <div className="h-20 sm:h-28 flex-shrink-0 w-full pointer-events-none" />
     </section>
   );
 }

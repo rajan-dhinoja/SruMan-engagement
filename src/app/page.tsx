@@ -9,7 +9,6 @@ import Couple from "@/components/Couple";
 import MeetCouple from "@/components/MeetCouple";
 import Nimantrak from "@/components/Nimantrak";
 import EventDetails from "@/components/EventDetails";
-import Venue from "@/components/Venue";
 import Blessings from "@/components/Blessings";
 import PalaceGateEntry from "@/components/PalaceGateEntry";
 import { useLanguage } from "@/context/LanguageContext";
@@ -140,7 +139,6 @@ export default function Home() {
     { id: "nimantrak", name: t("global.navDots.nimantrak"), component: <Nimantrak /> },
     { id: "meet-couple", name: t("global.navDots.meetCouple"), component: <MeetCouple /> },
     { id: "events", name: t("global.navDots.events"), component: <EventDetails /> },
-    { id: "venue", name: t("global.navDots.venue"), component: <Venue /> },
     { 
       id: "blessings", 
       name: t("global.navDots.blessings"), 
@@ -237,33 +235,14 @@ export default function Home() {
       )}
 
       <LanguageSwitcher />
-
-      {/* Floating Audio Controller */}
-      {!showGate && (
-        <div className="fixed top-8 right-8 z-50">
-          <motion.button
-            onClick={toggleMusic}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="flex items-center justify-center w-12 h-12 rounded-full border border-purple-300/30 bg-white/80 backdrop-blur-md text-purple-600 shadow-md cursor-pointer hover:bg-[#f7f0fb] transition-colors"
-            title={isPlaying ? t("global.audio.mute") : t("global.audio.play")}
-          >
-            {isPlaying ? (
-              <Volume2 className="w-5 h-5 animate-pulse" />
-            ) : (
-              <VolumeX className="w-5 h-5 text-stone-400" />
-            )}
-          </motion.button>
-        </div>
-      )}
     </>
   );
 }
 
 function CreditsSection() {
-  const { t } = useLanguage();
+  const { t, formatNumber } = useLanguage();
   return (
-    <div id="credits-section" className="w-full bg-gradient-to-b from-[#1a0525] via-[#110119] to-[#08000c] text-center flex flex-col items-center gap-12 px-6 py-16 md:py-24 relative overflow-hidden select-none">
+    <div id="credits-section" className="w-full bg-gradient-to-b from-[#1a0525] via-[#110119] to-[#08000c] text-center flex flex-col items-center gap-12 px-6 py-10 md:py-16 relative overflow-hidden select-none">
       {/* Decorative Royal Corner Elements */}
       <div className="absolute inset-0 pointer-events-none opacity-25">
         <div className="absolute top-0 left-0 w-36 h-36 md:w-48 md:h-48 border-l border-t border-gold-400/25 rounded-tl-[100px] m-4 md:m-6" />
@@ -277,14 +256,10 @@ function CreditsSection() {
 
       {/* Top Header Group */}
       <motion.div 
-        initial={{ opacity: 0, y: -20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: false }}
-        transition={{ duration: 0.8 }}
         className="mt-4 flex flex-col items-center"
       >
         <span className="font-serif text-[10px] tracking-[0.35em] text-[#d4af37]/60 uppercase mb-2">
-          Thank You For Visiting
+          {t("global.footer.thankYouForVisiting")}
         </span>
         <div className="w-16 h-[1px] bg-gold-400/20" />
       </motion.div>
@@ -293,10 +268,6 @@ function CreditsSection() {
       <div className="flex flex-col items-center gap-6 my-auto z-10">
         {/* Royal Monogram Crest */}
         <motion.div
-          initial={{ scale: 0.85, opacity: 0 }}
-          whileInView={{ scale: 1, opacity: 1 }}
-          viewport={{ once: false }}
-          transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
           className="relative w-32 h-32 md:w-40 md:h-40 flex items-center justify-center rounded-full border border-gold-400/15 bg-black/50 backdrop-blur-sm"
         >
           {/* Animated Outer Gold Ring */}
@@ -322,13 +293,13 @@ function CreditsSection() {
               ]
             }}
             transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute inset-4 md:inset-5 rounded-full flex items-center justify-center overflow-hidden bg-white z-10 border-2 border-gold-400/50"
+            className="absolute inset-4 md:inset-5 rounded-full flex items-center justify-center bg-white z-10 border-2 border-gold-400/50"
           >
-            <div className="relative w-full h-full p-2 flex items-center justify-center">
+            <div className="relative w-full h-full p-1 flex items-center justify-center">
               <img 
                 src="/logos/sruman-logo.png" 
                 alt="SruMan Logo" 
-                className="w-full h-full object-contain"
+                className="w-full h-full object-contain scale-[1.18] transition-transform duration-500 hover:scale-[1.26]"
               />
             </div>
           </motion.div>
@@ -336,10 +307,6 @@ function CreditsSection() {
 
         {/* Date / Location Details */}
         <motion.p
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: false }}
-          transition={{ delay: 0.2, duration: 0.8 }}
           className="font-serif text-sm tracking-[0.2em] text-[#f7e4a9]/85 font-light"
         >
           18.08.2026 • GONDAL, GUJARAT
@@ -348,14 +315,10 @@ function CreditsSection() {
 
       {/* Animated Developer Credits Card */}
       <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: false }}
-        transition={{ delay: 0.3, duration: 0.8, ease: "easeOut" }}
         className="w-full max-w-lg bg-[#fbf9fb]/[0.02] backdrop-blur-md rounded-[32px] border border-gold-400/10 p-6 md:p-8 flex flex-col items-center shadow-[0_12px_40px_rgba(0,0,0,0.6)] mb-4 z-10"
       >
         <span className="font-sans text-[8px] md:text-[9px] tracking-[0.3em] text-[#d4af37]/75 uppercase mb-5 font-semibold">
-          Digital Invitation Crafted By
+          {t("global.footer.craftedBy")}
         </span>
 
         {/* Logo and Company Name (Interactive Group) */}
@@ -390,7 +353,7 @@ function CreditsSection() {
               DHINOJA OmniTech Resolutions
             </h3>
             <p className="font-sans text-[9px] tracking-[0.2em] text-stone-400 mt-1">
-              INSHORT (NICKNAME): <span className="text-[#d4af37]/80 font-bold group-hover:text-gold-400 transition-colors">dotr</span>
+              {t("global.footer.nickname")} <span className="text-[#d4af37]/80 font-bold group-hover:text-gold-400 transition-colors">dotr</span>
             </p>
           </div>
         </a>
@@ -401,7 +364,7 @@ function CreditsSection() {
             href="http://dotr.in" 
             target="_blank" 
             rel="noopener noreferrer"
-            className="flex-1 flex items-center justify-center gap-2 px-5 py-3 rounded-full border border-gold-400/20 bg-black/40 hover:bg-gold-500 hover:text-stone-950 font-sans text-[11px] tracking-wider text-[#f7e4a9] transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_20px_rgba(212,175,55,0.35)] font-semibold cursor-pointer"
+            className="flex-1 flex items-center justify-center gap-2 px-5 py-3 rounded-full border border-gold-400/20 bg-black/40 hover:bg-gold-500 hover:text-stone-950 font-sans text-[11px] tracking-wider text-[#f7e4a9] transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_20px_rgba(212,175,55,0.35)] font-semibold cursor-pointer whitespace-nowrap"
           >
             <Globe className="w-3.5 h-3.5" />
             dotr.in
@@ -409,7 +372,7 @@ function CreditsSection() {
           
           <a 
             href="mailto:info@dotr.in"
-            className="flex-1 flex items-center justify-center gap-2 px-5 py-3 rounded-full border border-gold-400/20 bg-black/40 hover:bg-gold-500 hover:text-stone-950 font-sans text-[11px] tracking-wider text-[#f7e4a9] transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_20px_rgba(212,175,55,0.35)] font-semibold cursor-pointer"
+            className="flex-1 flex items-center justify-center gap-2 px-5 py-3 rounded-full border border-gold-400/20 bg-black/40 hover:bg-gold-500 hover:text-stone-950 font-sans text-[11px] tracking-wider text-[#f7e4a9] transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_20px_rgba(212,175,55,0.35)] font-semibold cursor-pointer whitespace-nowrap"
           >
             <Mail className="w-3.5 h-3.5" />
             info@dotr.in
@@ -417,10 +380,10 @@ function CreditsSection() {
           
           <a 
             href="tel:+918200965524"
-            className="flex-1 flex items-center justify-center gap-2 px-5 py-3 rounded-full border border-gold-400/20 bg-black/40 hover:bg-gold-500 hover:text-stone-950 font-sans text-[11px] tracking-wider text-[#f7e4a9] transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_20px_rgba(212,175,55,0.35)] font-semibold cursor-pointer"
+            className="flex-1 flex items-center justify-center gap-2 px-5 py-3 rounded-full border border-gold-400/20 bg-black/40 hover:bg-gold-500 hover:text-stone-950 font-sans text-[11px] tracking-wider text-[#f7e4a9] transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_20px_rgba(212,175,55,0.35)] font-semibold cursor-pointer whitespace-nowrap"
           >
             <Phone className="w-3.5 h-3.5" />
-            +91 8200965524
+            {formatNumber("+91 8200965524")}
           </a>
         </div>
       </motion.div>

@@ -207,7 +207,7 @@ export default function Blessings() {
   const marqueeList = [...wishes, ...wishes];
 
   return (
-    <section id="blessings-section" className="py-16 sm:py-24 px-4 sm:px-6 bg-[#fdf9ff] relative overflow-x-hidden">
+    <section id="blessings-section" className="py-8 px-4 bg-[#fffdf7] relative overflow-x-hidden">
       
       {/* Styles for Infinite Loop Wishes Train Marquee */}
       <style>{`
@@ -225,23 +225,27 @@ export default function Blessings() {
         }
       `}</style>
 
-      {/* Top Spacer for scroll buffer */}
-      <div className="h-12 sm:h-24 flex-shrink-0 w-full pointer-events-none" />
       <div className="max-w-6xl mx-auto">
         
         {/* Section Title with Admin Trigger */}
         <div className="text-center mb-16 relative">
-          <span className="font-sans text-[10px] sm:text-xs tracking-[0.2em] text-purple-650 uppercase font-bold">
+          <span className="font-sans text-[10px] sm:text-xs tracking-[0.2em] text-[#8a1525]/85 uppercase font-bold">
             {t("blessings.blessingsLove")}
           </span>
           <h2 
             onClick={handleHeaderClick}
-            className="font-serif text-4xl sm:text-5xl font-bold text-stone-900 mt-3 cursor-pointer select-none active:scale-95 transition-transform"
+            className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-[#8a1525] tracking-wide mb-0 mt-3 cursor-pointer select-none active:scale-95 transition-transform"
             title="Click 5 times for Admin Actions"
           >
-            {t("blessings.mainTitle")}
+            :: {t("blessings.mainTitle")} ::
           </h2>
-          <div className="w-12 h-[1px] bg-gold-400/40 mx-auto mt-4" />
+          
+          {/* Traditional Separator */}
+          <div className="flex items-center justify-center gap-2 mt-1 mb-6">
+            <span className="w-16 sm:w-24 h-[1px] bg-gradient-to-r from-transparent to-[#8a1525]/50" />
+            <span className="text-[#8a1525] text-lg">♦</span>
+            <span className="w-16 sm:w-24 h-[1px] bg-gradient-to-l from-transparent to-[#8a1525]/50" />
+          </div>
 
           {/* Admin Mode Controls */}
           {isAdmin && (
@@ -267,7 +271,7 @@ export default function Blessings() {
           )}
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           {/* Left Column: Form (4 cols) */}
           <div className="lg:col-span-4">
             {myWishes.length === 0 ? (
@@ -731,9 +735,6 @@ export default function Blessings() {
           </div>
         )}
       </AnimatePresence>
-
-      {/* Bottom Spacer for scroll buffer */}
-      <div className="h-20 sm:h-28 flex-shrink-0 w-full pointer-events-none" />
     </section>
   );
 }
