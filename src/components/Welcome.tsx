@@ -9,7 +9,7 @@ import { useLanguage } from "@/context/LanguageContext";
 export default function Welcome() {
   const { t } = useLanguage();
   return (
-    <section id="welcome-section" className="min-h-screen w-full flex flex-col justify-between py-12 px-6 bg-[#fbf9fb] relative overflow-x-hidden select-none">
+    <section id="welcome-section" className="w-full flex flex-col gap-10 py-16 px-6 bg-[#fdf9ff] relative overflow-x-hidden select-none">
       {/* Top Spacer for scroll buffer */}
       <div className="h-6 sm:h-10 flex-shrink-0 w-full pointer-events-none" />
 

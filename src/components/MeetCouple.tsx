@@ -31,7 +31,7 @@ export default function MeetCouple() {
   };
 
   return (
-    <section id="meet-couple-section" className="min-h-screen w-full flex flex-col justify-between py-12 px-6 bg-[#faf6f0] relative">
+    <section id="meet-couple-section" className="w-full flex flex-col gap-10 py-16 px-6 bg-[#fffdf7] relative">
       {/* Top Spacer for scroll buffer */}
       <div className="h-16 sm:h-24 flex-shrink-0 w-full pointer-events-none" />
 

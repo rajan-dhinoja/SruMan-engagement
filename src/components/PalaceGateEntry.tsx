@@ -124,7 +124,7 @@ export default function PalaceGateEntry({ onEnter }: PalaceGateEntryProps) {
         <motion.div
           exit={{ opacity: 0 }}
           transition={{ duration: 0.5, ease: "easeInOut" }}
-          className="fixed inset-0 z-50 flex items-center justify-center bg-transparent overflow-hidden select-none"
+          className={`fixed inset-0 z-50 flex items-center justify-center bg-transparent overflow-hidden select-none ${isEntering ? "pointer-events-none" : ""}`}
           style={{ perspective: "1400px", transformStyle: "preserve-3d" }}
         >
           {/* ═══════════════════════════════════════════════════════════

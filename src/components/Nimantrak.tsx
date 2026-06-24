@@ -25,7 +25,7 @@ export default function Nimantrak() {
   };
 
   return (
-    <section id="nimantrak-section" className="min-h-screen w-full flex flex-col justify-between py-12 px-6 bg-[#fcf9f2] relative overflow-x-hidden select-none">
+    <section id="nimantrak-section" className="w-full flex flex-col gap-10 py-16 px-6 bg-[#fdf9ff] relative overflow-x-hidden select-none">
       {/* Top Spacer for scroll buffer */}
       <div className="h-16 sm:h-24 flex-shrink-0 w-full pointer-events-none" />
 

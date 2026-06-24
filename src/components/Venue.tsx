@@ -17,7 +17,7 @@ export default function Venue() {
   };
 
   return (
-    <section id="venue-section" className="py-24 px-6 bg-[#fbf9fb] relative overflow-x-hidden select-none">
+    <section id="venue-section" className="py-24 px-6 bg-[#fffdf7] relative overflow-x-hidden select-none">
       {/* Top Spacer for scroll buffer */}
       <div className="h-16 sm:h-24 flex-shrink-0 w-full pointer-events-none" />
 

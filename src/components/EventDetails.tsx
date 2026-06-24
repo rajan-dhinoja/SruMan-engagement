@@ -57,7 +57,7 @@ export default function EventDetails() {
   ];
 
   return (
-    <section id="event-section" className="py-24 px-6 bg-transparent relative overflow-x-hidden">
+    <section id="event-section" className="py-24 px-6 bg-[#fdf9ff] relative overflow-x-hidden">
       {/* Top Spacer for scroll buffer */}
       <div className="h-16 sm:h-24 flex-shrink-0 w-full pointer-events-none" />
 

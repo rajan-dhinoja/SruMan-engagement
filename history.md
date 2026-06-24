@@ -84,3 +84,32 @@
   - Removed the unused `isOpen` dead state which caused secondary state update delays.
   - This eliminates rendering bottlenecks, frame drops, and layout lag at the boundaries of the sections, enabling a fluid, continuous single-page scrolling experience.
 
+## Prompt 20 (2026-06-24)
+- Fixed scroll interception issues during gate entrance in [PalaceGateEntry.tsx](file:///d:/SruMan/SruMan-engagement/src/components/PalaceGateEntry.tsx) and [page.tsx](file:///d:/SruMan/SruMan-engagement/src/app/page.tsx):
+  - Added `pointer-events-none` conditionally to the Gate entry overlay as soon as `isEntering` begins, allowing users to scroll immediately without the fading gate intercepting mouse or touch events.
+  - Removed `select-none` from the main component's active classes when the gate is opened, preventing mobile browsers from locking touch scroll inputs.
+
+## Prompt 21 (2026-06-24)
+- Removed full-viewport screen height constraints (`min-h-screen`) and replaced slide-based alignments (`justify-between`) with standard flow vertical spacing (`gap-10 py-16`) in:
+  - Section layout wrappers in [page.tsx](file:///d:/SruMan/SruMan-engagement/src/app/page.tsx) (for all sections).
+  - [Welcome.tsx](file:///d:/SruMan/SruMan-engagement/src/components/Welcome.tsx)
+  - [Couple.tsx](file:///d:/SruMan/SruMan-engagement/src/components/Couple.tsx)
+  - [Nimantrak.tsx](file:///d:/SruMan/SruMan-engagement/src/components/Nimantrak.tsx)
+  - [MeetCouple.tsx](file:///d:/SruMan/SruMan-engagement/src/components/MeetCouple.tsx)
+  - `CreditsSection` inside [page.tsx](file:///d:/SruMan/SruMan-engagement/src/app/page.tsx)
+- This turns the presentation-slide layout into a standard, naturally flowing, continuous website document.
+
+## Prompt 22 (2026-06-24)
+- Fixed first-scroll pause/stop issue in [page.tsx](file:///d:/SruMan/SruMan-engagement/src/app/page.tsx):
+  - Removed the `motion.div` `whileInView` animation wrappers (with `initial={{ opacity: 0, y: 30 }}`) from all section render blocks.
+  - These wrappers started sections as invisible/shifted down and fired IntersectionObserver events on first scroll entry, causing React to re-calculate layout and producing a momentary stutter/pause before becoming smooth.
+  - Sections now render immediately as part of normal document flow — no first-scroll jank.
+  - Removed unused `motion` from the `framer-motion` import (only `AnimatePresence` remains, used for the gate entrance).
+
+
+## Prompt 23 (2026-06-24)
+- Added alternating soft background colors to all sections to visually distinguish section boundaries:
+  - **Tone A** — soft lavender-purple `#f7f0fb` (from project's primary theme color `#5e1f70`): applied to [Welcome.tsx](file:///d:/SruMan/SruMan-engagement/src/components/Welcome.tsx), [Nimantrak.tsx](file:///d:/SruMan/SruMan-engagement/src/components/Nimantrak.tsx), [EventDetails.tsx](file:///d:/SruMan/SruMan-engagement/src/components/EventDetails.tsx), [Blessings.tsx](file:///d:/SruMan/SruMan-engagement/src/components/Blessings.tsx).
+  - **Tone B** — soft champagne-gold `#fdf8ed` (from project's accent color `#d4af37`): applied to [Couple.tsx](file:///d:/SruMan/SruMan-engagement/src/components/Couple.tsx), [MeetCouple.tsx](file:///d:/SruMan/SruMan-engagement/src/components/MeetCouple.tsx), [Venue.tsx](file:///d:/SruMan/SruMan-engagement/src/components/Venue.tsx).
+  - Credits section retains its dark royal gradient (intentional footer styling).
+  - Updated main `<main>` container in [page.tsx](file:///d:/SruMan/SruMan-engagement/src/app/page.tsx) background to `white` so section colors are cleanly visible.

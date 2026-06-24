@@ -203,29 +203,15 @@ export default function Home() {
       </AnimatePresence>
 
       <main 
-          className={`relative w-full overflow-x-hidden bg-[#fbf9fb] ${showGate ? "h-screen overflow-hidden pointer-events-none select-none" : "select-none"}`}
+          className={`relative w-full overflow-x-hidden bg-white ${showGate ? "h-screen overflow-hidden pointer-events-none select-none" : ""}`}
         >
-          {sections.map((sec, idx) => (
+          {sections.map((sec) => (
             <div
               key={sec.id}
               id={sec.id === "events" ? "event-section" : `${sec.id}-section`}
-              className="w-full min-h-screen relative flex flex-col justify-center"
+              className="w-full relative"
             >
-              {idx === 0 ? (
-                <div className="w-full min-h-screen">
-                  {sec.component}
-                </div>
-              ) : (
-                <motion.div
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.1 }}
-                  transition={{ duration: 0.8, ease: "easeOut" }}
-                  className="w-full min-h-screen origin-center"
-                >
-                  {sec.component}
-                </motion.div>
-              )}
+              {sec.component}
             </div>
           ))}
         </main>
@@ -259,7 +245,7 @@ export default function Home() {
             onClick={toggleMusic}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="flex items-center justify-center w-12 h-12 rounded-full border border-purple-300/30 bg-[#fbf9fb]/80 backdrop-blur-md text-purple-600 shadow-md cursor-pointer hover:bg-purple-50 transition-colors"
+            className="flex items-center justify-center w-12 h-12 rounded-full border border-purple-300/30 bg-white/80 backdrop-blur-md text-purple-600 shadow-md cursor-pointer hover:bg-[#f7f0fb] transition-colors"
             title={isPlaying ? t("global.audio.mute") : t("global.audio.play")}
           >
             {isPlaying ? (
@@ -277,7 +263,7 @@ export default function Home() {
 function CreditsSection() {
   const { t } = useLanguage();
   return (
-    <div id="credits-section" className="w-full min-h-screen bg-gradient-to-b from-[#1a0525] via-[#110119] to-[#08000c] text-center flex flex-col items-center justify-between px-6 py-12 md:py-16 relative overflow-hidden select-none">
+    <div id="credits-section" className="w-full bg-gradient-to-b from-[#1a0525] via-[#110119] to-[#08000c] text-center flex flex-col items-center gap-12 px-6 py-16 md:py-24 relative overflow-hidden select-none">
       {/* Decorative Royal Corner Elements */}
       <div className="absolute inset-0 pointer-events-none opacity-25">
         <div className="absolute top-0 left-0 w-36 h-36 md:w-48 md:h-48 border-l border-t border-gold-400/25 rounded-tl-[100px] m-4 md:m-6" />
