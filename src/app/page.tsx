@@ -13,11 +13,107 @@ import Blessings from "@/components/Blessings";
 import PalaceGateEntry from "@/components/PalaceGateEntry";
 import { useLanguage } from "@/context/LanguageContext";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
+import confetti from "canvas-confetti";
 
 export default function Home() {
   const [showGate, setShowGate] = useState(true);
   const [isPlaying, setIsPlaying] = useState(false);
   const [activeSection, setActiveSection] = useState(0);
+
+  const triggerCelebration = () => {
+    // 1. Crackers / Fireworks (multiple bursts from left and right top corners)
+    const duration = 3.5 * 1000;
+    const animationEnd = Date.now() + duration;
+    const defaults = { startVelocity: 25, spread: 360, ticks: 80, zIndex: 100 };
+
+    const randomInRange = (min: number, max: number) => {
+      return Math.random() * (max - min) + min;
+    };
+
+    const interval = setInterval(function() {
+      const timeLeft = animationEnd - Date.now();
+
+      if (timeLeft <= 0) {
+        return clearInterval(interval);
+      }
+
+      const particleCount = 40 * (timeLeft / duration);
+      // cracker bursts
+      confetti({ ...defaults, particleCount, origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 } });
+      confetti({ ...defaults, particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 } });
+    }, 250);
+
+    // 2. Flower shower (falling flowers and ribbons from top)
+    try {
+      const flower1 = (confetti as any).shapeFromText({ text: "🌸" });
+      const flower2 = (confetti as any).shapeFromText({ text: "🌹" });
+      const flower3 = (confetti as any).shapeFromText({ text: "🌺" });
+      const flower4 = (confetti as any).shapeFromText({ text: "🏵️" });
+      const flower5 = (confetti as any).shapeFromText({ text: "💐" });
+      const ribbon1 = (confetti as any).shapeFromText({ text: "🎀" });
+      const ribbon2 = (confetti as any).shapeFromText({ text: "🎗️" });
+
+      // Flower shower above Lord Shreenathji (Left side, x: 0.25)
+      confetti({
+        particleCount: 150, // High density
+        spread: 90,
+        origin: { y: -0.1, x: 0.25 },
+        shapes: [flower1, flower2, flower3, flower4, flower5, ribbon1, ribbon2],
+        scalar: 2.8,
+        zIndex: 100,
+        gravity: 0.75, // gentle fall
+        drift: 0.4,
+      });
+
+      // Flower shower in the center/right (x: 0.6)
+      confetti({
+        particleCount: 120,
+        spread: 100,
+        origin: { y: -0.1, x: 0.6 },
+        shapes: [flower1, flower2, flower3, flower4, flower5, ribbon1, ribbon2],
+        scalar: 2.5,
+        zIndex: 100,
+        gravity: 0.8,
+        drift: 0.2,
+      });
+    } catch (err) {
+      console.warn("confetti.shapeFromText not supported, falling back to standard confetti", err);
+      confetti({
+        particleCount: 120,
+        spread: 120,
+        origin: { y: 0, x: 0.5 },
+        colors: ['#ffb7c5', '#ff9999', '#ffcc00', '#e0b0ff', '#5e1f70', '#d4af37'],
+        scalar: 1.5,
+        zIndex: 100
+      });
+    }
+
+    // 3. Side ribbon streams (launching from bottom corners)
+    const end = Date.now() + (3 * 1000);
+    
+    (function frame() {
+      confetti({
+        particleCount: 4,
+        angle: 60,
+        spread: 55,
+        origin: { x: 0, y: 0.9 },
+        colors: ['#5e1f70', '#d4af37', '#e0b0ff', '#f7e4a9'],
+        zIndex: 100
+      });
+      confetti({
+        particleCount: 4,
+        angle: 120,
+        spread: 55,
+        origin: { x: 1, y: 0.9 },
+        colors: ['#5e1f70', '#d4af37', '#e0b0ff', '#f7e4a9'],
+        zIndex: 100
+      });
+
+      if (Date.now() < end) {
+        requestAnimationFrame(frame);
+      }
+    }());
+  };
   const { t } = useLanguage();
   
   const audioContextRef = useRef<AudioContext | null>(null);
@@ -197,7 +293,11 @@ export default function Home() {
 
       {/* Royal Gate Opening Entrance */}
       <AnimatePresence>
-        {showGate && <PalaceGateEntry onEnter={() => setShowGate(false)} />}
+        {showGate && <PalaceGateEntry onEnter={() => {
+          setShowGate(false);
+          triggerCelebration();
+          // startSynth();
+        }} />}
       </AnimatePresence>
 
       <main 
@@ -258,7 +358,7 @@ function CreditsSection() {
       <motion.div 
         className="mt-4 flex flex-col items-center"
       >
-        <span className="font-serif text-sm md:text-base tracking-[0.35em] text-[#d4af37]/60 uppercase mb-2">
+        <span className="font-serif text-base md:text-xl tracking-[0.25em] text-[#d4af37] uppercase mb-2 font-black drop-shadow-[0_0_12px_rgba(212,175,55,0.7)]">
           {t("global.footer.thankYouForVisiting")}
         </span>
         <div className="w-16 h-[1px] bg-gold-400/20" />
@@ -317,7 +417,7 @@ function CreditsSection() {
       <motion.div
         className="w-full max-w-lg bg-[#fbf9fb]/[0.02] backdrop-blur-md rounded-[32px] border border-gold-400/10 p-6 md:p-8 flex flex-col items-center shadow-[0_12px_40px_rgba(0,0,0,0.6)] mb-4 z-10"
       >
-        <span className="font-sans text-[9px] md:text-[10px] tracking-[0.3em] text-[#d4af37]/75 uppercase mb-5 font-semibold">
+        <span className="font-serif text-sm md:text-base tracking-[0.2em] text-[#d4af37] mb-5 font-bold drop-shadow-[0_0_10px_rgba(212,175,55,0.6)] text-center">
           {t("global.footer.craftedBy")}
         </span>
 

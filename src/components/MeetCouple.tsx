@@ -41,9 +41,6 @@ export default function MeetCouple() {
         <motion.div
           className="text-center mb-12"
         >
-          <span className="font-sans text-[10px] sm:text-xs tracking-[0.3em] text-[#8a1525]/85 uppercase font-semibold block mb-3">
-            Our Story
-          </span>
           <h2 className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-[#8a1525] tracking-wide mb-0">
             :: {t("couple.meetCoupleTitle")} ::
           </h2>

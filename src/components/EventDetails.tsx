@@ -72,7 +72,7 @@ export default function EventDetails() {
       venueTitle: "Venue & Location",
       venueName: "Venue Name",
       address: "Location Address",
-      interactiveMap: "Interactive Map",
+      interactiveMap: "View Map",
       copyAddress: "Copy Address",
       getDirections: "Get Directions",
       functionStarts: "The ceremony begins on Tuesday, August 18, 2026 at 9:00 AM",
@@ -85,11 +85,11 @@ export default function EventDetails() {
       venueTitle: "સ્થળ વિગત",
       venueName: "સ્થળનું નામ",
       address: "સરનામું",
-      interactiveMap: "ઇન્ટરેક્ટિવ નકશો",
+      interactiveMap: "નકશો જુઓ",
       copyAddress: "સરનામું કોપી કરો",
       getDirections: "નકશો જુઓ",
       functionStarts: "શુભ પ્રસંગ મંગળવાર, ૧૮ ઓગસ્ટ ૨૦૨૬ ના રોજ સવારે ૯:૦૦ વાગ્યે શરૂ થશે",
-      countdownTitle: "શુભ પ્રસંગ શરૂ થવા માટેનો સમય",
+      countdownTitle: "આ અદ્ભુત પ્રસંગ માટે બાકી સમય",
     },
     hi: {
       auspiciousDay: "तिथि",
@@ -98,11 +98,11 @@ export default function EventDetails() {
       venueTitle: "स्थान विवरण",
       venueName: "स्थान का नाम",
       address: "पता",
-      interactiveMap: "इंटरैक्टिव नक्शा",
+      interactiveMap: "नक्शा देखें",
       copyAddress: "पता कॉपी करें",
       getDirections: "दिशा निर्देश",
       functionStarts: "शुभ समारोह मंगलवार, १८ अगस्त २०२६ को सुबह ९:०० बजे शुरू होगा",
-      countdownTitle: "शुभ प्रसंग शुरू होने का समय",
+      countdownTitle: "इस मंगलमय अवसर के लिए शेष समय",
     }
   }[language as "en" | "gu" | "hi"] || {
     auspiciousDay: "Tithi",
@@ -111,11 +111,11 @@ export default function EventDetails() {
     venueTitle: "Venue & Location",
     venueName: "Venue Name",
     address: "Location Address",
-    interactiveMap: "Interactive Map",
+    interactiveMap: "View Map",
     copyAddress: "Copy Address",
     getDirections: "Get Directions",
     functionStarts: "The ceremony begins on Tuesday, August 18, 2026 at 9:00 AM",
-    countdownTitle: "Countdown to the Auspicious Event",
+    countdownTitle: "Time Remaining for This Magical Occasion",
   };
 
   return (
@@ -129,7 +129,7 @@ export default function EventDetails() {
           <span className="font-sans text-[10px] sm:text-xs tracking-[0.25em] text-purple-750 uppercase font-bold">
             {t("eventDetails.joinCelebration")}
           </span>
-          <h2 className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-[#5e1f70] tracking-wide mb-0 mt-3">
+          <h2 className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-[#5e1f70] tracking-wide mb-0 mt-5">
             :: {t("eventDetails.mainTitle")} ::
           </h2>
           
@@ -143,7 +143,7 @@ export default function EventDetails() {
 
         {/* Live Countdown Card with Ceremony Start Time details */}
         <div className="mb-12">
-          <div className="relative max-w-4xl mx-auto rounded-[2.5rem] bg-white/50 backdrop-blur-md p-6 sm:p-8 border border-purple-300/20 shadow-[0_12px_40px_rgba(94,31,112,0.04)] text-center overflow-hidden">
+          <div className="relative max-w-4xl mx-auto rounded-[2.5rem] bg-white/50 backdrop-blur-md p-6 sm:p-8 border border-purple-300/20 shadow-[0_12px_40px_rgba(94,31,112,0.04)] text-center overflow-visible">
             {/* Corner ornaments */}
             <div className="absolute top-4 left-4 w-6 h-6 border-t border-l border-[#d4af37]/45 rounded-tl-lg pointer-events-none" />
             <div className="absolute top-4 right-4 w-6 h-6 border-t border-r border-[#d4af37]/45 rounded-tr-lg pointer-events-none" />
@@ -152,14 +152,27 @@ export default function EventDetails() {
 
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 bg-purple-100/10 rounded-full blur-3xl pointer-events-none" />
             
-            <h3 className="font-serif text-lg sm:text-2xl font-bold text-stone-900 tracking-wide mb-2">
-              {labels.countdownTitle}
-            </h3>
-            
-            <p className="text-xs sm:text-sm text-[#5e1f70] font-sans tracking-wide mb-6 max-w-2xl mx-auto font-semibold">
-              {labels.functionStarts}
-            </p>
-            
+            <div className="mb-6 relative z-10">
+              <span className="inline-block text-2xl mb-2 animate-pulse">✨</span>
+              <h3
+                className="font-serif text-xl sm:text-3xl md:text-4xl font-extrabold tracking-wide leading-normal py-2"
+                style={{
+                  background: "linear-gradient(135deg, #5e1f70 0%, #9b3fbf 45%, #d4af37 100%)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  backgroundClip: "text",
+                }}
+              >
+                {labels.countdownTitle}
+              </h3>
+              <div className="flex items-center justify-center gap-2 mt-3">
+                <span className="w-10 sm:w-16 h-[1.5px] bg-gradient-to-r from-transparent to-[#d4af37]/60 rounded-full" />
+                <span className="text-[#d4af37] text-base">❋</span>
+                <span className="w-10 sm:w-16 h-[1.5px] bg-gradient-to-l from-transparent to-[#d4af37]/60 rounded-full" />
+              </div>
+            </div>
+
+
             <div className="grid grid-cols-4 gap-3 sm:gap-8 max-w-2xl mx-auto relative z-10">
               {countdownItems.map((item, idx) => (
                 <div key={idx} className="flex flex-col items-center">
@@ -287,7 +300,7 @@ export default function EventDetails() {
                   />
                   <div className="absolute bottom-3 left-3 z-20 flex items-center gap-2">
                     <span className="px-3 py-1 rounded-full bg-[#5e1f70]/95 text-[#f7e4a9] text-[9px] tracking-wider uppercase font-bold backdrop-blur-sm border border-gold-400/20 shadow-sm">
-                      Celebration Hall
+                      {t("venue.celebrationHall")}
                     </span>
                   </div>
                 </div>
@@ -316,7 +329,7 @@ export default function EventDetails() {
                     <span className="font-sans text-[12px] uppercase tracking-wider text-stone-400 font-bold block">
                       {labels.address}
                     </span>
-                    <p className="font-sans text-sm sm:text-base text-stone-700 leading-relaxed font-semibold mt-0.5">
+                    <p className="font-serif text-sm sm:text-base font-bold text-stone-850 mt-0.5">
                       {t("venue.address")}
                     </p>
                   </div>
@@ -356,12 +369,17 @@ export default function EventDetails() {
 
             {/* Interactive location map embed (Redesigned with floating glass header) */}
             <div className="relative w-full h-full min-h-[300px] md:min-h-full overflow-hidden group/map">
-              <div className="absolute top-4 left-4 z-20 px-3.5 py-2 rounded-xl bg-white/80 backdrop-blur-md border border-[#d4af37]/35 shadow-md flex items-center gap-2 pointer-events-none">
-                <Compass className="w-3.5 h-3.5 text-[#d4af37] animate-pulse" />
-                <span className="font-sans text-xs sm:text-sm tracking-wider text-[#5e1f70] font-bold uppercase">
+              <a
+                href="https://maps.google.com/?q=Parishram+The+Lawns+Gondal"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 px-4 py-2 rounded-xl bg-white/90 backdrop-blur-md border border-[#d4af37]/50 shadow-lg flex items-center gap-2 cursor-pointer hover:bg-[#5e1f70] hover:text-white hover:border-[#5e1f70] transition-all duration-300 group/btn whitespace-nowrap"
+              >
+                <Compass className="w-3.5 h-3.5 text-[#d4af37] group-hover/btn:text-white transition-colors duration-300" />
+                <span className="font-sans text-xs sm:text-sm tracking-wider text-[#5e1f70] group-hover/btn:text-white font-bold uppercase transition-colors duration-300">
                   {labels.interactiveMap}
                 </span>
-              </div>
+              </a>
               <iframe
                 title="SruMan Wedding Ceremony Venue Map"
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3700.040268595507!2d70.80373847604597!3d21.933167779270034!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395847a9ef7197a9%3A0xe510c436b7cd6858!2sParishram%20The%20Lawns!5e0!3m2!1sen!2sin!4v1718987178000!5m2!1sen!2sin"

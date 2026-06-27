@@ -55,6 +55,7 @@ export default function PalaceGateEntry({ onEnter }: PalaceGateEntryProps) {
   }, []);
 
   const handleOpenGates = () => {
+    playChime();
     setIsEntering(true);          // kick off the entire cinematic sequence
     setTimeout(() => {
       setIsVisible(false);        // unmount after animation
