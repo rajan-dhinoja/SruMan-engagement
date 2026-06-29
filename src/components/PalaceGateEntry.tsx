@@ -152,10 +152,13 @@ export default function PalaceGateEntry({ onEnter }: PalaceGateEntryProps) {
           >
             
             {/* Palace Background (z-20) */}
-            <img 
+            <Image 
               src="/images/dark_purple_without_door.png" 
               alt="Palace Background" 
-              className="absolute inset-0 w-full h-full object-fill z-20 pointer-events-none"
+              fill
+              priority
+              sizes="100vw"
+              className="absolute inset-0 object-fill z-20 pointer-events-none"
             />
 
             {/* LEFT DOOR — scaleX 1→0 */}
@@ -165,20 +168,26 @@ export default function PalaceGateEntry({ onEnter }: PalaceGateEntryProps) {
                 ? { duration: 0.8, times: [0, 0.3, 1], ease: "easeInOut" }
                 : { duration: 0 }
               }
+              className="absolute overflow-hidden"
               style={{
-                position: "absolute",
                 left: "30%",
                 width: "20%",
                 top: "19.5%",
                 height: "51%",
                 zIndex: 21,
                 transformOrigin: "left center",
-                backgroundImage: "url('/images/royal_door_v2.png')",
-                backgroundSize: "200% 100%",
-                backgroundPosition: "left center",
-                backgroundRepeat: "no-repeat",
               }}
-            />
+            >
+              <div className="absolute top-0 left-0 h-full w-[200%] max-w-none">
+                <Image 
+                  src="/images/royal_door_v2.png" 
+                  alt="Left Door" 
+                  fill
+                  priority
+                  sizes="40vw"
+                />
+              </div>
+            </motion.div>
 
             {/* RIGHT DOOR — scaleX 1→0 */}
             <motion.div
@@ -187,20 +196,26 @@ export default function PalaceGateEntry({ onEnter }: PalaceGateEntryProps) {
                 ? { duration: 0.8, times: [0, 0.3, 1], ease: "easeInOut" }
                 : { duration: 0 }
               }
+              className="absolute overflow-hidden"
               style={{
-                position: "absolute",
                 left: "50%",
                 width: "20%",
                 top: "19.5%",
                 height: "51%",
                 zIndex: 21,
                 transformOrigin: "right center",
-                backgroundImage: "url('/images/royal_door_v2.png')",
-                backgroundSize: "200% 100%",
-                backgroundPosition: "right center",
-                backgroundRepeat: "no-repeat",
               }}
-            />
+            >
+              <div className="absolute top-0 right-0 h-full w-[200%] max-w-none">
+                <Image 
+                  src="/images/royal_door_v2.png" 
+                  alt="Right Door" 
+                  fill
+                  priority
+                  sizes="40vw"
+                />
+              </div>
+            </motion.div>
 
             {/* Sparkle stars (z-21) */}
             <div className="absolute inset-0 pointer-events-none z-21 overflow-hidden">
@@ -252,10 +267,13 @@ export default function PalaceGateEntry({ onEnter }: PalaceGateEntryProps) {
                   }}
                 >
                   <div className="relative w-full h-full p-1 md:p-1 flex items-center justify-center">
-                    <img 
+                    <Image 
                       src="/logos/sruman-logo.png?v=2" 
                       alt="SruMan Logo" 
-                      className="w-full h-full object-contain scale-[1.18] transition-transform duration-500 hover:scale-[1.26]"
+                      fill
+                      priority
+                      sizes="200px"
+                      className="object-contain scale-[1.18] transition-transform duration-500 hover:scale-[1.26]"
                     />
                   </div>
                 </div>
@@ -296,11 +314,13 @@ export default function PalaceGateEntry({ onEnter }: PalaceGateEntryProps) {
                 rel="noopener noreferrer"
                 className="flex items-center gap-3.5 px-5 py-3 rounded-2xl border border-[#d4af37]/35 bg-black/75 backdrop-blur-md shadow-[0_8px_32px_rgba(0,0,0,0.5),inset_0_1px_1px_rgba(255,255,255,0.1)] hover:border-gold-400/60 transition-all duration-300 cursor-pointer group hover:scale-[1.02]"
               >
-                <div className="flex items-center justify-center p-1 bg-white rounded-lg border border-[#d4af37]/40 h-10 w-20 overflow-hidden shadow-sm">
-                  <img 
+                <div className="relative flex items-center justify-center p-1 bg-white rounded-lg border border-[#d4af37]/40 h-10 w-20 overflow-hidden shadow-sm">
+                  <Image 
                     src="/logos/dotr_logo.png" 
                     alt="dotr logo" 
-                    className="h-full w-full object-contain transition-transform duration-500 group-hover:scale-105" 
+                    fill
+                    sizes="80px"
+                    className="object-contain transition-transform duration-500 group-hover:scale-105" 
                   />
                 </div>
                 

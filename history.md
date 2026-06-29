@@ -267,3 +267,7 @@
 - Removed the delayed fade-in animation from the "Crafted By" company credit logo block on the Palace Gate Entrance screen (`PalaceGateEntry.tsx`) so it appears immediately on load.
 ## Prompt 57 (2026-06-24)
 - Further removed the initial fade-in animations for the central monogram logo and the "Open Gate" button on the Palace Gate Entrance screen (`PalaceGateEntry.tsx`), ensuring all central elements appear fully rendered instantly on load without any staggered transition effects.
+
+## Prompt 58 (2026-06-29)
+- Replaced standard <img> tags and CSS background images with Next.js <Image> components in PalaceGateEntry.tsx for dark_purple_without_door.png and oyal_door_v2.png. This leverages Next.js automatic image optimization (WebP/AVIF format, resizing, compression) to significantly reduce page load times and fix the 'loading too much' issue on mobile browsers and browsers other than Edge.
+- Added the priority prop to these images to ensure they preload immediately when the application starts, removing delays in loading the initial gate animation.
