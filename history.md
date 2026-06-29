@@ -274,3 +274,7 @@
 
 ## Prompt 59 (2026-06-29)
 - Removed the ?v=2 query string from the sruman-logo.png image source in PalaceGateEntry.tsx. Next.js <Image> component uses its own built-in hashing and caching mechanism, and adding manual query parameters to local static paths causes build prerendering errors (as query strings require explicit configuration in images.localPatterns).
+
+## Prompt 60 (2026-06-29)
+- Reverted the door and background assets in PalaceGateEntry.tsx back to standard <img> and ackground-image CSS. Next.js <Image> component recalculates srcset resolutions during heavy scale animations causing severe render lag when opening the doors.
+- Implemented a global Asset Preloader in PalaceGateEntry.tsx that downloads the large PNGs (dark_purple_without_door.png, oyal_door_v2.png) into browser cache via window.Image before rendering the invitation. This solves the issue of heavy images not loading in advance on slower connections, replacing it with a sleek 'Loading Palace...' spinner sequence.
