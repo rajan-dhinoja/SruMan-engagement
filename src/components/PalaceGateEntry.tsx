@@ -186,7 +186,7 @@ export default function PalaceGateEntry({ onEnter }: PalaceGateEntryProps) {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.8, ease: "easeInOut" }}
-            className={`fixed inset-0 z-50 flex items-center justify-center bg-black overflow-hidden select-none ${isEntering ? "pointer-events-none" : ""}`}
+            className={`fixed inset-0 z-50 flex items-center justify-center bg-transparent overflow-hidden select-none ${isEntering ? "pointer-events-none" : ""}`}
             style={{ perspective: "1400px", transformStyle: "preserve-3d" }}
           >
           {/* ═══════════════════════════════════════════════════════════

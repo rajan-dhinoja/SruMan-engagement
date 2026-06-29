@@ -278,3 +278,6 @@
 ## Prompt 60 (2026-06-29)
 - Reverted the door and background assets in PalaceGateEntry.tsx back to standard <img> and ackground-image CSS. Next.js <Image> component recalculates srcset resolutions during heavy scale animations causing severe render lag when opening the doors.
 - Implemented a global Asset Preloader in PalaceGateEntry.tsx that downloads the large PNGs (dark_purple_without_door.png, oyal_door_v2.png) into browser cache via window.Image before rendering the invitation. This solves the issue of heavy images not loading in advance on slower connections, replacing it with a sleek 'Loading Palace...' spinner sequence.
+
+## Prompt 61 (2026-06-29)
+- Reverted g-black back to g-transparent in the outer wrapper of PalaceGateEntry.tsx to fix the black screen during the gate opening animation. This allows the main website components rendered underneath to be visible as the gate zooms in and fades to 0 opacity.
