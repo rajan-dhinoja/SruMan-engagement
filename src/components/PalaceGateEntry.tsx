@@ -268,7 +268,7 @@ export default function PalaceGateEntry({ onEnter }: PalaceGateEntryProps) {
                 >
                   <div className="relative w-full h-full p-1 md:p-1 flex items-center justify-center">
                     <Image 
-                      src="/logos/sruman-logo.png?v=2" 
+                      src="/logos/sruman-logo.png" 
                       alt="SruMan Logo" 
                       fill
                       priority

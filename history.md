@@ -271,3 +271,6 @@
 ## Prompt 58 (2026-06-29)
 - Replaced standard <img> tags and CSS background images with Next.js <Image> components in PalaceGateEntry.tsx for dark_purple_without_door.png and oyal_door_v2.png. This leverages Next.js automatic image optimization (WebP/AVIF format, resizing, compression) to significantly reduce page load times and fix the 'loading too much' issue on mobile browsers and browsers other than Edge.
 - Added the priority prop to these images to ensure they preload immediately when the application starts, removing delays in loading the initial gate animation.
+
+## Prompt 59 (2026-06-29)
+- Removed the ?v=2 query string from the sruman-logo.png image source in PalaceGateEntry.tsx. Next.js <Image> component uses its own built-in hashing and caching mechanism, and adding manual query parameters to local static paths causes build prerendering errors (as query strings require explicit configuration in images.localPatterns).
