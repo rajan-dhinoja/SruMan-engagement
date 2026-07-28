@@ -99,6 +99,7 @@ export interface TranslationDict {
       champagne: string;
     };
     submitButton: string;
+    submittingButton: string;
     defaultWishes: {
       wish1: string;
       wish2: string;
@@ -244,6 +245,7 @@ export const translations: Record<"gu" | "en" | "hi", TranslationDict> = {
         champagne: "શેમ્પેઈન",
       },
       submitButton: "શુભેચ્છા મોકલો",
+      submittingButton: "મોકલી રહ્યાં છીએ...",
       defaultWishes: {
         wish1: "સૌથી સુંદર જોડીને, તમારી રિંગ સેરેમની તમારા જીવનની નવી અને પ્રેમભરી શરૂઆત બને તેવી શુભકામનાઓ!",
         wish2: "સૃષ્ટિ અને અમન, અમને તમારા આ સુંદર સોપાનની ઉજવણી તમારી સાથે કરતાં ખૂબ જ આનંદ થાય છે! ખુબ ખુબ અભિનંદન!",
@@ -387,6 +389,7 @@ export const translations: Record<"gu" | "en" | "hi", TranslationDict> = {
         champagne: "Champagne",
       },
       submitButton: "Send Wishes",
+      submittingButton: "Sending...",
       defaultWishes: {
         wish1: "Wishing the most beautiful couple a wonderful engagement and a beautiful beginning to your life together!",
         wish2: "Srushti and Aman, we are so delighted to celebrate this beautiful milestone with you! Congratulations!",
@@ -530,6 +533,7 @@ export const translations: Record<"gu" | "en" | "hi", TranslationDict> = {
         champagne: "शैम्पेन",
       },
       submitButton: "शुभकामनाएं भेजें",
+      submittingButton: "भेज रहे हैं...",
       defaultWishes: {
         wish1: "सबसे खूबसूरत जोड़ी को सगाई की हार्दिक बधाई! आपका नया जीवन खुशियों और अपार प्रेम से भरा हो।",
         wish2: "सृष्टि और अमन, हमें आप दोनों के इस खूबसूरत सफर का हिस्सा बनने की बेहद खुशी है! बहुत-बहुत बधाई!",

@@ -31,6 +31,7 @@ export default function Blessings() {
   const [adminPassword, setAdminPassword] = useState("");
   const [editingWish, setEditingWish] = useState<Wish | null>(null);
   const [clickCount, setClickCount] = useState(0);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Color Swatches definition (Removed Champagne/Grey)
   const colorThemes: { id: Wish["theme"]; name: string; bg: string; border: string; circle: string }[] = [
@@ -74,8 +75,9 @@ export default function Blessings() {
 
   const handlePostWish = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!name.trim() || !message.trim()) return;
+    if (!name.trim() || !message.trim() || isSubmitting) return;
 
+    setIsSubmitting(true);
     try {
       const response = await fetch("/api/wishes", {
         method: "POST",
@@ -99,10 +101,16 @@ export default function Blessings() {
         
         // Refresh wishes list
         await fetchWishes();
+      } else {
+        const errorText = await response.text();
+        console.error("Error posting wish:", response.status, errorText);
+        alert("Failed to add wish. Please try again.");
       }
     } catch (error) {
       console.error("Error posting wish:", error);
       alert("Failed to add wish. Please try again.");
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -354,10 +362,15 @@ export default function Blessings() {
 
                   <button
                     type="submit"
-                    className="w-full py-3.5 rounded-full bg-stone-900 text-[#fdfbf7] font-sans text-xs tracking-widest uppercase hover:bg-gold-500 hover:text-stone-900 transition-all flex items-center justify-center gap-2 cursor-pointer font-semibold"
+                    disabled={isSubmitting || !name.trim() || !message.trim()}
+                    className={`w-full py-3.5 rounded-full font-sans text-xs tracking-widest uppercase transition-all flex items-center justify-center gap-2 font-semibold ${
+                      isSubmitting || !name.trim() || !message.trim()
+                        ? "bg-stone-400 text-stone-600 cursor-not-allowed opacity-60"
+                        : "bg-stone-900 text-[#fdfbf7] hover:bg-gold-500 hover:text-stone-900 cursor-pointer"
+                    }`}
                   >
                     <Send className="w-3.5 h-3.5" />
-                    {t("blessings.submitButton")}
+                    {isSubmitting ? t("blessings.submittingButton") || "Sending..." : t("blessings.submitButton")}
                   </button>
                 </form>
               </div>

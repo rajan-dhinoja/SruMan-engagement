@@ -1,5 +1,19 @@
 [
   {
+    "id": "1785244404073",
+    "name": "Sarah Smith",
+    "message": "Wishing you both a lifetime of joy, love, and beautiful memories!",
+    "date": "Just now",
+    "theme": "gold"
+  },
+  {
+    "id": "1785244315031",
+    "name": "Test Name",
+    "message": "Test Message for Wishes",
+    "date": "Just now",
+    "theme": "gold"
+  },
+  {
     "id": "1785243963871",
     "name": "Test User",
     "message": "Test Wish",
