@@ -302,11 +302,11 @@ export default function Blessings() {
           )}
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
           {/* Left Column: Form (4 cols) */}
-          <div className="lg:col-span-4">
+          <div className="lg:col-span-4 relative z-50 min-h-min">
             {myWishes.length === 0 ? (
-              <div className="glass-card rounded-3xl p-6 border border-gold-300/20 shadow-sm sticky top-28">
+              <div className="glass-card rounded-3xl p-6 border border-gold-300/20 shadow-lg sticky top-28 z-50 pointer-events-auto">
                 <h3 className="font-serif text-xl font-light text-stone-900 mb-4 flex items-center gap-2">
                   <Sparkles className="w-4 h-4 text-gold-500" />
                   {t("blessings.writeWishTitle")}
@@ -363,10 +363,10 @@ export default function Blessings() {
                   <button
                     type="submit"
                     disabled={isSubmitting || !name.trim() || !message.trim()}
-                    className={`w-full py-3.5 rounded-full font-sans text-xs tracking-widest uppercase transition-all flex items-center justify-center gap-2 font-semibold ${
+                    className={`w-full py-3.5 rounded-full font-sans text-xs tracking-widest uppercase transition-all flex items-center justify-center gap-2 font-semibold relative z-40 ${
                       isSubmitting || !name.trim() || !message.trim()
-                        ? "bg-stone-400 text-stone-600 cursor-not-allowed opacity-60"
-                        : "bg-stone-900 text-[#fdfbf7] hover:bg-gold-500 hover:text-stone-900 cursor-pointer"
+                        ? "bg-stone-400 text-stone-600 cursor-not-allowed opacity-60 pointer-events-none"
+                        : "bg-stone-900 text-[#fdfbf7] hover:bg-gold-500 hover:text-stone-900 cursor-pointer pointer-events-auto"
                     }`}
                   >
                     <Send className="w-3.5 h-3.5" />
@@ -397,7 +397,7 @@ export default function Blessings() {
           </div>
 
           {/* Right Column: Moving Train / Loop Marquee (8 cols) */}
-          <div className="lg:col-span-8 flex flex-col gap-6 overflow-hidden w-full">
+          <div className="lg:col-span-8 flex flex-col gap-6 overflow-hidden w-full relative z-0">
             
             {/* User's Static Wish Highlight Slot (Always visible at the top of the wishes panel) */}
             {myWishes.length > 0 && (
@@ -444,12 +444,12 @@ export default function Blessings() {
 
             {/* View 1: Infinite Loop Marquee (Active in visitor mode, hidden/paused when admin wants list) */}
             {!isAdmin && !showAll && (
-              <div className="w-full relative py-4 pl-1">
+              <div className="w-full relative py-4 pl-1 z-0 pointer-events-auto">
                 {/* Visual Train Track Lines */}
                 <div className="absolute top-1/2 left-0 right-0 h-[2px] bg-dashed bg-stone-200 -translate-y-1/2 pointer-events-none opacity-20" />
                 
                 {/* Horizontal Scrolling Track */}
-                <div className="overflow-x-hidden w-full relative select-none">
+                <div className="overflow-x-hidden w-full relative select-none pointer-events-auto">
                   <div className="marquee-train flex gap-6 py-2">
                     {marqueeList.map((w, idx) => {
                       const isMyWish = myWishIds.includes(w.id);
