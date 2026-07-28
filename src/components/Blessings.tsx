@@ -20,6 +20,7 @@ export default function Blessings() {
   const [message, setMessage] = useState("");
   const [selectedTheme, setSelectedTheme] = useState<Wish["theme"]>("gold");
   const [showAll, setShowAll] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   // User wishes tracking
   const [myWishIds, setMyWishIds] = useState<string[]>([]);
@@ -40,63 +41,24 @@ export default function Blessings() {
     { id: "blue", name: "Soft Blue", bg: "from-blue-100 to-cyan-200", border: "border-blue-300", circle: "bg-blue-400" },
   ];
 
-  const defaultWishes: Wish[] = [
-    {
-      id: "1",
-      name: "Ajaybhai Dhinoja",
-      message: "મારી વ્હાલી દીકરી સૃષ્ટિ અને જમાઈ અમનને સગાઈની ખૂબ ખૂબ શુભેચ્છાઓ. પ્રભુ તમારા બંનેના જીવનને હંમેશા પ્રેમ અને ખુશીઓથી ભરી રાખે તેવી જ મંગલ કામના!",
-      date: "૨ કલાક પહેલા",
-      theme: "gold",
-    },
-    {
-      id: "2",
-      name: "Reenaben Dhinoja",
-      message: "લાડકડી સૃષ્ટિ અને વ્હાલા અમન, તમારી આ નવી સફર ખૂબ જ સુંદર અને સુખમય રહે. બંનેને જીવનભરના સાથ અને પ્રેમ માટે મારા હૃદયપૂર્વકના આશીર્વાદ!",
-      date: "૨ કલાક પહેલા",
-      theme: "purple",
-    },
-    {
-      id: "3",
-      name: "Riki Dhinoja",
-      message: "Congratulations Srushti and Aman! I am so excited for both of you as you step into this beautiful journey of togetherness. Wish you a lifetime of love and laughter!",
-      date: "૪ કલાક પહેલા",
-      theme: "rose",
-    },
-    {
-      id: "4",
-      name: "Rajan Dhinoja",
-      message: "To the coolest couple, Srushti and Aman! May your bond grow stronger with each passing day. Welcome to the family, Aman! Cheers to your beautiful future.",
-      date: "૫ કલાક પહેલા",
-      theme: "blue",
-    },
-    {
-      id: "5",
-      name: "Muraribhai Natani",
-      message: "प्रिय बेटे अमन और बहू सृष्टि को सगाई की हार्दिक शुभकामनाएं। ईश्वर से यही प्रार्थना है कि आप दोनों का जीवन आपसी प्रेम, सम्मान और खुशियों से महकता रहे।",
-      date: "૧ દિવસ પહેલા",
-      theme: "emerald",
-    },
-    {
-      id: "6",
-      name: "Sudhalataben Natani",
-      message: "प्यारे अमन और प्यारी सृष्टि, तुम दोनों की जोड़ी हमेशा सलामत रहे। इस नए सफर की शुरुआत पर ढेर सारा प्यार और आशीर्वाद। सदैव खुश रहो!",
-      date: "૧ દિવસ પહેલા",
-      theme: "rose",
-    },
-  ];
+  // Fetch wishes from API
+  const fetchWishes = async () => {
+    try {
+      setLoading(true);
+      const response = await fetch("/api/wishes");
+      if (response.ok) {
+        const data = await response.json();
+        setWishes(data);
+      }
+    } catch (error) {
+      console.error("Error fetching wishes:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
-    const saved = localStorage.getItem("sruman_wishes_v3");
-    if (saved) {
-      try {
-        setWishes(JSON.parse(saved));
-      } catch (e) {
-        setWishes(defaultWishes);
-      }
-    } else {
-      setWishes(defaultWishes);
-      localStorage.setItem("sruman_wishes_v3", JSON.stringify(defaultWishes));
-    }
+    fetchWishes();
 
     const mySaved = localStorage.getItem("sruman_my_wishes");
     if (mySaved) {
@@ -104,30 +66,44 @@ export default function Blessings() {
         setMyWishIds(JSON.parse(mySaved));
       } catch (e) {}
     }
+
+    // Poll for new wishes every 3 seconds
+    const interval = setInterval(fetchWishes, 3000);
+    return () => clearInterval(interval);
   }, []);
 
-  const handlePostWish = (e: React.FormEvent) => {
+  const handlePostWish = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!name.trim() || !message.trim()) return;
 
-    const newWish: Wish = {
-      id: Date.now().toString(),
-      name: name.trim(),
-      message: message.trim(),
-      date: "હમણાં જ",
-      theme: selectedTheme,
-    };
+    try {
+      const response = await fetch("/api/wishes", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: name.trim(),
+          message: message.trim(),
+          theme: selectedTheme,
+        }),
+      });
 
-    const updated = [newWish, ...wishes];
-    setWishes(updated);
-    localStorage.setItem("sruman_wishes_v3", JSON.stringify(updated));
+      if (response.ok) {
+        const newWish = await response.json();
+        
+        const updatedMyWishes = [newWish.id, ...myWishIds];
+        setMyWishIds(updatedMyWishes);
+        localStorage.setItem("sruman_my_wishes", JSON.stringify(updatedMyWishes));
 
-    const updatedMyWishes = [newWish.id, ...myWishIds];
-    setMyWishIds(updatedMyWishes);
-    localStorage.setItem("sruman_my_wishes", JSON.stringify(updatedMyWishes));
-
-    setName("");
-    setMessage("");
+        setName("");
+        setMessage("");
+        
+        // Refresh wishes list
+        await fetchWishes();
+      }
+    } catch (error) {
+      console.error("Error posting wish:", error);
+      alert("Failed to add wish. Please try again.");
+    }
   };
 
   const handleHeaderClick = () => {
@@ -156,37 +132,72 @@ export default function Blessings() {
     }
   };
 
-  const handleDeleteWish = (id: string) => {
+  const handleDeleteWish = async (id: string) => {
     if (window.confirm("Are you sure you want to delete this wish?")) {
-      const updated = wishes.filter((w) => w.id !== id);
-      setWishes(updated);
-      localStorage.setItem("sruman_wishes_v3", JSON.stringify(updated));
+      try {
+        const response = await fetch(`/api/wishes?id=${id}`, {
+          method: "DELETE",
+        });
 
-      const updatedMy = myWishIds.filter((mid) => mid !== id);
-      setMyWishIds(updatedMy);
-      localStorage.setItem("sruman_my_wishes", JSON.stringify(updatedMy));
+        if (response.ok) {
+          const updatedMy = myWishIds.filter((mid) => mid !== id);
+          setMyWishIds(updatedMy);
+          localStorage.setItem("sruman_my_wishes", JSON.stringify(updatedMy));
+          
+          // Refresh wishes list
+          await fetchWishes();
+        }
+      } catch (error) {
+        console.error("Error deleting wish:", error);
+        alert("Failed to delete wish. Please try again.");
+      }
     }
   };
 
-  const handleSaveEdit = (e: React.FormEvent) => {
+  const handleSaveEdit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!editingWish) return;
-    const updated = wishes.map((w) => (w.id === editingWish.id ? editingWish : w));
-    setWishes(updated);
-    localStorage.setItem("sruman_wishes_v3", JSON.stringify(updated));
-    setEditingWish(null);
-  };
+    
+    try {
+      const response = await fetch("/api/wishes", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(editingWish),
+      });
 
-  const handleClearAll = () => {
-    if (window.confirm("Delete ALL wishes from the wall?")) {
-      setWishes([]);
-      localStorage.setItem("sruman_wishes_v3", JSON.stringify([]));
-      setMyWishIds([]);
-      localStorage.setItem("sruman_my_wishes", JSON.stringify([]));
+      if (response.ok) {
+        setEditingWish(null);
+        // Refresh wishes list
+        await fetchWishes();
+      }
+    } catch (error) {
+      console.error("Error updating wish:", error);
+      alert("Failed to update wish. Please try again.");
     }
   };
 
-  const handleMoveWish = (index: number, direction: "up" | "down") => {
+  const handleClearAll = async () => {
+    if (window.confirm("Delete ALL wishes from the wall?")) {
+      try {
+        // Delete each wish individually
+        for (const wish of wishes) {
+          await fetch(`/api/wishes?id=${wish.id}`, { method: "DELETE" });
+        }
+        
+        setWishes([]);
+        setMyWishIds([]);
+        localStorage.setItem("sruman_my_wishes", JSON.stringify([]));
+        
+        // Refresh wishes list
+        await fetchWishes();
+      } catch (error) {
+        console.error("Error clearing wishes:", error);
+        alert("Failed to clear wishes. Please try again.");
+      }
+    }
+  };
+
+  const handleMoveWish = async (index: number, direction: "up" | "down") => {
     const newWishes = [...wishes];
     const targetIndex = direction === "up" ? index - 1 : index + 1;
 
@@ -197,7 +208,19 @@ export default function Blessings() {
     newWishes[targetIndex] = temp;
 
     setWishes(newWishes);
-    localStorage.setItem("sruman_wishes_v3", JSON.stringify(newWishes));
+    
+    // Save the reordered list by updating all wishes
+    try {
+      for (const wish of newWishes) {
+        await fetch("/api/wishes", {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(wish),
+        });
+      }
+    } catch (error) {
+      console.error("Error reordering wishes:", error);
+    }
   };
 
   // Get user's own sent wishes
