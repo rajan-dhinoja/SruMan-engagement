@@ -147,7 +147,7 @@ export default function Blessings() {
 
   const handleVerifyPassword = (e: React.FormEvent) => {
     e.preventDefault();
-    if (adminPassword === "sruman180826") {
+    if (adminPassword === "sruman@18082026") {
       setIsAdmin(true);
       setShowPasswordModal(false);
       setAdminPassword("");

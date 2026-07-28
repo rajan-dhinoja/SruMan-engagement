@@ -443,8 +443,7 @@ function CreditsSection() {
             <img 
               src="/logos/dotr_logo.png" 
               alt="dotr logo" 
-              className="w-full h-full object-contain filter invert(1) brightness-200 contrast-125 transition-all duration-500"
-              style={{ mixBlendMode: "screen" }}
+              className="w-full h-full object-contain transition-all duration-500 rounded-lg"
             />
           </motion.div>
           
@@ -453,37 +452,41 @@ function CreditsSection() {
               DHINOJA OmniTech Resolutions
             </h3>
             <p className="font-sans text-[10px] tracking-[0.2em] text-stone-400 mt-1">
-              {t("global.footer.nickname")} <span className="text-[#d4af37]/80 font-bold group-hover:text-gold-400 transition-colors">dotr</span>
+              {t("global.footer.nickname")} <span className="text-[#d4af37]/80 font-bold group-hover:text-gold-400 transition-colors">DotR</span>
             </p>
           </div>
         </a>
 
         {/* Interactive Button Pills */}
-        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full">
+        <div className="flex flex-col gap-3 w-full">
+          {/* Top row: Website & Phone */}
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full">
+            <a 
+              href="http://dotr.in" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="flex-1 flex items-center justify-center gap-2 px-5 py-3 rounded-full border border-gold-400/20 bg-black/40 hover:bg-gold-500 hover:text-stone-950 font-sans text-xs tracking-wider text-[#f7e4a9] transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_20px_rgba(212,175,55,0.35)] font-semibold cursor-pointer whitespace-nowrap"
+            >
+              <Globe className="w-3.5 h-3.5" />
+              dotr.in
+            </a>
+            
+            <a 
+              href="tel:+918200965524"
+              className="flex-1 flex items-center justify-center gap-2 px-5 py-3 rounded-full border border-gold-400/20 bg-black/40 hover:bg-gold-500 hover:text-stone-950 font-sans text-xs tracking-wider text-[#f7e4a9] transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_20px_rgba(212,175,55,0.35)] font-semibold cursor-pointer whitespace-nowrap"
+            >
+              <Phone className="w-3.5 h-3.5" />
+              {formatNumber("+91 8200965524")}
+            </a>
+          </div>
+
+          {/* Bottom row: Email (Full width to avoid overflow) */}
           <a 
-            href="http://dotr.in" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="flex-1 flex items-center justify-center gap-2 px-5 py-3 rounded-full border border-gold-400/20 bg-black/40 hover:bg-gold-500 hover:text-stone-950 font-sans text-xs tracking-wider text-[#f7e4a9] transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_20px_rgba(212,175,55,0.35)] font-semibold cursor-pointer whitespace-nowrap"
+            href="mailto:dhinojaomnitechresolutions@gmail.com"
+            className="w-full flex items-center justify-center gap-2 px-5 py-3 rounded-full border border-gold-400/20 bg-black/40 hover:bg-gold-500 hover:text-stone-950 font-sans text-xs sm:text-[11px] md:text-xs tracking-wider text-[#f7e4a9] transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_20px_rgba(212,175,55,0.35)] font-semibold cursor-pointer whitespace-nowrap overflow-hidden text-ellipsis"
           >
-            <Globe className="w-3.5 h-3.5" />
-            dotr.in
-          </a>
-          
-          <a 
-            href="mailto:info@dotr.in"
-            className="flex-1 flex items-center justify-center gap-2 px-5 py-3 rounded-full border border-gold-400/20 bg-black/40 hover:bg-gold-500 hover:text-stone-950 font-sans text-xs tracking-wider text-[#f7e4a9] transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_20px_rgba(212,175,55,0.35)] font-semibold cursor-pointer whitespace-nowrap"
-          >
-            <Mail className="w-3.5 h-3.5" />
-            info@dotr.in
-          </a>
-          
-          <a 
-            href="tel:+918200965524"
-            className="flex-1 flex items-center justify-center gap-2 px-5 py-3 rounded-full border border-gold-400/20 bg-black/40 hover:bg-gold-500 hover:text-stone-950 font-sans text-xs tracking-wider text-[#f7e4a9] transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_20px_rgba(212,175,55,0.35)] font-semibold cursor-pointer whitespace-nowrap"
-          >
-            <Phone className="w-3.5 h-3.5" />
-            {formatNumber("+91 8200965524")}
+            <Mail className="w-3.5 h-3.5 flex-shrink-0" />
+            <span className="truncate">dhinojaomnitechresolutions@gmail.com</span>
           </a>
         </div>
       </motion.div>
