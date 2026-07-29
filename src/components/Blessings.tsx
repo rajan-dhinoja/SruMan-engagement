@@ -31,6 +31,7 @@ export default function Blessings() {
   const [adminPassword, setAdminPassword] = useState("");
   const [editingWish, setEditingWish] = useState<Wish | null>(null);
   const [clickCount, setClickCount] = useState(0);
+  const [wishToDelete, setWishToDelete] = useState<string | null>(null);
 
   // Color Swatches definition (Removed Champagne/Grey)
   const colorThemes: { id: Wish["theme"]; name: string; bg: string; border: string; circle: string }[] = [
@@ -134,25 +135,36 @@ export default function Blessings() {
     }
   };
 
-  const handleDeleteWish = async (id: string) => {
-    if (window.confirm("Are you sure you want to delete this wish?")) {
-      try {
-        const response = await fetch(`/api/wishes?id=${id}`, {
-          method: "DELETE",
-        });
+  const handleDeleteWish = (id: string) => {
+    setWishToDelete(id);
+  };
 
-        if (response.ok) {
-          const updatedMy = myWishIds.filter((mid) => mid !== id);
-          setMyWishIds(updatedMy);
-          localStorage.setItem("sruman_my_wishes", JSON.stringify(updatedMy));
-          
-          // Refresh wishes list
-          await fetchWishes();
-        }
-      } catch (error) {
-        console.error("Error deleting wish:", error);
-        alert("Failed to delete wish. Please try again.");
+  const confirmDeleteWish = async () => {
+    if (!wishToDelete) return;
+    
+    // Optimistic UI update for instant feedback
+    setWishes((prev) => prev.filter((w) => w.id !== wishToDelete));
+    
+    try {
+      const response = await fetch(`/api/wishes?id=${wishToDelete}`, {
+        method: "DELETE",
+      });
+
+      if (response.ok) {
+        const updatedMy = myWishIds.filter((mid) => mid !== wishToDelete);
+        setMyWishIds(updatedMy);
+        localStorage.setItem("sruman_my_wishes", JSON.stringify(updatedMy));
+        
+        // Refresh wishes list just in case
+        fetchWishes();
       }
+    } catch (error) {
+      console.error("Error deleting wish:", error);
+      // Revert optimistic update
+      fetchWishes();
+      alert("Failed to delete wish. Please try again.");
+    } finally {
+      setWishToDelete(null);
     }
   };
 
@@ -809,6 +821,44 @@ export default function Blessings() {
                   </button>
                 </div>
               </form>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+      {/* Delete Wish Confirmation Modal */}
+      <AnimatePresence>
+        {wishToDelete && (
+          <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-[60] p-4">
+            <motion.div
+              initial={{ scale: 0.95, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.95, opacity: 0 }}
+              className="bg-white rounded-3xl border border-red-300/20 max-w-[320px] w-full p-6 shadow-2xl flex flex-col items-center text-center relative"
+            >
+              <div className="w-12 h-12 rounded-full bg-red-100 flex items-center justify-center text-red-500 mb-4">
+                <Trash2 className="w-6 h-6" />
+              </div>
+              <h3 className="font-serif text-xl font-bold text-stone-900 mb-2">
+                Delete Wish?
+              </h3>
+              <p className="font-sans text-xs text-stone-500 mb-6 leading-relaxed">
+                Are you sure you want to delete this beautiful blessing? This action cannot be undone.
+              </p>
+
+              <div className="flex gap-3 w-full">
+                <button
+                  onClick={() => setWishToDelete(null)}
+                  className="flex-1 py-3 rounded-full border border-stone-200 hover:bg-stone-50 text-stone-605 font-sans text-xs uppercase tracking-widest transition-all cursor-pointer font-bold"
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={confirmDeleteWish}
+                  className="flex-1 py-3 rounded-full bg-red-500 hover:bg-red-600 text-white font-sans text-xs uppercase tracking-widest transition-all cursor-pointer font-bold shadow-md shadow-red-500/20"
+                >
+                  Delete
+                </button>
+              </div>
             </motion.div>
           </div>
         )}

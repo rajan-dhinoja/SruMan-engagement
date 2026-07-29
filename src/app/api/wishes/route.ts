@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { put, list } from "@vercel/blob";
+import { put, list, get } from "@vercel/blob";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -62,13 +62,15 @@ async function getWishes() {
   try {
     const { blobs } = await list({ prefix: BLOB_NAME, limit: 1 });
     if (blobs.length > 0) {
-      const response = await fetch(blobs[0].url, { cache: "no-store" });
-      if (response.ok) {
-        return await response.json();
+      const blob = blobs[0];
+      const result = await get(blob.url, { access: "private" });
+      if (result) {
+        const text = await new Response(result.stream).text();
+        return JSON.parse(text);
       }
     }
   } catch (error) {
-    console.error("Error reading wishes from Blob:", error);
+    console.error("Error reading wishes from private Blob:", error);
   }
   
   // If no blob exists or fetch fails, return default wishes
@@ -77,7 +79,7 @@ async function getWishes() {
 
 async function saveWishes(wishes: any) {
   await put(BLOB_NAME, JSON.stringify(wishes, null, 2), {
-    access: "public",
+    access: "private",
     addRandomSuffix: false,
     contentType: "application/json",
   });
