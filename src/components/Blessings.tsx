@@ -398,7 +398,7 @@ export default function Blessings() {
           <div className="lg:col-span-8 flex flex-col gap-6 overflow-hidden w-full">
             
             {/* User's Static Wish Highlight Slot (Always visible at the top of the wishes panel) */}
-            {myWishes.length > 0 && (
+            {!isAdmin && myWishes.length > 0 && (
               <div className="space-y-3 pt-2 pb-2 pl-1">
                 <h4 className="font-sans text-[10px] uppercase tracking-widest text-[#5e1f70] font-bold">
                   {t("blessings.yourBlessing")}
@@ -562,6 +562,10 @@ export default function Blessings() {
                 <AnimatePresence>
                   {wishes.map((w, idx) => {
                     const isMyWish = myWishIds.includes(w.id);
+                    
+                    // Prevent duplication of user's own wishes since they are already shown in the pinned top slot
+                    if (isMyWish && !isAdmin) return null;
+
                     const themeMatch = colorThemes.find(t => t.id === w.theme) || colorThemes[0];
                     let themeClass = `${themeMatch.bg} ${themeMatch.border}`;
                     if (isMyWish) {
