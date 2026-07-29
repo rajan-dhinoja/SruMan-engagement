@@ -317,7 +317,6 @@ export default function Blessings() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           {/* Left Column: Form (4 cols) */}
           <div className="lg:col-span-4">
-            {myWishes.length === 0 ? (
               <div className="glass-card rounded-3xl p-6 border border-gold-300/20 shadow-sm sticky top-28">
                 <h3 className="font-serif text-xl font-light text-stone-900 mb-4 flex items-center gap-2">
                   <Sparkles className="w-4 h-4 text-gold-500" />
@@ -381,26 +380,6 @@ export default function Blessings() {
                   </button>
                 </form>
               </div>
-            ) : (
-              <div className="glass-card rounded-3xl p-6 border border-purple-300/30 shadow-sm sticky top-28 bg-gradient-to-br from-purple-50/50 to-pink-50/30 text-center flex flex-col items-center justify-center py-10 relative overflow-hidden">
-                {/* Decorative glowing gradient backdrop */}
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 bg-purple-200/20 rounded-full blur-2xl pointer-events-none" />
-                
-                <div className="w-12 h-12 rounded-full bg-purple-100/80 flex items-center justify-center text-purple-650 mb-4 z-10">
-                  <Sparkles className="w-6 h-6" />
-                </div>
-                <h3 className="font-serif text-xl font-bold text-[#5e1f70] mb-2 z-10">
-                  {t("blessings.blessingSentTitle")}
-                </h3>
-                <p className="font-sans text-xs text-stone-605 leading-relaxed max-w-[240px] mx-auto z-10">
-                  {t("blessings.blessingSentMsg")}
-                </p>
-                <div className="w-8 h-[1px] bg-gold-400/40 my-4 z-10" />
-                <span className="font-serif italic text-xs text-[#5e1f70] font-bold z-10">
-                  Srushti & Aman
-                </span>
-              </div>
-            )}
           </div>
 
           {/* Right Column: Moving Train / Loop Marquee (8 cols) */}
