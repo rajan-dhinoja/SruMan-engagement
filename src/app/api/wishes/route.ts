@@ -1,11 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
-import { promises as fs } from "fs";
-import path from "path";
+import { put, list } from "@vercel/blob";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
-const WISHES_FILE = path.join(process.cwd(), "data", "wishes.json");
+const BLOB_NAME = "wishes.json";
 
 // Default wishes
 const DEFAULT_WISHES = [
@@ -59,26 +58,34 @@ const DEFAULT_WISHES = [
   },
 ];
 
-async function ensureWishesFile() {
+async function getWishes() {
   try {
-    await fs.access(WISHES_FILE);
-  } catch {
-    // File doesn't exist, create it with default wishes
-    const dataDir = path.join(process.cwd(), "data");
-    try {
-      await fs.mkdir(dataDir, { recursive: true });
-    } catch (e) {
-      // Directory might already exist
+    const { blobs } = await list({ prefix: BLOB_NAME, limit: 1 });
+    if (blobs.length > 0) {
+      const response = await fetch(blobs[0].url, { cache: "no-store" });
+      if (response.ok) {
+        return await response.json();
+      }
     }
-    await fs.writeFile(WISHES_FILE, JSON.stringify(DEFAULT_WISHES, null, 2));
+  } catch (error) {
+    console.error("Error reading wishes from Blob:", error);
   }
+  
+  // If no blob exists or fetch fails, return default wishes
+  return DEFAULT_WISHES;
+}
+
+async function saveWishes(wishes: any) {
+  await put(BLOB_NAME, JSON.stringify(wishes, null, 2), {
+    access: "public",
+    addRandomSuffix: false,
+    contentType: "application/json",
+  });
 }
 
 export async function GET(request: NextRequest) {
   try {
-    await ensureWishesFile();
-    const data = await fs.readFile(WISHES_FILE, "utf-8");
-    const wishes = JSON.parse(data);
+    const wishes = await getWishes();
     return NextResponse.json(wishes);
   } catch (error) {
     console.error("Error reading wishes:", error);
@@ -88,8 +95,6 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   try {
-    await ensureWishesFile();
-
     const newWish = await request.json();
 
     // Validate wish data
@@ -101,22 +106,21 @@ export async function POST(request: NextRequest) {
     }
 
     // Read existing wishes
-    const data = await fs.readFile(WISHES_FILE, "utf-8");
-    const wishes = JSON.parse(data);
+    const wishes = await getWishes();
 
     // Add new wish
     const wish = {
       id: String(Date.now()),
       name: newWish.name,
       message: newWish.message,
-      date: "Just now",
+      date: "હમણાં જ",
       theme: newWish.theme || "gold",
     };
 
     wishes.unshift(wish); // Add to beginning
 
-    // Write back to file
-    await fs.writeFile(WISHES_FILE, JSON.stringify(wishes, null, 2));
+    // Write back to Blob
+    await saveWishes(wishes);
 
     return NextResponse.json(wish, { status: 201 });
   } catch (error) {
@@ -140,13 +144,10 @@ export async function DELETE(request: NextRequest) {
       );
     }
 
-    await ensureWishesFile();
-    const data = await fs.readFile(WISHES_FILE, "utf-8");
-    let wishes = JSON.parse(data);
-
+    let wishes = await getWishes();
     wishes = wishes.filter((wish: any) => wish.id !== wishId);
 
-    await fs.writeFile(WISHES_FILE, JSON.stringify(wishes, null, 2));
+    await saveWishes(wishes);
 
     return NextResponse.json({ success: true });
   } catch (error) {
@@ -161,12 +162,11 @@ export async function DELETE(request: NextRequest) {
 export async function PUT(request: NextRequest) {
   try {
     const updatedWish = await request.json();
+    let wishes = await getWishes();
 
-    await ensureWishesFile();
-    
     // If an array is sent, assume it's a full list replacement (for reordering)
     if (Array.isArray(updatedWish)) {
-      await fs.writeFile(WISHES_FILE, JSON.stringify(updatedWish, null, 2));
+      await saveWishes(updatedWish);
       return NextResponse.json(updatedWish);
     }
 
@@ -176,10 +176,6 @@ export async function PUT(request: NextRequest) {
         { status: 400 }
       );
     }
-
-    await ensureWishesFile();
-    const data = await fs.readFile(WISHES_FILE, "utf-8");
-    let wishes = JSON.parse(data);
 
     const index = wishes.findIndex((wish: any) => wish.id === updatedWish.id);
     if (index === -1) {
