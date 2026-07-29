@@ -211,15 +211,13 @@ export default function Blessings() {
 
     setWishes(newWishes);
     
-    // Save the reordered list by updating all wishes
+    // Save the reordered list by updating all wishes in a single request
     try {
-      for (const wish of newWishes) {
-        await fetch("/api/wishes", {
-          method: "PUT",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(wish),
-        });
-      }
+      await fetch("/api/wishes", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(newWishes),
+      });
     } catch (error) {
       console.error("Error reordering wishes:", error);
     }
@@ -228,8 +226,19 @@ export default function Blessings() {
   // Get user's own sent wishes
   const myWishes = wishes.filter((w) => myWishIds.includes(w.id));
 
-  // Determine marquee wishes (duplicate array once to ensure a seamless infinite looping scroll)
-  const marqueeList = [...wishes, ...wishes];
+  // Split wishes into two rows for the marquee
+  const topWishes = wishes.filter((_, i) => i % 2 === 0);
+  const bottomWishes = wishes.filter((_, i) => i % 2 !== 0);
+
+  // Determine marquee wishes (duplicate array to ensure a seamless infinite looping scroll)
+  const getMarqueeList = (list: Wish[]) => {
+    if (list.length === 0) return [];
+    if (list.length < 3) return [...list, ...list, ...list, ...list]; // Duplicate more if list is small
+    return [...list, ...list];
+  };
+
+  const topMarqueeList = getMarqueeList(topWishes);
+  const bottomMarqueeList = getMarqueeList(bottomWishes);
 
   return (
     <section id="blessings-section" className="py-8 px-4 bg-[#fffdf7] relative overflow-x-hidden">
@@ -240,12 +249,21 @@ export default function Blessings() {
           0% { transform: translateX(0); }
           100% { transform: translateX(-50%); }
         }
+        @keyframes loopMarqueeReverse {
+          0% { transform: translateX(-50%); }
+          100% { transform: translateX(0); }
+        }
         .marquee-train {
           display: flex;
           width: max-content;
-          animation: loopMarquee 35s linear infinite;
+          animation: loopMarquee 40s linear infinite;
         }
-        .marquee-train:hover {
+        .marquee-train-reverse {
+          display: flex;
+          width: max-content;
+          animation: loopMarqueeReverse 40s linear infinite;
+        }
+        .marquee-train:hover, .marquee-train-reverse:hover {
           animation-play-state: paused;
         }
       `}</style>
@@ -433,14 +451,14 @@ export default function Blessings() {
 
             {/* View 1: Infinite Loop Marquee (Active in visitor mode, hidden/paused when admin wants list) */}
             {!isAdmin && !showAll && (
-              <div className="w-full relative py-4 pl-1">
-                {/* Visual Train Track Lines */}
-                <div className="absolute top-1/2 left-0 right-0 h-[2px] bg-dashed bg-stone-200 -translate-y-1/2 pointer-events-none opacity-20" />
+              <div className="w-full relative py-4 pl-1 flex flex-col gap-6">
                 
-                {/* Horizontal Scrolling Track */}
+                {/* Horizontal Scrolling Track - Top (Left to Right) */}
                 <div className="overflow-x-hidden w-full relative select-none">
+                  {/* Visual Train Track Lines */}
+                  <div className="absolute top-1/2 left-0 right-0 h-[2px] bg-dashed bg-stone-200 -translate-y-1/2 pointer-events-none opacity-20" />
                   <div className="marquee-train flex gap-6 py-2">
-                    {marqueeList.map((w, idx) => {
+                    {topMarqueeList.map((w, idx) => {
                       const isMyWish = myWishIds.includes(w.id);
                       const themeMatch = colorThemes.find(t => t.id === w.theme) || colorThemes[0];
                       let themeClass = `${themeMatch.bg} ${themeMatch.border}`;
@@ -450,7 +468,7 @@ export default function Blessings() {
 
                       return (
                         <div
-                          key={`${w.id}-loop-${idx}`}
+                          key={`${w.id}-top-loop-${idx}`}
                           className={`w-[260px] sm:w-[300px] flex-shrink-0 p-5 rounded-2xl border bg-gradient-to-br backdrop-blur-md ${themeClass} flex flex-col justify-between shadow-md relative whitespace-normal transition-transform duration-300 hover:scale-103`}
                         >
                           {/* Delete own wish button */}
@@ -488,6 +506,62 @@ export default function Blessings() {
                     })}
                   </div>
                 </div>
+
+                {/* Horizontal Scrolling Track - Bottom (Right to Left) */}
+                {bottomMarqueeList.length > 0 && (
+                  <div className="overflow-x-hidden w-full relative select-none">
+                    {/* Visual Train Track Lines */}
+                    <div className="absolute top-1/2 left-0 right-0 h-[2px] bg-dashed bg-stone-200 -translate-y-1/2 pointer-events-none opacity-20" />
+                    <div className="marquee-train-reverse flex gap-6 py-2">
+                      {bottomMarqueeList.map((w, idx) => {
+                        const isMyWish = myWishIds.includes(w.id);
+                        const themeMatch = colorThemes.find(t => t.id === w.theme) || colorThemes[0];
+                        let themeClass = `${themeMatch.bg} ${themeMatch.border}`;
+                        if (isMyWish) {
+                          themeClass += " ring-4 ring-purple-500/30 shadow-[0_12px_24px_rgba(147,51,234,0.15)] border-purple-400/80";
+                        }
+
+                        return (
+                          <div
+                            key={`${w.id}-bottom-loop-${idx}`}
+                            className={`w-[260px] sm:w-[300px] flex-shrink-0 p-5 rounded-2xl border bg-gradient-to-br backdrop-blur-md ${themeClass} flex flex-col justify-between shadow-md relative whitespace-normal transition-transform duration-300 hover:scale-103`}
+                          >
+                            {/* Delete own wish button */}
+                            {isMyWish && !isAdmin && (
+                              <button
+                                onClick={() => handleDeleteWish(w.id)}
+                                className="absolute top-3 right-3 p-1.5 rounded-full bg-white border border-stone-200 text-red-500 hover:bg-red-50 shadow-sm cursor-pointer transition-colors z-20"
+                                title="Delete My Wish"
+                              >
+                                <Trash2 className="w-3 h-3" />
+                              </button>
+                            )}
+                            <div>
+                              <div className="flex justify-between items-start mb-2 pr-6">
+                                <div>
+                                  <h4 className="font-serif text-sm sm:text-base font-bold text-stone-900 truncate max-w-[150px]">
+                                    {w.name}
+                                  </h4>
+                                  {isMyWish && (
+                                    <span className="inline-block px-1.5 py-0.5 rounded bg-purple-650 text-white font-sans text-[7px] font-bold uppercase tracking-wider">
+                                      Your Blessing
+                                    </span>
+                                  )}
+                                </div>
+                                <span className="font-sans text-[8px] text-stone-400 uppercase font-semibold">
+                                  {w.date === "હમણાં જ" ? t("blessings.justNow") : w.date === "૨ કલાક પહેલા" ? `2 ${t("blessings.hoursAgo")}` : w.date === "૧ દિવસ પહેલા" ? `1 ${t("blessings.daysAgo")}` : w.date}
+                                </span>
+                              </div>
+                              <p className="font-sans text-xs text-stone-700 leading-relaxed font-semibold">
+                                &ldquo;{w.message}&rdquo;
+                              </p>
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                )}
               </div>
             )}
 

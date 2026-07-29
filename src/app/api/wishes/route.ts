@@ -162,6 +162,14 @@ export async function PUT(request: NextRequest) {
   try {
     const updatedWish = await request.json();
 
+    await ensureWishesFile();
+    
+    // If an array is sent, assume it's a full list replacement (for reordering)
+    if (Array.isArray(updatedWish)) {
+      await fs.writeFile(WISHES_FILE, JSON.stringify(updatedWish, null, 2));
+      return NextResponse.json(updatedWish);
+    }
+
     if (!updatedWish.id) {
       return NextResponse.json(
         { error: "Wish ID is required" },
