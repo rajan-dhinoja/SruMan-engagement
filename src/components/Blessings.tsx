@@ -45,7 +45,9 @@ export default function Blessings() {
   const fetchWishes = async () => {
     try {
       setLoading(true);
-      const response = await fetch("/api/wishes");
+      const response = await fetch(`/api/wishes?t=${Date.now()}`, {
+        cache: "no-store",
+      });
       if (response.ok) {
         const data = await response.json();
         setWishes(data);
