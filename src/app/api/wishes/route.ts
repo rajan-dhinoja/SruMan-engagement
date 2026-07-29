@@ -4,7 +4,7 @@ import { put, list, get } from "@vercel/blob";
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
-const BLOB_NAME = "wishes.json";
+const BLOB_PREFIX = "wishes-data";
 
 // Default wishes
 const DEFAULT_WISHES = [
@@ -60,16 +60,27 @@ const DEFAULT_WISHES = [
 
 async function getWishes() {
   try {
-    const { blobs } = await list({ prefix: BLOB_NAME, limit: 1 });
+    // Check for unique blobs first
+    const { blobs } = await list({ prefix: BLOB_PREFIX });
     if (blobs.length > 0) {
+      // Sort to get the most recent one
+      blobs.sort((a, b) => new Date(b.uploadedAt).getTime() - new Date(a.uploadedAt).getTime());
       const blob = blobs[0];
-      const url = new URL(blob.url);
-      url.searchParams.set("t", Date.now().toString());
       
-      const result = await get(url.toString(), { access: "private" });
+      const result = await get(blob.url, { access: "private" });
       if (result) {
         const text = await new Response(result.stream).text();
         return JSON.parse(text);
+      }
+    } else {
+      // Fallback for the old single file if they haven't migrated to the unique prefix yet
+      const oldList = await list({ prefix: "wishes.json", limit: 1 });
+      if (oldList.blobs.length > 0) {
+        const result = await get(oldList.blobs[0].url, { access: "private" });
+        if (result) {
+          const text = await new Response(result.stream).text();
+          return JSON.parse(text);
+        }
       }
     }
   } catch (error) {
@@ -80,12 +91,29 @@ async function getWishes() {
   return DEFAULT_WISHES;
 }
 
+import { del } from "@vercel/blob";
+
 async function saveWishes(wishes: any) {
-  await put(BLOB_NAME, JSON.stringify(wishes, null, 2), {
-    access: "private",
-    addRandomSuffix: false,
-    contentType: "application/json",
-  });
+  try {
+    // 1. Find existing blobs to clean them up later
+    const { blobs } = await list({ prefix: BLOB_PREFIX });
+    const oldList = await list({ prefix: "wishes.json" }); 
+    const allOldUrls = [...blobs.map(b => b.url), ...oldList.blobs.map(b => b.url)];
+
+    // 2. Upload the new JSON with a unique name to completely avoid edge caching
+    await put(`${BLOB_PREFIX}-${Date.now()}.json`, JSON.stringify(wishes, null, 2), {
+      access: "private",
+      addRandomSuffix: true, // Guarantees a unique URL
+      contentType: "application/json",
+    });
+
+    // 3. Delete the old blobs so we don't leak storage
+    if (allOldUrls.length > 0) {
+      await del(allOldUrls);
+    }
+  } catch (error) {
+    console.error("Error saving wishes:", error);
+  }
 }
 
 export async function GET(request: NextRequest) {
