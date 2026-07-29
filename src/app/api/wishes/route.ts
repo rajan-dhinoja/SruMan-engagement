@@ -192,7 +192,7 @@ export async function PUT(request: NextRequest) {
       theme: updatedWish.theme || wishes[index].theme,
     };
 
-    await fs.writeFile(WISHES_FILE, JSON.stringify(wishes, null, 2));
+    await saveWishes(wishes);
 
     return NextResponse.json(wishes[index]);
   } catch (error) {
