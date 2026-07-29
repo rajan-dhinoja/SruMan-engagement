@@ -63,7 +63,10 @@ async function getWishes() {
     const { blobs } = await list({ prefix: BLOB_NAME, limit: 1 });
     if (blobs.length > 0) {
       const blob = blobs[0];
-      const result = await get(blob.url, { access: "private" });
+      const url = new URL(blob.url);
+      url.searchParams.set("t", Date.now().toString());
+      
+      const result = await get(url.toString(), { access: "private" });
       if (result) {
         const text = await new Response(result.stream).text();
         return JSON.parse(text);
