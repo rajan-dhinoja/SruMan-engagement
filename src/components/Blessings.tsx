@@ -10,6 +10,7 @@ interface Wish {
   name: string;
   message: string;
   date: string;
+  created_at?: string;
   theme: "gold" | "purple" | "rose" | "emerald" | "blue";
 }
 
@@ -21,6 +22,24 @@ export default function Blessings() {
   const [selectedTheme, setSelectedTheme] = useState<Wish["theme"]>("gold");
   const [showAll, setShowAll] = useState(false);
   const [loading, setLoading] = useState(true);
+
+  // Date formatting helper
+  const getDisplayDate = (wish: Wish) => {
+    if (wish.created_at) {
+      return new Date(wish.created_at).toLocaleString('en-IN', {
+        day: '2-digit', month: 'short', year: 'numeric',
+        hour: '2-digit', minute: '2-digit', hour12: true
+      });
+    }
+    const idNum = Number(wish.id);
+    if (!isNaN(idNum) && idNum > 1000000000000) {
+      return new Date(idNum).toLocaleString('en-IN', {
+        day: '2-digit', month: 'short', year: 'numeric',
+        hour: '2-digit', minute: '2-digit', hour12: true
+      });
+    }
+    return wish.date === "હમણાં જ" ? t("blessings.justNow") : wish.date;
+  };
 
   // User wishes tracking
   const [myWishIds, setMyWishIds] = useState<string[]>([]);
@@ -427,7 +446,7 @@ export default function Blessings() {
                                 Pinned Blessing ✨
                               </span>
                             </div>
-                            <span className="font-sans text-[9px] text-stone-400 font-bold uppercase">{w.date}</span>
+                            <span className="font-sans text-[9px] text-stone-400 font-bold uppercase">{getDisplayDate(w)}</span>
                           </div>
                           <p className="font-sans text-sm text-stone-900 leading-relaxed font-semibold">
                             &ldquo;{w.message}&rdquo;
@@ -485,7 +504,7 @@ export default function Blessings() {
                                 )}
                               </div>
                               <span className="font-sans text-[8px] text-stone-400 uppercase font-semibold">
-                                {w.date === "હમણાં જ" ? t("blessings.justNow") : w.date === "૨ કલાક પહેલા" ? `2 ${t("blessings.hoursAgo")}` : w.date === "૧ દિવસ પહેલા" ? `1 ${t("blessings.daysAgo")}` : w.date}
+                                {getDisplayDate(w)}
                               </span>
                             </div>
                             <p className="font-sans text-xs text-stone-700 leading-relaxed font-semibold">
@@ -540,7 +559,7 @@ export default function Blessings() {
                                   )}
                                 </div>
                                 <span className="font-sans text-[8px] text-stone-400 uppercase font-semibold">
-                                  {w.date === "હમણાં જ" ? t("blessings.justNow") : w.date === "૨ કલાક પહેલા" ? `2 ${t("blessings.hoursAgo")}` : w.date === "૧ દિવસ પહેલા" ? `1 ${t("blessings.daysAgo")}` : w.date}
+                                  {getDisplayDate(w)}
                                 </span>
                               </div>
                               <p className="font-sans text-xs text-stone-700 leading-relaxed font-semibold">
@@ -640,7 +659,7 @@ export default function Blessings() {
                               )}
                             </div>
                             <span className="font-sans text-[9px] text-stone-400 uppercase font-semibold flex-shrink-0 mt-1">
-                              {w.date === "હમણાં જ" ? t("blessings.justNow") : w.date === "૨ કલાક પહેલા" ? `2 ${t("blessings.hoursAgo")}` : w.date === "૧ દિવસ પહેલા" ? `1 ${t("blessings.daysAgo")}` : w.date}
+                              {getDisplayDate(w)}
                             </span>
                           </div>
 
