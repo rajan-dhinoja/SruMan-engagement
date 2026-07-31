@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Send, Sparkles, Trash2, Edit2, ShieldAlert, LogOut, ArrowUp, ArrowDown, ChevronDown, ChevronUp, X, Check } from "lucide-react";
+import { Send, Sparkles, Trash2, Edit2, ShieldAlert, LogOut, ArrowUp, ArrowDown, ChevronDown, ChevronUp, X, Check, Heart, MessageSquare } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 
 interface Wish {
@@ -51,6 +51,12 @@ export default function Blessings() {
   const [editingWish, setEditingWish] = useState<Wish | null>(null);
   const [clickCount, setClickCount] = useState(0);
   const [wishToDelete, setWishToDelete] = useState<string | null>(null);
+  
+  // Global Thank You State
+  const [showGlobalModal, setShowGlobalModal] = useState(false);
+  const [globalName, setGlobalName] = useState("SruMan (Couple)");
+  const [globalMessage, setGlobalMessage] = useState("");
+
 
   // Color Swatches definition (Removed Champagne/Grey)
   const colorThemes: { id: Wish["theme"]; name: string; bg: string; border: string; circle: string }[] = [
@@ -213,7 +219,8 @@ export default function Blessings() {
     if (window.confirm("Delete ALL wishes from the wall?")) {
       try {
         // Delete each wish individually
-        for (const wish of wishes) {
+        const regularWishes = wishes.filter(w => w.id !== "global_thank_you_card");
+        for (const wish of regularWishes) {
           await fetch(`/api/wishes?id=${wish.id}`, { method: "DELETE" });
         }
         
@@ -231,7 +238,10 @@ export default function Blessings() {
   };
 
   const handleMoveWish = async (index: number, direction: "up" | "down") => {
-    const newWishes = [...wishes];
+    const regularWishes = wishes.filter(w => w.id !== "global_thank_you_card");
+    const globalThankYouCard = wishes.find(w => w.id === "global_thank_you_card");
+    
+    const newWishes = [...regularWishes];
     const targetIndex = direction === "up" ? index - 1 : index + 1;
 
     if (targetIndex < 0 || targetIndex >= newWishes.length) return;
@@ -240,26 +250,73 @@ export default function Blessings() {
     newWishes[index] = newWishes[targetIndex];
     newWishes[targetIndex] = temp;
 
-    setWishes(newWishes);
+    const finalWishes = globalThankYouCard ? [globalThankYouCard, ...newWishes] : newWishes;
+    setWishes(finalWishes);
     
     // Save the reordered list by updating all wishes in a single request
     try {
       await fetch("/api/wishes", {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(newWishes),
+        body: JSON.stringify(finalWishes),
       });
     } catch (error) {
       console.error("Error reordering wishes:", error);
     }
   };
 
+  const handleSaveGlobalThankYou = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!globalMessage.trim()) return;
+
+    try {
+      const isUpdate = !!globalThankYouCard;
+      const response = await fetch("/api/wishes", {
+        method: isUpdate ? "PUT" : "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          id: "global_thank_you_card",
+          name: globalName.trim() || "SruMan (Couple)",
+          message: globalMessage.trim(),
+          theme: "rose",
+        }),
+      });
+
+      if (response.ok) {
+        setShowGlobalModal(false);
+        await fetchWishes();
+      } else {
+        alert("Failed to save global thank you message.");
+      }
+    } catch (error) {
+      console.error("Error saving global thank you:", error);
+      alert("Failed to save. Please try again.");
+    }
+  };
+
+  const handleDeleteGlobalThankYou = async () => {
+    if (!window.confirm("Remove the global thank you message?")) return;
+    try {
+      const response = await fetch(`/api/wishes?id=global_thank_you_card`, {
+        method: "DELETE",
+      });
+      if (response.ok) {
+        await fetchWishes();
+      }
+    } catch (error) {
+      console.error("Error deleting global thank you:", error);
+    }
+  };
+
+  const globalThankYouCard = wishes.find((w) => w.id === "global_thank_you_card");
+  const regularWishes = wishes.filter((w) => w.id !== "global_thank_you_card");
+
   // Get user's own sent wishes
-  const myWishes = wishes.filter((w) => myWishIds.includes(w.id));
+  const myWishes = regularWishes.filter((w) => myWishIds.includes(w.id));
 
   // Split wishes into two rows for the marquee
-  const topWishes = wishes.filter((_, i) => i % 2 === 0);
-  const bottomWishes = wishes.filter((_, i) => i % 2 !== 0);
+  const topWishes = regularWishes.filter((_, i) => i % 2 === 0);
+  const bottomWishes = regularWishes.filter((_, i) => i % 2 !== 0);
 
   // Determine marquee wishes (duplicate array to ensure a seamless infinite looping scroll)
   const getMarqueeList = (list: Wish[]) => {
@@ -334,6 +391,17 @@ export default function Blessings() {
               >
                 <LogOut className="w-3 h-3 text-[#5e1f70]" />
                 Logout
+              </button>
+              <button 
+                onClick={() => {
+                  setGlobalName(globalThankYouCard?.name || "SruMan (Couple)");
+                  setGlobalMessage(globalThankYouCard?.message || "");
+                  setShowGlobalModal(true);
+                }}
+                className="flex items-center gap-1 px-3 py-1 rounded-full bg-purple-600 hover:bg-purple-700 text-white text-[10px] font-bold uppercase tracking-wider shadow-sm cursor-pointer"
+              >
+                <Heart className="w-3 h-3" />
+                Global Thank You
               </button>
               <button 
                 onClick={handleClearAll}
@@ -416,6 +484,70 @@ export default function Blessings() {
           {/* Right Column: Moving Train / Loop Marquee (8 cols) */}
           <div className="lg:col-span-8 flex flex-col gap-6 overflow-hidden w-full">
             
+            {/* Global Thank You Banner */}
+            {globalThankYouCard && (
+              <div className="pt-2 pb-2 pl-1 pr-2">
+                <div className="w-full p-8 sm:p-10 rounded-tr-[4rem] rounded-bl-[4rem] rounded-tl-xl rounded-br-xl border-2 bg-gradient-to-br from-[#fffdfa] via-[#fff9e6] to-[#fcf4d9] backdrop-blur-xl border-[#d4af37]/40 ring-[6px] ring-[#d4af37]/10 shadow-[0_20px_50px_rgba(212,175,55,0.15)] flex flex-col items-center text-center relative overflow-hidden group">
+                  {/* Decorative Elements */}
+                  <div className="absolute top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/cream-paper.png')] opacity-40 pointer-events-none mix-blend-overlay" />
+                  
+                  {/* Golden Ornaments */}
+                  <div className="absolute top-0 left-0 w-16 h-16 border-t-2 border-l-2 border-[#d4af37]/50 rounded-tl-xl m-2 pointer-events-none" />
+                  <div className="absolute bottom-0 right-0 w-16 h-16 border-b-2 border-r-2 border-[#d4af37]/50 rounded-br-xl m-2 pointer-events-none" />
+                  
+                  <Heart className="absolute -right-4 -bottom-4 w-32 h-32 text-[#d4af37]/10 rotate-12" />
+                  <Heart className="absolute -left-4 -top-4 w-24 h-24 text-[#d4af37]/10 -rotate-12" />
+                  
+                  {/* Admin Controls for Global Card */}
+                  {isAdmin && (
+                    <div className="absolute top-4 right-4 flex gap-2 z-20">
+                      <button
+                        onClick={() => {
+                          setGlobalName(globalThankYouCard.name);
+                          setGlobalMessage(globalThankYouCard.message);
+                          setShowGlobalModal(true);
+                        }}
+                        className="p-1.5 rounded-full bg-white/50 border border-[#d4af37]/30 text-[#d4af37] hover:bg-white cursor-pointer shadow-sm backdrop-blur-sm transition-colors"
+                        title="Edit Banner"
+                      >
+                        <Edit2 className="w-3.5 h-3.5" />
+                      </button>
+                      <button
+                        onClick={handleDeleteGlobalThankYou}
+                        className="p-1.5 rounded-full bg-white/50 border border-[#d4af37]/30 text-red-400 hover:bg-white hover:text-red-500 cursor-pointer shadow-sm backdrop-blur-sm transition-colors"
+                        title="Delete Banner"
+                      >
+                        <Trash2 className="w-3.5 h-3.5" />
+                      </button>
+                    </div>
+                  )}
+
+                  <div className="relative z-10 flex flex-col items-center">
+                    <span className="inline-flex items-center gap-1.5 px-4 py-1.5 mb-6 rounded-full bg-gradient-to-r from-[#d4af37]/10 via-[#d4af37]/20 to-[#d4af37]/10 text-[#8a1525] border border-[#d4af37]/30 font-sans text-[10px] font-bold uppercase tracking-[0.2em] shadow-sm backdrop-blur-sm">
+                      <Sparkles className="w-3 h-3 text-[#d4af37]" />
+                      A Note From The Couple
+                      <Sparkles className="w-3 h-3 text-[#d4af37]" />
+                    </span>
+                    <h3 className="font-serif text-3xl sm:text-4xl text-[#8a1525] font-bold mb-6 drop-shadow-sm tracking-wide">
+                      {globalThankYouCard.name}
+                    </h3>
+                    <div className="max-w-2xl mx-auto px-4">
+                      <p className="font-sans text-base sm:text-lg text-stone-700 leading-relaxed font-medium italic">
+                        "{globalThankYouCard.message}"
+                      </p>
+                    </div>
+                    <div className="mt-8 flex gap-3 justify-center items-center">
+                      <span className="w-12 h-[1px] bg-gradient-to-r from-transparent to-[#d4af37]/50" />
+                      <Heart className="w-4 h-4 fill-[#d4af37] text-[#d4af37]" />
+                      <Heart className="w-5 h-5 fill-[#d4af37] text-[#d4af37] -mt-2" />
+                      <Heart className="w-4 h-4 fill-[#d4af37] text-[#d4af37]" />
+                      <span className="w-12 h-[1px] bg-gradient-to-l from-transparent to-[#d4af37]/50" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+
             {/* User's Static Wish Highlight Slot (Always visible at the top of the wishes panel) */}
             {!isAdmin && myWishes.length > 0 && (
               <div className="space-y-3 pt-2 pb-2 pl-1">
@@ -579,7 +711,7 @@ export default function Blessings() {
             {(isAdmin || showAll) && (
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 lg:max-h-[600px] lg:overflow-y-auto pr-2 pt-2 pb-2 pl-1 scrollbar-thin">
                 <AnimatePresence>
-                  {wishes.map((w, idx) => {
+                  {regularWishes.map((w, idx) => {
                     const isMyWish = myWishIds.includes(w.id);
                     
                     // Prevent duplication of user's own wishes since they are already shown in the pinned top slot
@@ -613,7 +745,7 @@ export default function Blessings() {
                               </button>
                               <button
                                 onClick={() => handleMoveWish(idx, "down")}
-                                disabled={idx === wishes.length - 1}
+                                disabled={idx === regularWishes.length - 1}
                                 className="p-1 rounded bg-white border border-stone-200 text-stone-600 hover:bg-stone-50 cursor-pointer disabled:opacity-30 disabled:pointer-events-none"
                                 title="Move Down"
                               >
@@ -675,7 +807,7 @@ export default function Blessings() {
             )}
 
             {/* Toggle View More/Less Button */}
-            {!isAdmin && wishes.length > 0 && (
+            {!isAdmin && regularWishes.length > 0 && (
               <div className="flex justify-center mt-4">
                 <button
                   onClick={() => setShowAll(!showAll)}
@@ -689,7 +821,7 @@ export default function Blessings() {
                   ) : (
                     <>
                       <ChevronDown className="w-4 h-4 text-[#5e1f70]" />
-                      {t("blessings.viewAllWishes")} ({wishes.length} {t("blessings.cardsCount")})
+                      {t("blessings.viewAllWishes")} ({regularWishes.length} {t("blessings.cardsCount")})
                     </>
                   )}
                 </button>
@@ -848,6 +980,84 @@ export default function Blessings() {
           </div>
         )}
       </AnimatePresence>
+      {/* Global Thank You Modal */}
+      <AnimatePresence>
+        {showGlobalModal && (
+          <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+            <motion.div
+              initial={{ scale: 0.95, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.95, opacity: 0 }}
+              className="bg-white rounded-3xl border border-rose-300/20 max-w-lg w-full p-6 sm:p-8 shadow-2xl flex flex-col relative"
+            >
+              <button 
+                onClick={() => setShowGlobalModal(false)}
+                className="absolute top-4 right-4 text-stone-400 hover:text-stone-605 cursor-pointer"
+              >
+                <X className="w-5 h-5" />
+              </button>
+              <div className="flex items-center gap-3 mb-2">
+                <div className="w-10 h-10 rounded-full bg-rose-100 flex items-center justify-center text-rose-600">
+                  <MessageSquare className="w-5 h-5" />
+                </div>
+                <h3 className="font-serif text-2xl font-bold text-[#5e1f70]">
+                  Global Thank You Message
+                </h3>
+              </div>
+              <p className="font-sans text-xs text-stone-500 mb-6 leading-relaxed">
+                This message will be beautifully displayed at the top of the blessings board for all guests to see. Use this to express your gratitude to everyone who took the time to write a wish.
+              </p>
+
+              <form onSubmit={handleSaveGlobalThankYou} className="space-y-4">
+                <div>
+                  <label className="font-sans text-[10px] uppercase tracking-wider text-stone-400 font-bold block mb-2">
+                    Title / Name
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="e.g. SruMan (Couple)"
+                    value={globalName}
+                    onChange={(e) => setGlobalName(e.target.value)}
+                    className="w-full px-4 py-3 rounded-xl border border-stone-200 text-stone-800 text-sm focus:outline-none focus:border-rose-400 focus:ring-1 focus:ring-rose-400 bg-stone-50"
+                    required
+                  />
+                </div>
+
+                <div>
+                  <label className="font-sans text-[10px] uppercase tracking-wider text-stone-400 font-bold block mb-2">
+                    Your Message
+                  </label>
+                  <textarea
+                    rows={5}
+                    placeholder="Write a heartfelt thank you to your guests..."
+                    value={globalMessage}
+                    onChange={(e) => setGlobalMessage(e.target.value)}
+                    className="w-full px-4 py-3 rounded-xl border border-stone-200 text-stone-800 text-sm focus:outline-none focus:border-rose-400 focus:ring-1 focus:ring-rose-400 resize-none bg-stone-50"
+                    required
+                  />
+                </div>
+
+                <div className="pt-4 flex gap-3">
+                  <button
+                    type="submit"
+                    className="flex-1 py-3.5 rounded-full bg-rose-600 hover:bg-rose-700 text-white font-sans text-xs uppercase tracking-widest transition-all cursor-pointer font-bold shadow-md shadow-rose-600/20"
+                  >
+                    {globalThankYouCard ? "Update Banner" : "Publish Banner"}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setShowGlobalModal(false)}
+                    className="flex-1 py-3.5 rounded-full border border-stone-200 hover:bg-stone-50 text-stone-605 font-sans text-xs uppercase tracking-widest transition-all cursor-pointer font-bold"
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </form>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+
       {/* Delete Wish Confirmation Modal */}
       <AnimatePresence>
         {wishToDelete && (

@@ -41,10 +41,10 @@ export async function POST(request: NextRequest) {
     }
 
     const wish = {
-      id: String(Date.now()),
+      id: newWish.id || String(Date.now()),
       name: newWish.name,
       message: newWish.message,
-      date: "હમણાં જ",
+      date: newWish.date || "હમણાં જ",
       theme: newWish.theme || "gold",
     };
 
