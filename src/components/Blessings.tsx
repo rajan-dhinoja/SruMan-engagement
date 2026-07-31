@@ -525,7 +525,7 @@ export default function Blessings() {
                   <div className="relative z-10 flex flex-col items-center">
                     <span className="inline-flex items-center gap-1.5 px-4 py-1.5 mb-6 rounded-full bg-gradient-to-r from-[#d4af37]/10 via-[#d4af37]/20 to-[#d4af37]/10 text-[#8a1525] border border-[#d4af37]/30 font-sans text-[10px] font-bold uppercase tracking-[0.2em] shadow-sm backdrop-blur-sm">
                       <Sparkles className="w-3 h-3 text-[#d4af37]" />
-                      A Note From The Couple
+                      THANK YOU Note from the Family...
                       <Sparkles className="w-3 h-3 text-[#d4af37]" />
                     </span>
                     <h3 className="font-serif text-3xl sm:text-4xl text-[#8a1525] font-bold mb-6 drop-shadow-sm tracking-wide">
