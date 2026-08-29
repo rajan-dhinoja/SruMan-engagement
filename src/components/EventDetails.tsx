@@ -7,6 +7,7 @@ import { Calendar, Clock, MapPin, Navigation, Landmark, Copy, Check, Compass, Sp
 import { useLanguage } from "@/context/LanguageContext";
 
 interface TimeLeft {
+  months: number;
   days: number;
   hours: number;
   minutes: number;
@@ -17,24 +18,48 @@ export default function EventDetails() {
   const { language, t, formatNumber } = useLanguage();
   const targetDate = new Date("2026-08-18T09:00:00+05:30"); // 18th August 2026 at 9:00 AM IST
 
-  const [timeLeft, setTimeLeft] = useState<TimeLeft>({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+  const [timeLeft, setTimeLeft] = useState<TimeLeft>({ months: 0, days: 0, hours: 0, minutes: 0, seconds: 0 });
+  const [isPastEvent, setIsPastEvent] = useState(false);
+  const [isOngoingEvent, setIsOngoingEvent] = useState(false);
   const [mounted, setMounted] = useState(false);
   const [copied, setCopied] = useState(false);
 
   useEffect(() => {
     setMounted(true);
     const calculateTime = () => {
-      const difference = +targetDate - +new Date();
-      if (difference <= 0) {
-        setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
-        return;
+      const now = +new Date();
+      const completionDate = new Date("2026-08-18T14:00:00+05:30"); // 18th August 2026 at 2:00 PM IST
+      
+      const differenceToStart = +targetDate - now;
+      const differenceToCompletion = now - +completionDate;
+
+      let isPast = false;
+      let isOngoing = false;
+      let absDiff = 0;
+
+      if (differenceToStart > 0) {
+        // Counting down to start
+        absDiff = differenceToStart;
+      } else if (differenceToCompletion > 0) {
+        // Counting up from completion
+        isPast = true;
+        absDiff = differenceToCompletion;
+      } else {
+        // Ongoing (between 9 AM and 2 PM)
+        isOngoing = true;
+        absDiff = 0; // Show zeros
       }
 
+      const totalDays = Math.floor(absDiff / (1000 * 60 * 60 * 24));
+      
+      setIsPastEvent(isPast);
+      setIsOngoingEvent(isOngoing);
       setTimeLeft({
-        days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-        hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
-        minutes: Math.floor((difference / 1000 / 60) % 60),
-        seconds: Math.floor((difference / 1000) % 60),
+        months: Math.floor(totalDays / 30),
+        days: totalDays % 30,
+        hours: Math.floor((absDiff / (1000 * 60 * 60)) % 24),
+        minutes: Math.floor((absDiff / 1000 / 60) % 60),
+        seconds: Math.floor((absDiff / 1000) % 60),
       });
     };
 
@@ -57,6 +82,7 @@ export default function EventDetails() {
   };
 
   const countdownItems = [
+    { label: t("eventDetails.countdown.months"), value: timeLeft.months },
     { label: t("eventDetails.countdown.days"), value: timeLeft.days },
     { label: t("eventDetails.countdown.hours"), value: timeLeft.hours },
     { label: t("eventDetails.countdown.minutes"), value: timeLeft.minutes },
@@ -77,6 +103,8 @@ export default function EventDetails() {
       getDirections: "Get Directions",
       functionStarts: "The ceremony begins on Tuesday, August 18, 2026 at 9:00 AM",
       countdownTitle: "Countdown to the Auspicious Event",
+      timePassedTitle: "Time Since the Auspicious Event",
+      ongoingTitle: "The Auspicious Event is Ongoing",
     },
     gu: {
       auspiciousDay: "તિથિ",
@@ -90,6 +118,8 @@ export default function EventDetails() {
       getDirections: "નકશો જુઓ",
       functionStarts: "શુભ પ્રસંગ મંગળવાર, ૧૮ ઓગસ્ટ ૨૦૨૬ ના રોજ સવારે ૯:૦૦ વાગ્યે શરૂ થશે",
       countdownTitle: "આ અદ્ભુત પ્રસંગ માટે બાકી સમય",
+      timePassedTitle: "આ અદ્ભુત પ્રસંગને વીતી ગયેલો સમય",
+      ongoingTitle: "શુભ પ્રસંગ ચાલી રહ્યો છે",
     },
     hi: {
       auspiciousDay: "तिथि",
@@ -103,6 +133,8 @@ export default function EventDetails() {
       getDirections: "दिशा निर्देश",
       functionStarts: "शुभ समारोह मंगलवार, १८ अगस्त २०२६ को सुबह ९:०० बजे शुरू होगा",
       countdownTitle: "इस मंगलमय अवसर के लिए शेष समय",
+      timePassedTitle: "इस मंगलमय अवसर के बाद बीता समय",
+      ongoingTitle: "शुभ समारोह चल रहा है",
     }
   }[language as "en" | "gu" | "hi"] || {
     auspiciousDay: "Tithi",
@@ -116,6 +148,8 @@ export default function EventDetails() {
     getDirections: "Get Directions",
     functionStarts: "The ceremony begins on Tuesday, August 18, 2026 at 9:00 AM",
     countdownTitle: "Time Remaining for This Magical Occasion",
+    timePassedTitle: "Time Since This Magical Occasion",
+    ongoingTitle: "This Magical Occasion is Ongoing",
   };
 
   return (
@@ -163,7 +197,7 @@ export default function EventDetails() {
                   backgroundClip: "text",
                 }}
               >
-                {labels.countdownTitle}
+                {isOngoingEvent ? labels.ongoingTitle : isPastEvent ? labels.timePassedTitle : labels.countdownTitle}
               </h3>
               <div className="flex items-center justify-center gap-2 mt-3">
                 <span className="w-10 sm:w-16 h-[1.5px] bg-gradient-to-r from-transparent to-[#d4af37]/60 rounded-full" />
@@ -173,12 +207,12 @@ export default function EventDetails() {
             </div>
 
 
-            <div className="grid grid-cols-4 gap-3 sm:gap-8 max-w-2xl mx-auto relative z-10">
+            <div className="grid grid-cols-5 gap-2 sm:gap-6 max-w-3xl mx-auto relative z-10">
               {countdownItems.map((item, idx) => (
                 <div key={idx} className="flex flex-col items-center">
-                  <div className="w-14 h-16 sm:w-28 sm:h-28 rounded-2xl bg-white border border-[#d4af37]/25 flex items-center justify-center shadow-md relative group overflow-hidden">
+                  <div className="w-12 h-14 sm:w-24 sm:h-24 rounded-2xl bg-white border border-[#d4af37]/25 flex items-center justify-center shadow-md relative group overflow-hidden">
                     <div className="absolute inset-0 bg-gradient-to-tr from-[#d4af37]/5 to-[#5e1f70]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                    <span className="font-serif text-xl sm:text-5xl font-bold text-purple-700 tracking-tight">
+                    <span className="font-serif text-lg sm:text-4xl font-bold text-purple-700 tracking-tight">
                       {mounted ? formatNumber(String(item.value).padStart(2, "0")) : formatNumber("00")}
                     </span>
                   </div>

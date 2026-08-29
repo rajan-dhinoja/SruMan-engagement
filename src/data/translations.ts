@@ -54,11 +54,13 @@ export interface TranslationDict {
     mainTitle: string;
     countdownAwaiting: string;
     countdown: {
+      months: string;
       days: string;
       hours: string;
       minutes: string;
       seconds: string;
     };
+    ongoingTitle: string;
     dateTimeCard: {
       title: string;
       date: string;
@@ -199,6 +201,7 @@ export const translations: Record<"gu" | "en" | "hi", TranslationDict> = {
       mainTitle: "સમારોહની વિગત",
       countdownAwaiting: "શુભ ઘડીની રાહ",
       countdown: {
+        months: "મહિના",
         days: "દિવસ",
         hours: "કલાક",
         minutes: "મિનિટ",
@@ -341,7 +344,9 @@ export const translations: Record<"gu" | "en" | "hi", TranslationDict> = {
       joinCelebration: "Join the Celebration",
       mainTitle: "Event Details",
       countdownAwaiting: "Awaiting the Auspicious Hour",
+      ongoingTitle: "The Auspicious Event is Ongoing",
       countdown: {
+        months: "Months",
         days: "Days",
         hours: "Hours",
         minutes: "Mins",
@@ -484,7 +489,9 @@ export const translations: Record<"gu" | "en" | "hi", TranslationDict> = {
       joinCelebration: "उत्सव में शामिल हों",
       mainTitle: "समारोह विवरण",
       countdownAwaiting: "शुभ घड़ी की प्रतीक्षा",
+      ongoingTitle: "शुभ समारोह चल रहा है",
       countdown: {
+        months: "महीने",
         days: "दिन",
         hours: "घंटे",
         minutes: "मिनट",
