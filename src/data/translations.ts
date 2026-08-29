@@ -200,6 +200,7 @@ export const translations: Record<"gu" | "en" | "hi", TranslationDict> = {
       joinCelebration: "ઉજવણીમાં સામેલ થાઓ",
       mainTitle: "સમારોહની વિગત",
       countdownAwaiting: "શુભ ઘડીની રાહ",
+      ongoingTitle: "શુભ પ્રસંગ ચાલી રહ્યો છે",
       countdown: {
         months: "મહિના",
         days: "દિવસ",
