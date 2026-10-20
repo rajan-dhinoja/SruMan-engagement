@@ -428,6 +428,17 @@ function CreditsSection() {
           rel="noopener noreferrer"
           className="group flex flex-col items-center gap-3.5 cursor-pointer mb-6"
         >
+          {/* Royal Tech Hallmark Emblem Crest */}
+          <div className="relative flex items-center justify-center">
+            <div className="w-16 h-16 md:w-20 md:h-20 rounded-2xl bg-white/95 p-1.5 border-2 border-[#d4af37]/60 shadow-[0_0_20px_rgba(212,175,55,0.35)] flex items-center justify-center overflow-hidden group-hover:scale-105 transition-all duration-500">
+              <img 
+                src="/logos/Glossy DOTR Global Tech Emblem.png" 
+                alt="DotR Royal Tech Emblem" 
+                className="w-full h-full object-contain"
+              />
+            </div>
+          </div>
+
           {/* Glowing Glassmorphic Rectangular Logo Frame */}
           <motion.div 
             animate={{ 
@@ -441,9 +452,9 @@ function CreditsSection() {
             className="relative w-48 h-24 md:w-60 md:h-30 rounded-2xl bg-black/40 border border-[#d4af37]/35 flex items-center justify-center p-3 group-hover:scale-105 group-hover:border-[#d4af37]/60 transition-all duration-500 shadow-inner overflow-hidden"
           >
             <img 
-              src="/logos/dotr_logo.png" 
-              alt="dotr logo" 
-              className="w-full h-full object-contain transition-all duration-500 rounded-lg"
+              src="/logos/Glossy DOTR Globe-Orbit Logo.png" 
+              alt="DotR Globe-Orbit Logo" 
+              className="w-full h-full object-contain transition-all duration-500 rounded-lg drop-shadow-[0_0_15px_rgba(0,140,255,0.4)]"
             />
           </motion.div>
           

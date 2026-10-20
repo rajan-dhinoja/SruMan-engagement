@@ -281,3 +281,10 @@
 
 ## Prompt 61 (2026-06-29)
 - Reverted g-black back to g-transparent in the outer wrapper of PalaceGateEntry.tsx to fix the black screen during the gate opening animation. This allows the main website components rendered underneath to be visible as the gate zooms in and fades to 0 opacity.
+
+## Prompt 62 (2026-10-20)
+- Updated DotR branding across the application to integrate all three provided logos based on their specific format and presentation needs:
+  - Palace Gate Entry screen (PalaceGateEntry.tsx): Used DOTR_Full_Color_Logo.png in the horizontal 2:1 white credit pill badge.
+  - Footer Credits Section (page.tsx):
+    - Featured Glossy DOTR Global Tech Emblem.png in a circular/square 1:1 gold-bordered Royal Tech Hallmark seal crest.
+    - Featured Glossy DOTR Globe-Orbit Logo.png with its transparent background and glowing 3D metallic chrome finish inside the glowing glassmorphic dark-mode frame.

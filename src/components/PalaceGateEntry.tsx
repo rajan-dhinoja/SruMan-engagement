@@ -363,8 +363,8 @@ export default function PalaceGateEntry({ onEnter }: PalaceGateEntryProps) {
               >
                 <div className="relative flex items-center justify-center p-1 bg-white rounded-lg border border-[#d4af37]/40 h-10 w-20 overflow-hidden shadow-sm">
                   <Image 
-                    src="/logos/dotr_logo.png" 
-                    alt="dotr logo" 
+                    src="/logos/DOTR_Full_Color_Logo.png" 
+                    alt="DHINOJA OmniTech Resolutions (DotR) Logo" 
                     fill
                     sizes="80px"
                     className="object-contain transition-transform duration-500 group-hover:scale-105" 
