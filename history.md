@@ -288,3 +288,9 @@
   - Footer Credits Section (page.tsx):
     - Featured Glossy DOTR Global Tech Emblem.png in a circular/square 1:1 gold-bordered Royal Tech Hallmark seal crest.
     - Featured Glossy DOTR Globe-Orbit Logo.png with its transparent background and glowing 3D metallic chrome finish inside the glowing glassmorphic dark-mode frame.
+
+## Prompt 63 (2026-11-12)
+- Unified and refined DotR branding across all components:
+  - Palace Gate Entry screen (`PalaceGateEntry.tsx`): Replaced the solid white logo box with the horizontal transparent logo (`Glossy DOTR Globe-Orbit Logo.png`) inside a translucent dark glassmorphic badge with golden border and cyan glow to match the royal gate aesthetic.
+  - Footer Credits Section (`page.tsx`): Streamlined the developer credit card by removing the redundant square crest, cleanly featuring the glowing horizontal transparent logo (`Glossy DOTR Globe-Orbit Logo.png`) above the company details.
+  - Favicon & App Icons: Extracted the 3D DotR Globe Emblem to create high-definition multi-resolution icons (`favicon.ico`, `icon.png`, and `apple-icon.png`) for desktop, mobile, and Apple touch devices.

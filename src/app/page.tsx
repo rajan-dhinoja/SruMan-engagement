@@ -428,17 +428,6 @@ function CreditsSection() {
           rel="noopener noreferrer"
           className="group flex flex-col items-center gap-3.5 cursor-pointer mb-6"
         >
-          {/* Royal Tech Hallmark Emblem Crest */}
-          <div className="relative flex items-center justify-center">
-            <div className="w-16 h-16 md:w-20 md:h-20 rounded-2xl bg-white/95 p-1.5 border-2 border-[#d4af37]/60 shadow-[0_0_20px_rgba(212,175,55,0.35)] flex items-center justify-center overflow-hidden group-hover:scale-105 transition-all duration-500">
-              <img 
-                src="/logos/Glossy DOTR Global Tech Emblem.png" 
-                alt="DotR Royal Tech Emblem" 
-                className="w-full h-full object-contain"
-              />
-            </div>
-          </div>
-
           {/* Glowing Glassmorphic Rectangular Logo Frame */}
           <motion.div 
             animate={{ 

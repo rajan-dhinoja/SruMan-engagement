@@ -361,13 +361,13 @@ export default function PalaceGateEntry({ onEnter }: PalaceGateEntryProps) {
                 rel="noopener noreferrer"
                 className="flex items-center gap-3.5 px-5 py-3 rounded-2xl border border-[#d4af37]/35 bg-black/75 backdrop-blur-md shadow-[0_8px_32px_rgba(0,0,0,0.5),inset_0_1px_1px_rgba(255,255,255,0.1)] hover:border-gold-400/60 transition-all duration-300 cursor-pointer group hover:scale-[1.02]"
               >
-                <div className="relative flex items-center justify-center p-1 bg-white rounded-lg border border-[#d4af37]/40 h-10 w-20 overflow-hidden shadow-sm">
+                <div className="relative flex items-center justify-center p-1 bg-black/40 backdrop-blur-sm rounded-xl border border-[#d4af37]/35 h-10 w-24 overflow-hidden shadow-[0_0_15px_rgba(0,140,255,0.2)]">
                   <Image 
-                    src="/logos/DOTR_Full_Color_Logo.png" 
+                    src="/logos/Glossy DOTR Globe-Orbit Logo.png" 
                     alt="DHINOJA OmniTech Resolutions (DotR) Logo" 
                     fill
-                    sizes="80px"
-                    className="object-contain transition-transform duration-500 group-hover:scale-105" 
+                    sizes="96px"
+                    className="object-contain transition-transform duration-500 group-hover:scale-105 drop-shadow-[0_0_8px_rgba(0,140,255,0.4)]" 
                   />
                 </div>
                 
